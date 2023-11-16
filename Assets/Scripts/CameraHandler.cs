@@ -5,9 +5,6 @@ public class CameraHandler : MonoBehaviour
 {
     public CinemachineVirtualCamera[] cameras;
 
-    public CinemachineVirtualCamera camera1; 
-    public CinemachineVirtualCamera camera2;
-
     public CinemachineVirtualCamera startCamera;
     private CinemachineVirtualCamera currentCamera; 
     
@@ -18,14 +15,7 @@ public class CameraHandler : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.T))
-        {
-            SwitchCamera(camera2);
-        }
-        if (Input.GetKeyDown(KeyCode.Y))
-        {
-            SwitchCamera(camera1);
-        }
+        
     }
 
     public void InitialSetup()

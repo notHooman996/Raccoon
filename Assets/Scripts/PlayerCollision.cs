@@ -1,21 +1,23 @@
-using System;
 using UnityEngine;
+using Cinemachine;
 
 public class PlayerCollision : MonoBehaviour
 {
+    public GameObject cameraController; 
+    
     private bool isFirstCamera = true; 
     
     private void OnTriggerEnter(Collider other)
     {
         isFirstCamera = !isFirstCamera;
-
+        
         if (isFirstCamera)
         {
-            gameObject.GetComponent<CameraHandler>().SwitchCamera(gameObject.GetComponent<CameraHandler>().camera1);
+            cameraController.GetComponent<CameraHandler>().SwitchCamera(cameraController.GetComponent<CameraHandler>().cameras[0]);
         }
         else
         {
-            gameObject.GetComponent<CameraHandler>().SwitchCamera(gameObject.GetComponent<CameraHandler>().camera2);
+            cameraController.GetComponent<CameraHandler>().SwitchCamera(cameraController.GetComponent<CameraHandler>().cameras[1]);
         }
     }
 }
