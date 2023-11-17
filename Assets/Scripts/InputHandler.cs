@@ -13,6 +13,9 @@ public class InputHandler : MonoBehaviour
 
     [Header("InteractControls")] 
     [SerializeField, ReadOnly] private bool interact;
+    
+    [Header("PauseControls")] 
+    [SerializeField, ReadOnly] private bool pause;
 
     private void Awake()
     {
@@ -35,6 +38,7 @@ public class InputHandler : MonoBehaviour
         // set input 
         SetMovementInput();
         SetInteractInput();
+        SetPauseInput();
     }
 
     private void SetMovementInput()
@@ -47,6 +51,11 @@ public class InputHandler : MonoBehaviour
         interact = Input.GetButtonDown("Interact");
     }
 
+    private void SetPauseInput()
+    {
+        pause = Input.GetButtonDown("Pause");
+    }
+
     public (float x, float y) GetMovementInput()
     {
         return (horizontal, vertical);
@@ -55,5 +64,10 @@ public class InputHandler : MonoBehaviour
     public bool GetInteractInput()
     {
         return interact;
+    }
+
+    public bool GetPauseInput()
+    {
+        return pause; 
     }
 }
