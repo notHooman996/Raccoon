@@ -3,8 +3,6 @@ using Cinemachine;
 
 public class PlayerCollision : MonoBehaviour
 {
-    public GameObject cameraController; 
-    
     private bool isFirstCamera = true; 
     
     private void OnTriggerEnter(Collider other)
@@ -13,11 +11,11 @@ public class PlayerCollision : MonoBehaviour
         
         if (isFirstCamera)
         {
-            cameraController.GetComponent<CameraHandler>().SwitchCamera(cameraController.GetComponent<CameraHandler>().cameras[0]);
+            CameraHandler.Instance.SwitchCamera(CameraHandler.Instance.GetCameraByName("Camera1"));
         }
         else
         {
-            cameraController.GetComponent<CameraHandler>().SwitchCamera(cameraController.GetComponent<CameraHandler>().cameras[1]);
+            CameraHandler.Instance.SwitchCamera(CameraHandler.Instance.GetCameraByName("Camera2"));
         }
     }
 }
