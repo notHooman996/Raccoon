@@ -11,6 +11,14 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
+        if (Attributes.Instance.GetCanPlayerMove())
+        {
+            Move();
+        }
+    }
+
+    private void Move()
+    {
         // get input 
         float horizontalInput = InputHandler.Instance.GetMovementInput().x;
         float verticalInput = InputHandler.Instance.GetMovementInput().y;

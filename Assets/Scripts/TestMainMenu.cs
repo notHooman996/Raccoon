@@ -4,12 +4,30 @@ using System.Collections;
 
 public class TestMainMenu : MonoBehaviour
 {
+    public static TestMainMenu Instance; 
+    
     public GameObject mainmenuPrefab; // reference to the canvas ui prefab 
     private CanvasGroup canvasGroup;
     private GameObject canvasInstance; // reference to the instantiated prefab 
     private bool isMenu = false;
 
     private CinemachineBrain cinemachineBrain;
+    
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this; 
+            
+            // make sure object is not destroyed across scenes 
+            //DontDestroyOnLoad(gameObject);
+        }
+        else if (Instance != this)
+        {
+            // enforce singleton, there can only be one instance 
+            Destroy(gameObject);
+        }
+    }
     
     private void Start()
     {
@@ -18,19 +36,19 @@ public class TestMainMenu : MonoBehaviour
 
     private void Update()
     {
-        if (InputHandler.Instance.GetPauseInput()) // TODO - temporary using pause for testing the main menu 
-        {
-            isMenu = !isMenu;
-
-            if (isMenu)
-            {
-                OpenMainMenu();
-            }
-            else
-            {
-                CloseMainMenu();
-            }
-        }
+        // if (InputHandler.Instance.GetPauseInput()) // TODO - temporary using pause for testing the main menu 
+        // {
+        //     isMenu = !isMenu;
+        //
+        //     if (isMenu)
+        //     {
+        //         OpenMainMenu();
+        //     }
+        //     else
+        //     {
+        //         CloseMainMenu();
+        //     }
+        // }
     }
 
     /// <summary>
@@ -38,6 +56,8 @@ public class TestMainMenu : MonoBehaviour
     /// </summary>
     public void OpenMainMenu()
     {
+        Attributes.Instance.SetCanPlayerMove();
+        
         // move camera to sky - change camera with the CameraController 
         CameraHandler.Instance.SwitchCamera(CameraHandler.Instance.GetCameraByName("SkyCamera"));
         
@@ -59,10 +79,12 @@ public class TestMainMenu : MonoBehaviour
         {
             canvasGroup = canvasInstance.GetComponent<CanvasGroup>();
             StartCoroutine(FadeCanvasGroup(canvasGroup.alpha, 0f, 2f));
+            
+            // once fading is over - change camera and remove prefab 
+            StartCoroutine(FadingOver());
         }
-
-        // once fading is over - change camera and remove prefab 
-        StartCoroutine(FadingOver());
+        
+        Attributes.Instance.SetCanPlayerMove();
     }
 
     /// <summary>
