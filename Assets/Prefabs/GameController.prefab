@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 6047372999111826885}
   - component: {fileID: 9115750975109803672}
   - component: {fileID: -4691485472952816776}
+  - component: {fileID: -5133851280641542827}
+  - component: {fileID: -3172356255836206958}
   m_Layer: 0
   m_Name: GameController
   m_TagString: Untagged
@@ -76,3 +78,29 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cameras: []
   startCamera: {fileID: 0}
+--- !u!114 &-5133851280641542827
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7078753792141446877}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1392078467d3d8b45b5adde07b72f29f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mainmenuPrefab: {fileID: 5109410412213691079, guid: 7db7354b67beeab4ea02b6578c5ff5bf, type: 3}
+--- !u!114 &-3172356255836206958
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7078753792141446877}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1eb25e0885c49fb4bb19062e9b1d205a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pausemenuPrefab: {fileID: 158479739407139580, guid: b92f26620c6a2d142904a6e8a3ce84ae, type: 3}
