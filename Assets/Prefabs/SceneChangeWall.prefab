@@ -13,8 +13,8 @@ GameObject:
   - component: {fileID: 2046373910673059248}
   - component: {fileID: 3583232141994736415}
   m_Layer: 0
-  m_Name: TriggerWall
-  m_TagString: Untagged
+  m_Name: SceneChangeWall
+  m_TagString: SceneChanger
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
