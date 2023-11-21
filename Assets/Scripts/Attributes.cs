@@ -9,6 +9,9 @@ public class Attributes : MonoBehaviour
     [Header("CanPlayerMove")] 
     [SerializeField, ReadOnly] private bool canPlayerMove;
     
+    [Header("CanPlayerInteract")]
+    [SerializeField, ReadOnly] private bool canPlayerInteract;
+    
     private void Awake()
     {
         if (Instance == null)
@@ -43,5 +46,15 @@ public class Attributes : MonoBehaviour
     public bool GetCanPlayerMove()
     {
         return canPlayerMove; 
+    }
+    
+    public void SetCanPlayerInteract(bool b)
+    {
+        canPlayerInteract = b;
+    }
+    
+    public bool GetCanPlayerInteract()
+    {
+        return canPlayerInteract; 
     }
 }
