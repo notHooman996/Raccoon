@@ -9,7 +9,7 @@ public class TestMainMenu : MonoBehaviour
     public GameObject mainmenuPrefab; // reference to the canvas ui prefab 
     private CanvasGroup canvasGroup;
     private GameObject canvasInstance; // reference to the instantiated prefab 
-    private bool isMenu = false;
+    //private bool isMenu = false;
 
     private CinemachineBrain cinemachineBrain;
     
