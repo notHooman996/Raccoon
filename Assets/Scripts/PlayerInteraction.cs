@@ -9,9 +9,12 @@ public class PlayerInteraction : MonoBehaviour
 
     private void Update()
     {
-        if (InputHandler.Instance.GetInteractInput())
+        if (Attributes.Instance.GetCanPlayerInteract())
         {
-            Debug.Log("interact");
+            if (InputHandler.Instance.GetInteractInput())
+            {
+                Debug.Log("interact");
+            }
         }
     }
 }
