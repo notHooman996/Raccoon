@@ -1,3 +1,4 @@
+using Cinemachine;
 using UnityEngine;
 using Unity.Collections;
 
@@ -5,12 +6,18 @@ public class Attributes : MonoBehaviour
 {
     // singleton 
     public static Attributes Instance;
+    
+    [Header("ActiveVirtualCamera")] 
+    [SerializeField, ReadOnly] private CinemachineVirtualCameraBase activeVirtualCamera;
 
     [Header("CanPlayerMove")] 
     [SerializeField, ReadOnly] private bool canPlayerMove;
     
     [Header("CanPlayerInteract")]
-    [SerializeField, ReadOnly] private bool canPlayerInteract;
+    [SerializeField, ReadOnly] private bool canPlayerInteract = false;
+    
+    [Header("CanPlayerInteract")]
+    [SerializeField, ReadOnly] private bool isMouseHovering;
     
     private void Awake()
     {
@@ -37,6 +44,16 @@ public class Attributes : MonoBehaviour
     {
         
     }
+
+    public void SetActiveVirtualCamera(CinemachineVirtualCameraBase virtualCamera)
+    {
+        activeVirtualCamera = virtualCamera;
+    }
+
+    public CinemachineVirtualCameraBase GetActiveVirtualCamera()
+    {
+        return activeVirtualCamera;
+    }
     
     public void SetCanPlayerMove()
     {
@@ -56,5 +73,10 @@ public class Attributes : MonoBehaviour
     public bool GetCanPlayerInteract()
     {
         return canPlayerInteract; 
+    }
+
+    private void SetMouseHover(bool b)
+    {
+        isMouseHovering = b; 
     }
 }
