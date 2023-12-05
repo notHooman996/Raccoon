@@ -16,6 +16,10 @@ public class InputHandler : MonoBehaviour
     
     [Header("PauseControls")] 
     [SerializeField, ReadOnly] private bool pause;
+    
+    [Header("MouseControls")]
+    [SerializeField, ReadOnly] private bool mouseLeftClick; 
+    [SerializeField, ReadOnly] private Vector3 mousePosition; 
 
     private void Awake()
     {
@@ -39,6 +43,8 @@ public class InputHandler : MonoBehaviour
         SetMovementInput();
         SetInteractInput();
         SetPauseInput();
+        SetMouseLeftClick();
+        SetMousePosition();
     }
 
     private void SetMovementInput()
@@ -56,6 +62,16 @@ public class InputHandler : MonoBehaviour
         pause = Input.GetButtonDown("Pause");
     }
 
+    private void SetMouseLeftClick()
+    {
+        mouseLeftClick = Input.GetMouseButtonDown(0);
+    }
+
+    private void SetMousePosition()
+    {
+        mousePosition = Input.mousePosition; 
+    }
+
     public (float x, float y) GetMovementInput()
     {
         return (horizontal, vertical);
@@ -69,5 +85,15 @@ public class InputHandler : MonoBehaviour
     public bool GetPauseInput()
     {
         return pause; 
+    }
+
+    public bool GetMouseLeftClick()
+    {
+        return mouseLeftClick;
+    }
+
+    public Vector3 GetMousePosition()
+    {
+        return mousePosition; 
     }
 }
