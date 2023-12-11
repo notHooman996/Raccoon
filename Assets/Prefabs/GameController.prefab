@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: -4691485472952816776}
   - component: {fileID: -5133851280641542827}
   - component: {fileID: -3172356255836206958}
+  - component: {fileID: -4850434726643227528}
   m_Layer: 0
   m_Name: GameController
   m_TagString: Untagged
@@ -48,6 +49,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a181b14ccb9c35b4bbfc8603d1436587, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  activeVirtualCamera: {fileID: 0}
+  canPlayerMove: 0
+  canPlayerInteract: 0
+  mouseHovering: 0
+  mouseInteractableHover: 0
 --- !u!114 &9115750975109803672
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -64,6 +70,8 @@ MonoBehaviour:
   vertical: 0
   interact: 0
   pause: 0
+  mouseLeftClick: 0
+  mousePosition: {x: 0, y: 0, z: 0}
 --- !u!114 &-4691485472952816776
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -104,3 +112,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pausemenuPrefab: {fileID: 158479739407139580, guid: b92f26620c6a2d142904a6e8a3ce84ae, type: 3}
+--- !u!114 &-4850434726643227528
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7078753792141446877}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 169b6a6e3e27a5242bece080b4a38c4f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cursorTestTexture: {fileID: 2800000, guid: 3c472f3c7bd4d81428a2a49402a5d303, type: 3}
+  leafTexture: {fileID: 2800000, guid: 3c472f3c7bd4d81428a2a49402a5d303, type: 3}
+  walkTexture: {fileID: 2800000, guid: 3c472f3c7bd4d81428a2a49402a5d303, type: 3}
+  hideTexture: {fileID: 2800000, guid: 3c472f3c7bd4d81428a2a49402a5d303, type: 3}

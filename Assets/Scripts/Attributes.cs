@@ -2,6 +2,9 @@ using Cinemachine;
 using UnityEngine;
 using Unity.Collections;
 
+public enum MouseHoverType {Ground, Interactable, None}
+public enum InteractableType {Test, Hide}
+
 public class Attributes : MonoBehaviour
 {
     // singleton 
@@ -16,8 +19,9 @@ public class Attributes : MonoBehaviour
     [Header("CanPlayerInteract")]
     [SerializeField, ReadOnly] private bool canPlayerInteract = false;
     
-    [Header("CanPlayerInteract")]
-    [SerializeField, ReadOnly] private bool isMouseHovering;
+    [Header("MouseHovering")]
+    [SerializeField, ReadOnly] private MouseHoverType mouseHovering;
+    [SerializeField, ReadOnly] private InteractableType mouseInteractableHover;
     
     private void Awake()
     {
@@ -75,8 +79,23 @@ public class Attributes : MonoBehaviour
         return canPlayerInteract; 
     }
 
-    private void SetMouseHover(bool b)
+    public void SetMouseHover(MouseHoverType type)
     {
-        isMouseHovering = b; 
+        mouseHovering = type; 
+    }
+
+    public MouseHoverType GetMouseHover()
+    {
+        return mouseHovering; 
+    }
+
+    public void SetMouseInteractableHover(InteractableType type)
+    {
+        mouseInteractableHover = type; 
+    }
+
+    public InteractableType GetMouseInteractableHover()
+    {
+        return mouseInteractableHover; 
     }
 }
