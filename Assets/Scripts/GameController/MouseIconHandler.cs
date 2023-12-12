@@ -16,8 +16,8 @@ public class MouseIconHandler : MonoBehaviour
     private void Start()
     {
         isPreviousPause = InputHandler.Instance.GetPauseInput();
-        previousMouseHoverType = Attributes.Instance.GetMouseHover();
-        previousInteractableType = Attributes.Instance.GetMouseInteractableHover();
+        previousMouseHoverType = AttributesPointAndClick.Instance.GetMouseHover();
+        previousInteractableType = AttributesPointAndClick.Instance.GetMouseInteractableHover();
 
         // set default cursor icon 
         SetCursorIcon(leafTexture);
@@ -26,16 +26,16 @@ public class MouseIconHandler : MonoBehaviour
     private void Update()
     {
         if (isPreviousPause != InputHandler.Instance.GetPauseInput() ||
-            previousMouseHoverType != Attributes.Instance.GetMouseHover() ||
-            previousInteractableType != Attributes.Instance.GetMouseInteractableHover())
+            previousMouseHoverType != AttributesPointAndClick.Instance.GetMouseHover() ||
+            previousInteractableType != AttributesPointAndClick.Instance.GetMouseInteractableHover())
         {
             // only update cursor icon when it needs to change 
             UpdateCursorIcon();
             
             // update previous variables 
             isPreviousPause = InputHandler.Instance.GetPauseInput();
-            previousMouseHoverType = Attributes.Instance.GetMouseHover();
-            previousInteractableType = Attributes.Instance.GetMouseInteractableHover();
+            previousMouseHoverType = AttributesPointAndClick.Instance.GetMouseHover();
+            previousInteractableType = AttributesPointAndClick.Instance.GetMouseInteractableHover();
         }
     }
 
@@ -46,12 +46,12 @@ public class MouseIconHandler : MonoBehaviour
         {
             SetCursorIcon(leafTexture);
         }
-        else if(Attributes.Instance.GetMouseHover() == MouseHoverType.Interactable)
+        else if(AttributesPointAndClick.Instance.GetMouseHover() == MouseHoverType.Interactable)
         {
             // set depending on the interactable type 
             SetInteractableCursor();
         }
-        else if(Attributes.Instance.GetMouseHover() == MouseHoverType.Ground)
+        else if(AttributesPointAndClick.Instance.GetMouseHover() == MouseHoverType.Ground)
         {
             // set depending on ground 
             SetCursorIcon(walkTexture);
@@ -65,7 +65,7 @@ public class MouseIconHandler : MonoBehaviour
 
     private void SetInteractableCursor()
     {
-        switch (Attributes.Instance.GetMouseInteractableHover())
+        switch (AttributesPointAndClick.Instance.GetMouseInteractableHover())
         {
             case InteractableType.Test:
                 SetCursorIcon(cursorTestTexture);
