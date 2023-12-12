@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 3576936797822231917}
   - component: {fileID: -3625134394168457578}
   - component: {fileID: -7436614352465387004}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -151,7 +151,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ad5150e4a829684dbe3d6ef0ebfa229, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gizmoPrefab: {fileID: 9188049197340293158, guid: 64a26a4061d61744784e3057bc97ef4c, type: 3}
 --- !u!114 &3576936797822231917
 MonoBehaviour:
   m_ObjectHideFlags: 0

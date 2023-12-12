@@ -9,7 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1350096686665952774}
+  - component: {fileID: 721761484002778209}
   - component: {fileID: 6047372999111826885}
+  - component: {fileID: -7698253123889144908}
   - component: {fileID: 9115750975109803672}
   - component: {fileID: -4691485472952816776}
   - component: {fileID: -5133851280641542827}
@@ -37,6 +39,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &721761484002778209
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7078753792141446877}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f9bc6d792f6842438dbc83652af2726, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &6047372999111826885
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -52,8 +66,24 @@ MonoBehaviour:
   activeVirtualCamera: {fileID: 0}
   canPlayerMove: 0
   canPlayerInteract: 0
+--- !u!114 &-7698253123889144908
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7078753792141446877}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 061cceac383850543934528157db98b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   mouseHovering: 0
   mouseInteractableHover: 0
+  currentObjective: 0
+  goalPosition: {x: 0, y: 0, z: 0}
+  interactableObject: {fileID: 0}
+  interactDistance: 3
 --- !u!114 &9115750975109803672
 MonoBehaviour:
   m_ObjectHideFlags: 0

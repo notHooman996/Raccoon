@@ -1,24 +1,10 @@
-using Cinemachine;
 using UnityEngine;
 using Unity.Collections;
 
-public enum MouseHoverType {Ground, Interactable, None}
-public enum InteractableType {Test, Hide}
-public enum CurrentObjective {Move, Interact}
-
-public class Attributes : MonoBehaviour
+public class AttributesPointAndClick : MonoBehaviour
 {
     // singleton 
-    public static Attributes Instance;
-    
-    [Header("ActiveVirtualCamera")] 
-    [SerializeField, ReadOnly] private CinemachineVirtualCameraBase activeVirtualCamera;
-
-    [Header("CanPlayerMove")] 
-    [SerializeField, ReadOnly] private bool canPlayerMove;
-    
-    [Header("CanPlayerInteract")]
-    [SerializeField, ReadOnly] private bool canPlayerInteract = false;
+    public static AttributesPointAndClick Instance;
     
     [Header("MouseHovering")]
     [SerializeField, ReadOnly] private MouseHoverType mouseHovering;
@@ -28,7 +14,7 @@ public class Attributes : MonoBehaviour
     [SerializeField, ReadOnly] private CurrentObjective currentObjective;
     [SerializeField, ReadOnly] private Vector3 goalPosition;
     [SerializeField, ReadOnly] private GameObject interactableObject;
-    [SerializeField, ReadOnly] private float interactDistance = 5;
+    [SerializeField, ReadOnly] private float interactDistance = 3;
     
     private void Awake()
     {
@@ -48,44 +34,14 @@ public class Attributes : MonoBehaviour
     
     private void Start()
     {
-        canPlayerMove = true; // TODO - set to false when game starts 
+        
     }
 
     private void Update()
     {
         
     }
-
-    public void SetActiveVirtualCamera(CinemachineVirtualCameraBase virtualCamera)
-    {
-        activeVirtualCamera = virtualCamera;
-    }
-
-    public CinemachineVirtualCameraBase GetActiveVirtualCamera()
-    {
-        return activeVirtualCamera;
-    }
     
-    public void SetCanPlayerMove()
-    {
-        canPlayerMove = !canPlayerMove;
-    }
-    
-    public bool GetCanPlayerMove()
-    {
-        return canPlayerMove; 
-    }
-    
-    public void SetCanPlayerInteract(bool b)
-    {
-        canPlayerInteract = b;
-    }
-    
-    public bool GetCanPlayerInteract()
-    {
-        return canPlayerInteract; 
-    }
-
     public void SetMouseHover(MouseHoverType type)
     {
         mouseHovering = type; 
