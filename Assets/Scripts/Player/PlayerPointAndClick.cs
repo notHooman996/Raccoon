@@ -50,27 +50,27 @@ public class PlayerPointAndClick : MonoBehaviour
             if (hit.collider.CompareTag("Interactable"))
             {
                 // set hover to be for interactable 
-                Attributes.Instance.SetMouseHover(global::MouseHoverType.Interactable);
+                AttributesPointAndClick.Instance.SetMouseHover(global::MouseHoverType.Interactable);
                 
                 // set the type of interaction possible at the object 
-                Attributes.Instance.SetMouseInteractableHover(hit.collider.GetComponent<InteractableObject>().GetInteractableType());
+                AttributesPointAndClick.Instance.SetMouseInteractableHover(hit.collider.GetComponent<InteractableObject>().GetInteractableType());
             }
             // check if the object is of type "Ground" 
             else if (hit.collider.CompareTag("Ground"))
             {
                 // set hover to be for ground 
-                Attributes.Instance.SetMouseHover(global::MouseHoverType.Ground);
+                AttributesPointAndClick.Instance.SetMouseHover(global::MouseHoverType.Ground);
             }
             else
             {
                 // set hover to be none 
-                Attributes.Instance.SetMouseHover(global::MouseHoverType.None);
+                AttributesPointAndClick.Instance.SetMouseHover(global::MouseHoverType.None);
             }
         }
         else
         {
             // set hover to be none 
-            Attributes.Instance.SetMouseHover(global::MouseHoverType.None);
+            AttributesPointAndClick.Instance.SetMouseHover(global::MouseHoverType.None);
         }
     }
 
@@ -87,10 +87,10 @@ public class PlayerPointAndClick : MonoBehaviour
             if (hit.collider.CompareTag("Interactable"))
             {
                 // set the current objective to interacting 
-                Attributes.Instance.SetCurrentObjective(CurrentObjective.Interact);
+                AttributesPointAndClick.Instance.SetCurrentObjective(CurrentObjective.Interact);
                 
                 // set the chosen interactable object 
-                Attributes.Instance.SetInteractable(hit.collider.GameObject());
+                AttributesPointAndClick.Instance.SetInteractable(hit.collider.GameObject());
                 
                 // check if player can interact 
                 if (Attributes.Instance.GetCanPlayerInteract())
@@ -107,20 +107,20 @@ public class PlayerPointAndClick : MonoBehaviour
                     
                     entryPoint = hit.point; 
                     Debug.Log("entrypoint: "+entryPoint);
-                    Attributes.Instance.SetGoalPosition(hit.point);
+                    AttributesPointAndClick.Instance.SetGoalPosition(hit.point);
                 }
             }
             // check if the object is of type "Ground" 
             else if (hit.collider.CompareTag("Ground"))
             {
                 // set the current objective to moving 
-                Attributes.Instance.SetCurrentObjective(CurrentObjective.Move);
+                AttributesPointAndClick.Instance.SetCurrentObjective(CurrentObjective.Move);
                 
                 Debug.Log("click move"); // TODO - move to position 
 
                 entryPoint = hit.point; 
                 Debug.Log("entrypoint: "+entryPoint);
-                Attributes.Instance.SetGoalPosition(hit.point);
+                AttributesPointAndClick.Instance.SetGoalPosition(hit.point);
             }
         }
     }
