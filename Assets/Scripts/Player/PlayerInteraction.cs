@@ -26,11 +26,11 @@ public class PlayerInteraction : MonoBehaviour
 
     private void PointAndClickInteraction()
     {
-        if (Attributes.Instance.GetCurrentObjective() == CurrentObjective.Interact)
+        if (AttributesPointAndClick.Instance.GetCurrentObjective() == CurrentObjective.Interact)
         {
             // check if player is close enough to the chosen interactable object 
-            float distance = Vector3.Distance(GameObject.FindWithTag("Player").transform.position, Attributes.Instance.GetInteractable().transform.position);
-            if (distance <= Attributes.Instance.GetInteractDistance())
+            float distance = Vector3.Distance(GameObject.FindWithTag("Player").transform.position, AttributesPointAndClick.Instance.GetInteractable().transform.position);
+            if (distance <= AttributesPointAndClick.Instance.GetInteractDistance())
             {
                 Debug.Log("interact - point and click");
             }
