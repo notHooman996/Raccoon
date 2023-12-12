@@ -4,6 +4,7 @@ using Unity.Collections;
 
 public enum MouseHoverType {Ground, Interactable, None}
 public enum InteractableType {Test, Hide}
+public enum CurrentObjective {Move, Interact}
 
 public class Attributes : MonoBehaviour
 {
@@ -22,6 +23,12 @@ public class Attributes : MonoBehaviour
     [Header("MouseHovering")]
     [SerializeField, ReadOnly] private MouseHoverType mouseHovering;
     [SerializeField, ReadOnly] private InteractableType mouseInteractableHover;
+    
+    [Header("Objective")] 
+    [SerializeField, ReadOnly] private CurrentObjective currentObjective;
+    [SerializeField, ReadOnly] private Vector3 goalPosition;
+    [SerializeField, ReadOnly] private GameObject interactableObject;
+    [SerializeField, ReadOnly] private float interactDistance = 5;
     
     private void Awake()
     {
@@ -97,5 +104,40 @@ public class Attributes : MonoBehaviour
     public InteractableType GetMouseInteractableHover()
     {
         return mouseInteractableHover; 
+    }
+
+    public void SetCurrentObjective(CurrentObjective objective)
+    {
+        currentObjective = objective; 
+    }
+
+    public CurrentObjective GetCurrentObjective()
+    {
+        return currentObjective; 
+    }
+
+    public void SetGoalPosition(Vector3 position)
+    {
+        goalPosition = position;
+    }
+
+    public Vector3 GetGoalPosition()
+    {
+        return goalPosition; 
+    }
+
+    public void SetInteractable(GameObject obj)
+    {
+        interactableObject = obj; 
+    }
+
+    public GameObject GetInteractable()
+    {
+        return interactableObject; 
+    }
+
+    public float GetInteractDistance()
+    {
+        return interactDistance; 
     }
 }
