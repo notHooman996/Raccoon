@@ -1,10 +1,17 @@
+using System;
 using Cinemachine;
+using Unity.VisualScripting;
+using UnityEditor;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerPointAndClick : MonoBehaviour
 {
     private Camera mainCamera;
-    private Vector3 previousMousePosition; 
+    private Vector3 previousMousePosition;
+
+    // hit point 
+    private Vector3 entryPoint;
     
     private void Start()
     {
@@ -79,6 +86,12 @@ public class PlayerPointAndClick : MonoBehaviour
             // check if the object is of type "Interactable"
             if (hit.collider.CompareTag("Interactable"))
             {
+                // set the current objective to interacting 
+                Attributes.Instance.SetCurrentObjective(CurrentObjective.Interact);
+                
+                // set the chosen interactable object 
+                Attributes.Instance.SetInteractable(hit.collider.GameObject());
+                
                 // check if player can interact 
                 if (Attributes.Instance.GetCanPlayerInteract())
                 {
@@ -91,13 +104,35 @@ public class PlayerPointAndClick : MonoBehaviour
                 {
                     // move to interactable object position 
                     Debug.Log("click interact, move"); // TODO - move to position 
+                    
+                    entryPoint = hit.point; 
+                    Debug.Log("entrypoint: "+entryPoint);
+                    Attributes.Instance.SetGoalPosition(hit.point);
                 }
             }
             // check if the object is of type "Ground" 
             else if (hit.collider.CompareTag("Ground"))
             {
+                // set the current objective to moving 
+                Attributes.Instance.SetCurrentObjective(CurrentObjective.Move);
+                
                 Debug.Log("click move"); // TODO - move to position 
+
+                entryPoint = hit.point; 
+                Debug.Log("entrypoint: "+entryPoint);
+                Attributes.Instance.SetGoalPosition(hit.point);
             }
         }
+    }
+
+    private void OnDrawGizmos()
+    {
+        Debug.Log("test gizmos");
+        
+        Gizmos.color = Color.red; 
+        
+        Gizmos.DrawSphere(entryPoint, 0.5f);
+        
+        Gizmos.DrawRay(entryPoint, Vector3.up * 10);
     }
 }
