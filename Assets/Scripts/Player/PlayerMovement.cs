@@ -11,7 +11,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
-        if (Attributes.Instance.GetCanPlayerMove())
+        if (Attributes.Instance.CanPlayerMove)
         {
             Move();
         }

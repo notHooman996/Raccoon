@@ -53,7 +53,7 @@ public class TestPauseMenu : MonoBehaviour
     /// </summary>
     public void OpenPauseMenu()
     {
-        Attributes.Instance.SetCanPlayerMove();
+        Attributes.Instance.CanPlayerMove = false; 
         AddPrefabToScene();
         canvasGroup = canvasInstance.GetComponent<CanvasGroup>();
         StartCoroutine(FadeCanvasGroup(0f, 1f, 2f));
@@ -71,7 +71,8 @@ public class TestPauseMenu : MonoBehaviour
             StartCoroutine(FadeCanvasGroup(1f, 0f, 2f));
             StartCoroutine(FadingOver());
         }
-        Attributes.Instance.SetCanPlayerMove();
+
+        Attributes.Instance.CanPlayerMove = true; 
     }
     
     /// <summary>

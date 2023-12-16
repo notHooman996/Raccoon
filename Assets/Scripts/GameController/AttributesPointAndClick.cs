@@ -41,59 +41,39 @@ public class AttributesPointAndClick : MonoBehaviour
     {
         
     }
-    
-    public void SetMouseHover(MouseHoverType type)
+
+    public MouseHoverType MouseHover
     {
-        mouseHovering = type; 
+        get { return mouseHovering; }
+        set { mouseHovering = value; }
     }
 
-    public MouseHoverType GetMouseHover()
+    public InteractableType MouseInteractableHover
     {
-        return mouseHovering; 
+        get { return mouseInteractableHover; }
+        set { mouseInteractableHover = value; }
     }
 
-    public void SetMouseInteractableHover(InteractableType type)
+    public CurrentObjective CurrentObjective
     {
-        mouseInteractableHover = type; 
+        get { return currentObjective; }
+        set { currentObjective = value; }
     }
 
-    public InteractableType GetMouseInteractableHover()
+    public Vector3 GoalPosition
     {
-        return mouseInteractableHover; 
+        get { return goalPosition; }
+        set { goalPosition = value; }
     }
 
-    public void SetCurrentObjective(CurrentObjective objective)
+    public GameObject InteractableObject
     {
-        currentObjective = objective; 
+        get { return interactableObject; }
+        set { interactableObject = value; }
     }
 
-    public CurrentObjective GetCurrentObjective()
+    public float InteractDistance
     {
-        return currentObjective; 
-    }
-
-    public void SetGoalPosition(Vector3 position)
-    {
-        goalPosition = position;
-    }
-
-    public Vector3 GetGoalPosition()
-    {
-        return goalPosition; 
-    }
-
-    public void SetInteractable(GameObject obj)
-    {
-        interactableObject = obj; 
-    }
-
-    public GameObject GetInteractable()
-    {
-        return interactableObject; 
-    }
-
-    public float GetInteractDistance()
-    {
-        return interactDistance; 
+        get { return interactDistance; }
     }
 }
