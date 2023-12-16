@@ -56,7 +56,7 @@ public class TestMainMenu : MonoBehaviour
     /// </summary>
     public void OpenMainMenu()
     {
-        Attributes.Instance.SetCanPlayerMove();
+        Attributes.Instance.CanPlayerMove = false;
         
         // move camera to sky - change camera with the CameraController 
         CameraHandler.Instance.SwitchCamera(CameraHandler.Instance.GetCameraByName("SkyCamera"));
@@ -83,8 +83,8 @@ public class TestMainMenu : MonoBehaviour
             // once fading is over - change camera and remove prefab 
             StartCoroutine(FadingOver());
         }
-        
-        Attributes.Instance.SetCanPlayerMove();
+
+        Attributes.Instance.CanPlayerMove = true; 
     }
 
     /// <summary>

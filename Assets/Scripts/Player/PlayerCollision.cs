@@ -10,8 +10,8 @@ public class PlayerCollision : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Interactable"))
         {
-            Attributes.Instance.SetCanPlayerInteract(true);
-            Debug.Log("can interact: "+Attributes.Instance.GetCanPlayerInteract());
+            Attributes.Instance.CanPlayerInteract = true;
+            Debug.Log("can interact: "+Attributes.Instance.CanPlayerInteract);
         }
         
         if (other.gameObject.CompareTag("SceneChanger"))
@@ -33,8 +33,8 @@ public class PlayerCollision : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Interactable"))
         {
-            Attributes.Instance.SetCanPlayerInteract(false);
-            Debug.Log("can interact: "+Attributes.Instance.GetCanPlayerInteract());
+            Attributes.Instance.CanPlayerInteract = false;
+            Debug.Log("can interact: "+Attributes.Instance.CanPlayerInteract);
         }
     }
 }
