@@ -14,12 +14,14 @@ public class Vertex
     [NonSerialized] public Vertex predecessor;
 
     public float x;
+    public float y;
     public float z;
 
-    public Vertex(string name, float x, float z)
+    public Vertex(string name, float x, float y, float z)
     {
         this.name = name;
         this.x = x;
+        this.y = y;
         this.z = z;
         edges = new List<Edge>();
     }

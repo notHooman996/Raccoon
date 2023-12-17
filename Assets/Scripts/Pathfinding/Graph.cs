@@ -16,9 +16,9 @@ public class Graph
         }
     }
 
-    public void Add(string name, float x, float z)
+    public void Add(string name, float x, float y, float z)
     {
-        vertices.Add(new Vertex(name, x, z));
+        vertices.Add(new Vertex(name, x, y, z));
     }
 
     public void Clear()
