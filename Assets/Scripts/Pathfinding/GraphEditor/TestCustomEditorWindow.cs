@@ -12,6 +12,8 @@ public class TestCustomEditorWindow : EditorWindow
     private List<GameObject> colliderObjects = new List<GameObject>();
     private GameObject newGameObject;
 
+    private List<Vertex> vertices = new List<Vertex>();
+    
     private string fileName; 
     
     
@@ -183,6 +185,13 @@ public class TestCustomEditorWindow : EditorWindow
         if (GUILayout.Button("Generate Graph"))
         {
             Debug.Log("Generate Graph");
+            GraphGenerator.Generate(walkableObjects, colliderObjects);
+        }
+        
+        if (GUILayout.Button("Draw Gizmos"))
+        {
+            Debug.Log("Draw gizmos");
+            SceneView.RepaintAll();
         }
     }
 
