@@ -13,16 +13,16 @@ public class Vertex
     [NonSerialized] public float h; // total distance from start to the node 
     [NonSerialized] public Vertex predecessor;
 
+    public Vector3 position; 
+    
     public float x;
     public float y;
     public float z;
 
-    public Vertex(string name, float x, float y, float z)
+    public Vertex(string name, Vector3 position)
     {
         this.name = name;
-        this.x = x;
-        this.y = y;
-        this.z = z;
+        this.position = position; 
         edges = new List<Edge>();
     }
 
