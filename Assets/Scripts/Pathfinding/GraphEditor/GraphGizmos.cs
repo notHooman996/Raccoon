@@ -22,19 +22,32 @@ public class GraphGizmos : MonoBehaviour
     #if UNITY_EDITOR
     private void OnDrawGizmos()
     {
-        foreach (Vertex vertex in GraphGenerator.GetVertices())
+        // foreach (Vertex vertex in GraphGenerator.GetVertices())
+        // {
+        //     DrawVertex(vertex.position);
+        // }
+
+        foreach (Vertex vertex in GraphCreator.GetVertices())
         {
             DrawVertex(vertex.position);
         }
-        
-        // DrawVertex(Vector3.zero);
-        // DrawEdge(Vector3.zero, new Vector3(1, 0, 1));
+
+        if (GraphCreator.GetChosenVertex() != null)
+        {
+            DrawChosenVertex(GraphCreator.GetChosenVertex().position);
+        }
     }
 
     public void DrawVertex(Vector3 position)
     {
         Gizmos.color = Color.cyan;
         Gizmos.DrawSphere(position, 0.1f);
+    }
+    
+    public void DrawChosenVertex(Vector3 position)
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawSphere(position, 0.15f);
     }
 
     private void DrawEdge(Vector3 from, Vector3 to)
