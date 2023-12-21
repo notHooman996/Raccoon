@@ -20,11 +20,13 @@ public class GraphCreator : EditorWindow
     private List<GameObject> colliderObjects = new List<GameObject>();
 
     private static List<Vertex> vertices = new List<Vertex>();
+    private static List<Vertex> wrongVertices = new List<Vertex>();
     private static List<Edge> edges = new List<Edge>();
 
     private static Vertex chosenVertex;
-    private bool canAddVertex = false; 
-    
+    private bool canAddVertex = false;
+
+    private float proximityRadius = 3; // TODO - player gameobject size radius 
 
     public static List<Vertex> GetVertices()
     {
@@ -34,6 +36,11 @@ public class GraphCreator : EditorWindow
     public static Vertex GetChosenVertex()
     {
         return chosenVertex; 
+    }
+
+    public static List<Vertex> GetWrongVertices()
+    {
+        return wrongVertices; 
     }
 
     public static List<Edge> GetEdges()
@@ -244,6 +251,11 @@ public class GraphCreator : EditorWindow
         showVerticesList = EditorGUILayout.Foldout(showVerticesList, "Vertices List");
         if (showVerticesList)
         {
+            if (GUILayout.Button("Disable Show Vertex"))
+            {
+                chosenVertex = null; 
+            }
+            
             GUILayout.Label("List of Vertices: ", EditorStyles.boldLabel);
             if (vertices.Count > 0)
             {
@@ -330,7 +342,25 @@ public class GraphCreator : EditorWindow
 
     private void CheckVertices()
     {
-        
+        wrongVertices.Clear(); 
+        foreach (Vertex vertex in vertices)
+        {
+            bool isVertexTooClose = false; 
+            foreach (GameObject colliderObject in colliderObjects)
+            {
+                float distance = Vector3.Distance(colliderObject.transform.position, vertex.position);
+                if (distance <= proximityRadius) // TODO - calculate common radius for player and collider object 
+                {
+                    isVertexTooClose = true;
+                    break; 
+                }
+            }
+
+            if (isVertexTooClose)
+            {
+                wrongVertices.Add(vertex);
+            }
+        }
     }
     
     private void GenerateEdges()
