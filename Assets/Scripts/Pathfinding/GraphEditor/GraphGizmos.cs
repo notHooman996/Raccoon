@@ -24,7 +24,23 @@ public class GraphGizmos : MonoBehaviour
     {
         foreach (Vertex vertex in GraphCreator.GetVertices())
         {
-            DrawVertex(vertex.position);
+            if (GraphCreator.GetWrongVertices() == null || GraphCreator.GetWrongVertices().Count == 0)
+            {
+                DrawVertex(vertex.position);
+            }
+            
+            foreach (Vertex wrongVertex in GraphCreator.GetWrongVertices())
+            {
+                if (vertex != wrongVertex)
+                {
+                    DrawVertex(vertex.position);
+                }
+            }
+        }
+
+        foreach (Vertex wrongVertex in GraphCreator.GetWrongVertices())
+        {
+            DrawWrongVertex(wrongVertex.position);
         }
 
         if (GraphCreator.GetChosenVertex() != null)
@@ -46,8 +62,14 @@ public class GraphGizmos : MonoBehaviour
     
     public void DrawChosenVertex(Vector3 position)
     {
-        Gizmos.color = Color.red;
+        Gizmos.color = Color.green;
         Gizmos.DrawSphere(position, 0.15f);
+    }
+
+    private void DrawWrongVertex(Vector3 position)
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawSphere(position, 0.1f);
     }
 
     private void DrawEdge(Vector3 from, Vector3 to)
