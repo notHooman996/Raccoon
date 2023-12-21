@@ -22,11 +22,6 @@ public class GraphGizmos : MonoBehaviour
     #if UNITY_EDITOR
     private void OnDrawGizmos()
     {
-        // foreach (Vertex vertex in GraphGenerator.GetVertices())
-        // {
-        //     DrawVertex(vertex.position);
-        // }
-
         foreach (Vertex vertex in GraphCreator.GetVertices())
         {
             DrawVertex(vertex.position);
@@ -35,6 +30,11 @@ public class GraphGizmos : MonoBehaviour
         if (GraphCreator.GetChosenVertex() != null)
         {
             DrawChosenVertex(GraphCreator.GetChosenVertex().position);
+        }
+
+        foreach (Edge edge in GraphCreator.GetEdges())
+        {
+            DrawEdge(edge.from.position, edge.to.position);
         }
     }
 
