@@ -7,7 +7,8 @@ using UnityEngine;
 public class GraphCreator : EditorWindow
 {
     private Vector2 scrollPosition;
-    private bool showWalkableList = false; 
+    private bool showWalkableList = false;
+    private bool showColliderList = false; 
     private bool showVerticesList = false; 
     
     private string selectedJSONFile; 
@@ -16,6 +17,7 @@ public class GraphCreator : EditorWindow
     
     private GameObject newGameObject;
     private List<GameObject> walkableObjects = new List<GameObject>();
+    private List<GameObject> colliderObjects = new List<GameObject>();
 
     private static List<Vertex> vertices = new List<Vertex>();
     private static List<Edge> edges = new List<Edge>();
@@ -33,6 +35,11 @@ public class GraphCreator : EditorWindow
     {
         return chosenVertex; 
     }
+
+    public static List<Edge> GetEdges()
+    {
+        return edges;
+    }
     
     [MenuItem("Window/Graph Creator")] // add it to the Window menu 
     public static void ShowWindow()
@@ -48,6 +55,7 @@ public class GraphCreator : EditorWindow
         DrawHorizontalLine();
         AddGameObject();
         WalkableList();
+        ColliderList();
         DrawHorizontalLine();
         GenerateGraph();
         DrawHorizontalLine();
@@ -134,6 +142,12 @@ public class GraphCreator : EditorWindow
             walkableObjects.Add(newGameObject);
             newGameObject = null; 
         }
+        
+        if (GUILayout.Button("Add GameObject as CollisionObject") && newGameObject != null)
+        {
+            colliderObjects.Add(newGameObject);
+            newGameObject = null; 
+        }
     }
 
     private void WalkableList()
@@ -156,6 +170,38 @@ public class GraphCreator : EditorWindow
                     if (GUILayout.Button("Remove", GUILayout.MaxWidth(70)))
                     {
                         walkableObjects.RemoveAt(i);
+                    }
+
+                    EditorGUILayout.EndHorizontal();
+                }
+            }
+            else
+            {
+                GUILayout.Label("No GameObjects added yet.");
+            }
+        }
+    }
+    
+    private void ColliderList()
+    {
+        showColliderList = EditorGUILayout.Foldout(showColliderList, "Collider GameObject List");
+        if (showColliderList)
+        {
+            GUILayout.Label("List of Collider GameObjects: ", EditorStyles.boldLabel);
+
+            if (colliderObjects.Count > 0)
+            {
+                for (int i = 0; i < colliderObjects.Count; i++)
+                {
+                    EditorGUILayout.BeginHorizontal();
+
+                    colliderObjects[i] =
+                        EditorGUILayout.ObjectField("Element " + i, colliderObjects[i], typeof(GameObject), true) as
+                            GameObject;
+
+                    if (GUILayout.Button("Remove", GUILayout.MaxWidth(70)))
+                    {
+                        colliderObjects.RemoveAt(i);
                     }
 
                     EditorGUILayout.EndHorizontal();
@@ -210,6 +256,19 @@ public class GraphCreator : EditorWindow
             {
                 GUILayout.Label("No vertices added yet.");
             }
+        }
+
+        if (GUILayout.Button("Check vertices"))
+        {
+            Debug.Log("Check vertices");
+            CheckVertices();
+        }
+
+        if (GUILayout.Button("Generate edges"))
+        {
+            Debug.Log("Generate edges");
+            edges.Clear(); // remember to clear list before generating new edges 
+            GenerateEdges();
         }
     }
 
@@ -269,14 +328,61 @@ public class GraphCreator : EditorWindow
         }
     }
 
+    private void CheckVertices()
+    {
+        
+    }
+    
     private void GenerateEdges()
     {
-        GUILayout.Space(10);
-        
-        if (GUILayout.Button("Calculate edges"))
+        // connect all vertices with edges 
+        foreach (Vertex vertex1 in vertices)
         {
-            // TODO 
+            foreach (Vertex vertex2 in vertices)
+            {
+                // make sure not to make edges at same vertex 
+                if (vertex1 != vertex2)
+                {
+                    bool hitAnyObject = false; 
+                    
+                    // define raycast start and end point
+                    Vector3 startPoint = vertex1.position;
+                    Vector3 endPoint = vertex2.position;
+
+                    Ray ray = new Ray(startPoint, endPoint - startPoint);
+                    RaycastHit hit; 
+                    
+                    // check if collider in the way 
+                    foreach (GameObject colliderObject in colliderObjects)
+                    {
+                        if (colliderObject != null)
+                        {
+                            if (Physics.Raycast(ray, out hit))
+                            {
+                                if (hit.collider.gameObject == colliderObject)
+                                {
+                                    hitAnyObject = true;
+                                    break; // exit the loop 
+                                }
+                            }
+                        }
+                    }
+
+                    // if no collision object was hit, then create edge
+                    if (!hitAnyObject)
+                    {
+                        CreateEdge(vertex1, vertex2);
+                    }
+                }
+            }
         }
+    }
+
+    private void CreateEdge(Vertex from, Vertex to)
+    {
+        // make edges both ways 
+        edges.Add(new Edge(from, to));
+        edges.Add(new Edge(to, from));
     }
     
     private void SaveGraph()
