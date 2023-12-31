@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
+using Pathfinding.GraphEditor;
 using UnityEditor;
 using UnityEngine;
 
@@ -108,9 +110,7 @@ public class GraphCreator : EditorWindow
         {
             if (!string.IsNullOrEmpty(selectedJSONFile))
             {
-                string filePath = System.IO.Path.Combine(folderPath, selectedJSONFile);
-                string jsonContent = File.ReadAllText(filePath);
-                // TODO - process loaded JSON data 
+                LoadFile();
             }
             else
             {
@@ -134,6 +134,47 @@ public class GraphCreator : EditorWindow
         }
     
         return jsonFiles; 
+    }
+
+    private void LoadFile()
+    {
+        Debug.Log($"Load file: {selectedJSONFile}");
+        
+        vertices.Clear();
+        wrongVertices.Clear();
+        edges.Clear();
+        
+        // read the entire file as a string
+        string filePath = System.IO.Path.Combine(folderPath, selectedJSONFile);
+        string jsonContent = File.ReadAllText(filePath);
+        
+        // deserialize json string 
+        JsonContainer container = JsonUtility.FromJson<JsonContainer>(jsonContent);
+        
+        // access and use the objects from the data 
+        if (container != null && container.vertices != null)
+        {
+            foreach (var vertex in container.vertices)
+            {
+                vertices.Add(new Vertex(vertex.name, new Vector3(vertex.position.x, vertex.position.y, vertex.position.z)));
+            }
+        }
+        if (container != null && container.edges != null)
+        {
+            foreach (var edge in container.edges)
+            {
+                Vertex fromVertex = vertices.Find(x =>
+                    x.name == edge.from.name && x.position ==
+                    new Vector3(edge.from.position.x, edge.from.position.y, edge.from.position.z));
+                Vertex toVertex = vertices.Find(x =>
+                    x.name == edge.to.name && x.position ==
+                    new Vector3(edge.to.position.x, edge.to.position.y, edge.to.position.z));
+                if (fromVertex != null && toVertex != null)
+                {
+                    edges.Add(new Edge(fromVertex, toVertex));
+                }
+            }
+        }
     }
     
     private void AddGameObject()
@@ -412,7 +453,6 @@ public class GraphCreator : EditorWindow
     {
         // make edges both ways 
         edges.Add(new Edge(from, to));
-        edges.Add(new Edge(to, from));
     }
     
     private void SaveGraph()
@@ -456,7 +496,12 @@ public class GraphCreator : EditorWindow
 
     private void SaveToFile(string path)
     {
-        // TODO - perform logic here 
-        File.WriteAllText(path, "");
+        JsonContainer jsonContainer = new JsonContainer();
+        jsonContainer.vertices = vertices.ToArray();
+        jsonContainer.edges = edges.ToArray();
+
+        string data = JsonUtility.ToJson(jsonContainer, true);
+
+        File.WriteAllText(path, data);
     }
 }
