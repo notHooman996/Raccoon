@@ -2,10 +2,11 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
+[Serializable]
 public class Vertex
 {
     public string name;
-    public List<Edge> edges;
+    [NonSerialized]public List<Edge> edges;
 
     [NonSerialized] public float distance; 
     [NonSerialized] public float f; // distance to a node 
@@ -15,9 +16,9 @@ public class Vertex
 
     public Vector3 position; 
     
-    public float x;
-    public float y;
-    public float z;
+    [NonSerialized]public float x;
+    [NonSerialized]public float y;
+    [NonSerialized]public float z;
 
     public Vertex(string name, Vector3 position)
     {
