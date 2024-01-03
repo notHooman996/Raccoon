@@ -127,7 +127,7 @@ public class PlayerPointAndClick : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        Debug.Log("test gizmos");
+        //Debug.Log("test gizmos");
         
         Gizmos.color = Color.red; 
         
