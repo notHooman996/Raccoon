@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 
@@ -10,7 +11,11 @@ public class TheatreStageCreator : EditorWindow
 
     public GameObject backdropPrefab; 
     private GameObject ground;
+    private GameObject backdropHolderObject; 
     private List<GameObject> backdrops = new List<GameObject>();
+    private GameObject selectedBackdrop = null; 
+    private bool showBackdropsList = false;
+    private bool showEditBackdropTransform = false;
     
     [MenuItem("Window/Theatre Stage Editor")] // add it to the Window menu 
     public static void ShowWindow()
@@ -24,10 +29,14 @@ public class TheatreStageCreator : EditorWindow
         
         scrollPosition = EditorGUILayout.BeginScrollView(scrollPosition);
         
-        CreateGround();
+        //CreateGround();
         DrawHorizontalLine();
-        SetBackdropPrefab();
         AddBackdrop();
+        DrawHorizontalLine();
+        BackdropList();
+        DrawHorizontalLine();
+        EditMenu();
+        DrawHorizontalLine();
         
         EditorGUILayout.EndScrollView();
     }
@@ -55,6 +64,9 @@ public class TheatreStageCreator : EditorWindow
         // load the ground object 
         ground = GameObject.FindGameObjectWithTag("Ground");
 
+        // load backdrop holder 
+        backdropHolderObject = GameObject.FindGameObjectWithTag("BackdropHolder");
+        
         // load the backdrops 
         backdrops = GameObject.FindGameObjectsWithTag("Backdrop").ToList();
     }
@@ -63,7 +75,7 @@ public class TheatreStageCreator : EditorWindow
     {
         // TODO - make separate editor for ground/water 
         
-        EditorGUILayout.LabelField("Create ground");
+        EditorGUILayout.LabelField("Create ground", EditorStyles.boldLabel);
         
         // add plane object 
         // set tag as Ground
@@ -77,42 +89,137 @@ public class TheatreStageCreator : EditorWindow
         }
     }
     
-    private void SetBackdropPrefab()
-    {
-        GUILayout.Label("Prefab Setter", EditorStyles.boldLabel);
-        
-        // Display the stored prefab reference 
-        backdropPrefab = (GameObject)EditorGUILayout.ObjectField("BackdropPrefab", backdropPrefab, typeof(GameObject), false);
-    }
-
     private void AddBackdrop()
     {
-        EditorGUILayout.LabelField("Add backdrop");
+        EditorGUILayout.LabelField("Add backdrop", EditorStyles.boldLabel);
+        
+        SetBackdropPrefab();
         
         // use prefab 
         if (GUILayout.Button("Add Backdrop"))
         {
-            // new gameobject 
+            if (backdropHolderObject == null)
+            {
+                // new backdrop holder object 
+                backdropHolderObject = new GameObject();
+                backdropHolderObject.name = "BackdropHolder";
+                backdropHolderObject.tag = "BackdropHolder";
+            }
+            
+            // new backdrop gameobject 
             GameObject newBackdrop = PrefabUtility.InstantiatePrefab(backdropPrefab) as GameObject;
+            newBackdrop.transform.parent = backdropHolderObject.transform; 
+            backdrops.Add(newBackdrop);
+        }
+    }
+    
+    private void SetBackdropPrefab()
+    {
+        // Display the stored prefab reference 
+        backdropPrefab = (GameObject)EditorGUILayout.ObjectField("BackdropPrefab", backdropPrefab, typeof(GameObject), false);
+    }
+
+    private void BackdropList()
+    {
+        showBackdropsList = EditorGUILayout.Foldout(showBackdropsList, "Backdrop GameObject List");
+        if (showBackdropsList)
+        {
+            GUILayout.Label("List of Backdrop GameObjects: ", EditorStyles.boldLabel);
+
+            if (backdrops.Count > 0)
+            {
+                for (int i = 0; i < backdrops.Count; i++)
+                {
+                    EditorGUILayout.BeginHorizontal();
+                    
+                    backdrops[i] = EditorGUILayout.ObjectField("Name: "+backdrops[i].name, backdrops[i], typeof(GameObject), true) as GameObject;
+
+                    if (GUILayout.Button("Edit", GUILayout.MaxWidth(70)))
+                    {
+                        selectedBackdrop = backdrops[i];
+                    }
+                    
+                    EditorGUILayout.EndHorizontal();
+                }
+            }
+        }
+    }
+
+    private void EditMenu()
+    {
+        EditorGUILayout.LabelField("Edit backdrop", EditorStyles.boldLabel);
+
+        if (selectedBackdrop == null)
+        {
+            GUILayout.Label("Choose backdrop from list to edit.");
+        }
+        else
+        {
+            if (GUILayout.Button("Stop edit", GUILayout.MaxWidth(70)))
+            {
+                selectedBackdrop = null;
+                return; 
+            }
+
+            EditBackdrop();
+            EditFloor();
+            EditLayer();
         }
     }
 
     private void EditBackdrop()
     {
-        EditorGUILayout.LabelField("Choose backdrop");
+        // edit the chosen backdrop 
+        EditorGUILayout.ObjectField("Name: "+selectedBackdrop.name, selectedBackdrop, typeof(GameObject), true);
+
+        EditBackdropName();
+        EditBackdropTransform();
+    }
+
+    private void EditBackdropName()
+    {
+        // change name 
+        string newName = selectedBackdrop.name; 
+        newName = EditorGUILayout.TextField("Rename backdrop: ", newName);
+        selectedBackdrop.name = newName; 
+    }
+
+    private void EditBackdropTransform()
+    {
+        showEditBackdropTransform = EditorGUILayout.Foldout(showEditBackdropTransform, "Transform");
+        if (showEditBackdropTransform)
+        {
+            EditorGUI.BeginChangeCheck();
+            
+            // Display position fields
+            selectedBackdrop.transform.position = EditorGUILayout.Vector3Field("Position", selectedBackdrop.transform.position);
+            
+            // Display rotation fields 
+            selectedBackdrop.transform.rotation = Quaternion.Euler(EditorGUILayout.Vector3Field("Rotation", selectedBackdrop.transform.rotation.eulerAngles));
+            
+            // Display scale fields
+            selectedBackdrop.transform.localScale = EditorGUILayout.Vector3Field("Scale", selectedBackdrop.transform.localScale);
+            
+            // Check if any changes were made
+            if (EditorGUI.EndChangeCheck())
+            {
+                // Mark the object as dirty to apply the changes
+                EditorUtility.SetDirty(selectedBackdrop);
+            }
+        }
+    }
+
+    private void EditFloor()
+    {
         
-        
-        
-        
-        EditorGUILayout.LabelField("Edit backdrop");
-        
+    }
+
+    private void EditLayer()
+    {
         // edit number of layers (give the layers ids)
         // edit width between each layer 
-        // entire backdrop can be moved (x,y,z)
-        // entire backdrop can be rotated (remember, only visible from one side)
+
         // add elements to a layer 
             // choose layer first 
     }
-    
-    
 }
