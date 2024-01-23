@@ -1,5 +1,7 @@
 using System;
+using System.Collections.Generic;
 using Cinemachine;
+using GameController;
 using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
@@ -9,6 +11,8 @@ public class PlayerPointAndClick : MonoBehaviour
 {
     private Camera mainCamera;
     private Vector3 previousMousePosition;
+
+    private float stoppingDistance = 1.5f; 
 
     // hit point 
     private Vector3 entryPoint;
@@ -35,6 +39,8 @@ public class PlayerPointAndClick : MonoBehaviour
         {
             MouseClick();
         }
+
+        FollowPath(PathGenerator.Instance.path);
     }
     
     private void MouseHover()
@@ -134,5 +140,31 @@ public class PlayerPointAndClick : MonoBehaviour
         Gizmos.DrawSphere(entryPoint, 0.5f);
         
         Gizmos.DrawRay(entryPoint, Vector3.up * 10);
+    }
+
+    public void FollowPath(List<Vertex> vertices)
+    {
+        if (vertices?.Count >= 2)
+        {
+            // TODO - what should be done 
+            // turn the player to point towards the next point 
+            // if angle is around 20 about the angle it should be, then go straight ahead with x speed 
+            // when player is n from end, then stop (decelerate)
+            
+            // what we no now 
+            
+            // when player is x from end, then stop (decelerate) 
+
+            if (vertices[1].name == "End" && Vector3.Distance(transform.position, vertices[1].position) <= stoppingDistance)
+            {
+                
+            }
+            else
+            {
+                // move towards the next vertex 
+                transform.LookAt(new Vector3(vertices[1].position.x, transform.position.y, vertices[1].position.z));
+                transform.Translate(Vector3.forward * AttributesPlayer.Instance.GetPlayerSpeed() * Time.deltaTime);
+            }
+        }
     }
 }
