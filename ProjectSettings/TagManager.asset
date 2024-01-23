@@ -10,6 +10,7 @@ TagManager:
   - Backdrop
   - BackdropFloor
   - BackdropLayer
+  - BackdropHolder
   layers:
   - Default
   - TransparentFX
