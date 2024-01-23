@@ -7,6 +7,10 @@ TagManager:
   - Interactable
   - SceneChanger
   - Ground
+  - Backdrop
+  - BackdropFloor
+  - BackdropLayer
+  - BackdropHolder
   layers:
   - Default
   - TransparentFX
