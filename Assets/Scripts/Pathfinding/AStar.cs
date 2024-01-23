@@ -31,6 +31,8 @@ public class AStar
                 path.Add(currentVertex);
             }
 
+            path.Reverse();
+            
             pathResult = path;
 
             foreach (Vertex vertex in pathResult)
