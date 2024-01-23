@@ -11,6 +11,7 @@ TagManager:
   - BackdropFloor
   - BackdropLayer
   - BackdropHolder
+  - Obstacle
   layers:
   - Default
   - TransparentFX
