@@ -6,7 +6,7 @@ using UnityEngine;
 public class Vertex
 {
     public string name;
-    [NonSerialized]public List<Edge> edges;
+    [NonSerialized] public List<Edge> edges;
 
     [NonSerialized] public float distance; 
     [NonSerialized] public float f; // distance to a node 
