@@ -6,6 +6,24 @@ using UnityEngine;
 
 public class PathGenerator : MonoBehaviour
 {
+    // singleton 
+    public static PathGenerator Instance;
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this; 
+            
+            // make sure object is not destroyed across scenes 
+            //DontDestroyOnLoad(gameObject);
+        }
+        else if (Instance != this)
+        {
+            // enforce singleton, there can only be one instance 
+            Destroy(gameObject);
+        }
+    }
+    
     private string folderPath = "Assets/DataFiles/";
     private string selectedJSONFile = "hej.json";
 
@@ -13,24 +31,34 @@ public class PathGenerator : MonoBehaviour
     public GameObject target;
 
     AStar aStar;
+    private Graph graph;
+    private Vertex start;
+    private Vertex end;
+
+    public List<Vertex> path = new List<Vertex>();
 
     private void Start()
     {
-
+        // TODO - make sure to load new file whenever changing stage 
+        string jsonContent = LoadFile();
+        graph = ConvertToJsonObject<Graph>(jsonContent);
     }
 
     private void Update()
     {
-        string jsonContent = LoadFile();
-        Graph graph = ConvertToJsonObject<Graph>(jsonContent);
-        Vertex start = new Vertex("Start", player.transform.position);
-        Vertex end = new Vertex("End", target.transform.position);
+        start = new Vertex("Start", player.transform.position);
+        end = new Vertex("End", AttributesPointAndClick.Instance.GoalPosition);
         graph.vertices.Add(start);
         graph.vertices.Add(end);
         graph = CalculateGraphConnections(graph);
 
         aStar = new AStar(graph);
         aStar.Run(start, end);
+
+        path = aStar.pathResult; 
+
+        graph.vertices.Remove(start);
+        graph.vertices.Remove(end);
 
         // foreach (var path in aStar.pathResult)
         // {

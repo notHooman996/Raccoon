@@ -485,7 +485,6 @@ public class GraphCreator : EditorWindow
             }
         }
         
-        
         if (GUILayout.Button("Overwrite File"))
         {
             string filePath = System.IO.Path.Combine(folderPath, selectedJSONFile);
@@ -498,7 +497,6 @@ public class GraphCreator : EditorWindow
     {
         JsonContainer jsonContainer = new JsonContainer();
         jsonContainer.vertices = vertices.ToArray();
-        jsonContainer.edges = edges.ToArray();
 
         string data = JsonUtility.ToJson(jsonContainer, true);
 
