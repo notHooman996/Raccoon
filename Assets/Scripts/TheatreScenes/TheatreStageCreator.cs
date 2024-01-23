@@ -124,8 +124,6 @@ public class TheatreStageCreator : EditorWindow
         showBackdropsList = EditorGUILayout.Foldout(showBackdropsList, "Backdrop GameObject List");
         if (showBackdropsList)
         {
-            GUILayout.Label("List of Backdrop GameObjects: ", EditorStyles.boldLabel);
-
             if (backdrops.Count > 0)
             {
                 for (int i = 0; i < backdrops.Count; i++)
@@ -159,6 +157,19 @@ public class TheatreStageCreator : EditorWindow
             {
                 selectedBackdrop = null;
                 return; 
+            }
+            
+            if (GUILayout.Button("Focus Backdrop", GUILayout.MaxWidth(120)))
+            {
+                SceneView sceneView = SceneView.lastActiveSceneView;
+                if (sceneView != null)
+                {
+                    // Set the scene view pivot to the position of the selected object
+                    sceneView.LookAt(selectedBackdrop.transform.position, sceneView.rotation);
+                    
+                    // repaint the scene view to reflect the changes 
+                    sceneView.Repaint();
+                }
             }
 
             EditBackdrop();
