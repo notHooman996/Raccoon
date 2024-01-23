@@ -33,7 +33,9 @@ public class PathGenerator : MonoBehaviour
     AStar aStar;
     private Graph graph;
     private Vertex start;
-    private Vertex end; 
+    private Vertex end;
+
+    public List<Vertex> path = new List<Vertex>();
 
     private void Start()
     {
@@ -52,6 +54,8 @@ public class PathGenerator : MonoBehaviour
 
         aStar = new AStar(graph);
         aStar.Run(start, end);
+
+        path = aStar.pathResult; 
 
         graph.vertices.Remove(start);
         graph.vertices.Remove(end);
