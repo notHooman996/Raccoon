@@ -8,7 +8,8 @@ public class BackdropTool : EditorWindow
     private BackdropView backdropView;
     private BackdropCreater backdropCreater;
     private BackdropSelect backdropSelect; 
-    private BackdropEditor backdropEditor; 
+    private BackdropEditor backdropEditor;
+    private BackdropLayerEditor backdropLayerEditor; 
     
     private int selectedToolTab = 0;
     private string[] toolTabNames = {"View", "Create", "Select", "Edit"};
@@ -32,11 +33,12 @@ public class BackdropTool : EditorWindow
         backdropCreater = ScriptableObject.CreateInstance<BackdropCreater>();
         backdropSelect = ScriptableObject.CreateInstance<BackdropSelect>();
         backdropEditor = ScriptableObject.CreateInstance<BackdropEditor>();
+        backdropLayerEditor = ScriptableObject.CreateInstance<BackdropLayerEditor>();
     }
 
     private void OnGUI()
     {
-        backdropLoad.LoadStage();
+        backdropLoad.Load();
         
         DrawTabs(ref selectedToolTab, toolTabNames);
         DrawContent();
@@ -81,7 +83,7 @@ public class BackdropTool : EditorWindow
                 break; 
             case 3: // edit 
                 DrawTabs(ref selectedEditTab, editTabNames);
-                backdropEditor.DrawEditTab();
+                DrawEditContent();
                 break; 
         }
     }
@@ -93,14 +95,32 @@ public class BackdropTool : EditorWindow
         switch (selectedEditTab)
         {
             case 0: // backdrop 
-                
+                backdropEditor.DrawEditTab();
                 break; 
             case 1: // floor
                 
                 break; 
             case 2: // layer
-                
+                backdropLayerEditor.DrawLayerEditor();
                 break; 
         }
+    }
+    
+    public static void DrawHorizontalLine()
+    {
+        GUILayout.Space(10);
+        
+        Color color = Color.gray;
+        int thickness = 1;
+        int padding = 10; 
+        
+        Rect rect = EditorGUILayout.GetControlRect(false, thickness, EditorStyles.helpBox);
+        rect.height = thickness;
+        rect.y += padding / 2;
+        rect.x -= 2;
+        rect.width += 6;
+        EditorGUI.DrawRect(rect, color);
+        
+        GUILayout.Space(10);
     }
 }
