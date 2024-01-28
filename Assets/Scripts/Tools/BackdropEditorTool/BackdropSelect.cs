@@ -21,7 +21,9 @@ public class BackdropSelect : EditorWindow
 
     public void DrawSelectTab()
     {
+        BackdropTool.DrawHorizontalLine();
         Deselect();
+        BackdropTool.DrawHorizontalLine();
         
         DrawList(ref showBackdropList,
                 "Backdrop GameObject List",
@@ -30,12 +32,16 @@ public class BackdropSelect : EditorWindow
                 (x) => BackdropElement(x),
                 (x) => BackdropEditButton(x));
         
+        BackdropTool.DrawHorizontalLine();
+        
         DrawList(ref showLayerList,
                 "Layer GameObject List",
                 layers,
                 ref selectedLayerIndex,
                 (x) => LayerElement(x),
                 (x) => LayerEditButton(x)); 
+        
+        BackdropTool.DrawHorizontalLine();
     }
 
     private void Deselect()
@@ -125,11 +131,7 @@ public class BackdropSelect : EditorWindow
 
     private void SetLayersList()
     {
-        layers = SelectedBackdrop.transform
-                        .GetComponentsInChildren<Transform>(true)
-                        .Where(child => child.CompareTag("BackdropLayer"))
-                        .Select(child => child.gameObject)
-                        .ToList();
+        layers = SelectedBackdrop.GetComponent<Backdrop>().Layers; 
     }
 
     private void SetFloor()
