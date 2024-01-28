@@ -7,6 +7,7 @@ public class BackdropEditor : EditorWindow
 
     public void DrawEditTab()
     {
+        BackdropTool.DrawHorizontalLine();
         EditMenu();
     }
     
@@ -34,8 +35,6 @@ public class BackdropEditor : EditorWindow
             }
 
             EditBackdrop();
-            EditFloor();
-            EditLayer();
         }
     }
 
@@ -45,8 +44,11 @@ public class BackdropEditor : EditorWindow
         EditorGUILayout.ObjectField("Name: "+BackdropSelect.SelectedBackdrop.name, BackdropSelect.SelectedBackdrop, typeof(GameObject), true);
         EditorGUI.EndDisabledGroup();
         
+        BackdropTool.DrawHorizontalLine();
         ChangeName(BackdropSelect.SelectedBackdrop);
+        BackdropTool.DrawHorizontalLine();
         Transform(ref showEditBackdropTransform, BackdropSelect.SelectedBackdrop);
+        BackdropTool.DrawHorizontalLine();
     }
 
     private void ChangeName(GameObject gameObject)
