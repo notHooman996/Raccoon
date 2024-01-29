@@ -39,9 +39,22 @@ public class BackdropTool : EditorWindow
     private void OnGUI()
     {
         backdropLoad.Load();
+
+        DrawUpdate();
         
         DrawTabs(ref selectedToolTab, toolTabNames);
         DrawContent();
+    }
+
+    private void DrawUpdate()
+    {
+        if (GUILayout.Button("Update"))
+        {
+            foreach (GameObject backdrop in BackdropSelect.Backdrops)
+            {
+                backdrop.GetComponent<Backdrop>().DrawLayers();
+            }
+        }
     }
     
     private void DrawTabs(ref int selectedTab, string[] tabNames)

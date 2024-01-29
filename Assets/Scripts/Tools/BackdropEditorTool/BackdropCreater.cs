@@ -56,6 +56,11 @@ public class BackdropCreater : EditorWindow
                 // new layer gameobject 
                 GameObject newLayer = PrefabUtility.InstantiatePrefab(BackdropLoad.LayerPrefab) as GameObject;
                 newLayer.transform.parent = BackdropSelect.SelectedBackdrop.transform; 
+                // figure out the id 
+                newLayer.GetComponent<BackdropLayer>().LayerID =
+                    BackdropSelect.SelectedBackdrop.GetComponent<Backdrop>().GetHighestLayerId() + 1; 
+                // set initial spacing 
+                newLayer.GetComponent<BackdropLayer>().LayerSpacing = 0.5f; 
                 BackdropSelect.SelectedBackdrop.GetComponent<Backdrop>().AddLayer(newLayer);
             }
         }

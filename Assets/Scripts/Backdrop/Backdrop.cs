@@ -29,10 +29,9 @@ public class Backdrop : MonoBehaviour
     }
     
     // create method that positions the layers correctly in relation to the backdrop 
-    private void DrawLayers()
+    public void DrawLayers()
     {
-        // sort the layers based on id 
-        Layers.Sort((a, b) => a.GetComponent<BackdropLayer>().LayerID.CompareTo(b.GetComponent<BackdropLayer>().LayerID));
+        AdjustLayerIds();
         
         // arrange the layers along the local z-axis with pacing 
         float offsetZ = 0f; // initial offset 
@@ -42,6 +41,36 @@ public class Backdrop : MonoBehaviour
             offsetZ += Layers[i].GetComponent<BackdropLayer>().LayerSpacing; // add the current layer spacing 
             Vector3 newPosition = new Vector3(0f, Layers[i].transform.position.y, offsetZ);
             Layers[i].transform.localPosition = newPosition; 
+        }
+    }
+
+    public int GetHighestLayerId()
+    {
+        AdjustLayerIds();
+        
+        int highestID = 0;
+
+        foreach (GameObject layer in Layers)
+        {
+            int id = layer.GetComponent<BackdropLayer>().LayerID;
+
+            if (id > highestID)
+            {
+                highestID = id; 
+            }
+        }
+
+        return highestID; 
+    }
+
+    private void AdjustLayerIds()
+    {
+        // sort the layers based on id 
+        Layers.Sort((a, b) => a.GetComponent<BackdropLayer>().LayerID.CompareTo(b.GetComponent<BackdropLayer>().LayerID));
+        
+        for (int i = 0; i < Layers.Count; i++)
+        {
+            Layers[i].GetComponent<BackdropLayer>().LayerID = i;
         }
     }
 }
