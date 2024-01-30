@@ -8,7 +8,7 @@ public class TerrainCreater : EditorWindow
     [MenuItem("Tools/Terrain Creater")] // add it to the Window menu 
     public static void ShowWindow()
     {
-        EditorWindow.GetWindow(typeof(BackdropCreater));
+        EditorWindow.GetWindow(typeof(OldBackdropCreater));
     }
 
     private void OnGUI()

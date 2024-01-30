@@ -1,7 +1,7 @@
 using UnityEditor;
 using UnityEngine;
 
-public class BackdropCreater : EditorWindow
+public class OldBackdropCreater : EditorWindow
 {
     private Vector2 scrollPosition;
 
@@ -9,11 +9,11 @@ public class BackdropCreater : EditorWindow
     {
         scrollPosition = EditorGUILayout.BeginScrollView(scrollPosition);
         
-        BackdropTool.DrawHorizontalLine();
+        OldBackdropTool.DrawHorizontalLine();
         AddBackdrop();
-        BackdropTool.DrawHorizontalLine();
+        OldBackdropTool.DrawHorizontalLine();
         AddLayer();
-        BackdropTool.DrawHorizontalLine();
+        OldBackdropTool.DrawHorizontalLine();
         
         EditorGUILayout.EndScrollView();
     }
@@ -25,19 +25,19 @@ public class BackdropCreater : EditorWindow
         // use prefab 
         if (GUILayout.Button("Add Backdrop"))
         {
-            if (BackdropLoad.BackdropHolderObject == null)
+            if (OldBackdropLoad.BackdropHolderObject == null)
             {
                 // new backdrop holder object 
-                BackdropLoad.BackdropHolderObject = new GameObject();
-                BackdropLoad.BackdropHolderObject.name = "BackdropHolder";
-                BackdropLoad.BackdropHolderObject.tag = "BackdropHolder";
+                OldBackdropLoad.BackdropHolderObject = new GameObject();
+                OldBackdropLoad.BackdropHolderObject.name = "BackdropHolder";
+                OldBackdropLoad.BackdropHolderObject.tag = "BackdropHolder";
             }
             
             // new backdrop gameobject 
-            GameObject newBackdrop = Instantiate(BackdropLoad.BackdropPrefab);
-            newBackdrop.transform.parent = BackdropLoad.BackdropHolderObject.transform;
+            GameObject newBackdrop = Instantiate(OldBackdropLoad.BackdropPrefab);
+            newBackdrop.transform.parent = OldBackdropLoad.BackdropHolderObject.transform;
             newBackdrop.AddComponent<Backdrop>();
-            BackdropSelect.Backdrops.Add(newBackdrop);
+            OldBackdropSelect.Backdrops.Add(newBackdrop);
         }
     }
     
@@ -45,7 +45,7 @@ public class BackdropCreater : EditorWindow
     {
         EditorGUILayout.LabelField("Add layer", EditorStyles.boldLabel);
         
-        if (BackdropSelect.SelectedBackdrop == null)
+        if (OldBackdropSelect.SelectedBackdrop == null)
         {
             GUILayout.Label("Choose backdrop from list.");
         }
@@ -55,16 +55,16 @@ public class BackdropCreater : EditorWindow
             if (GUILayout.Button("Add Layer"))
             {
                 // new layer gameobject 
-                GameObject newLayer = Instantiate(BackdropLoad.LayerPrefab);
-                newLayer.transform.parent = BackdropSelect.SelectedBackdrop.transform; 
+                GameObject newLayer = Instantiate(OldBackdropLoad.LayerPrefab);
+                newLayer.transform.parent = OldBackdropSelect.SelectedBackdrop.transform; 
                 // add component 
                 newLayer.AddComponent<BackdropLayer>();
                 // figure out the id 
                 newLayer.GetComponent<BackdropLayer>().LayerID =
-                    BackdropSelect.SelectedBackdrop.GetComponent<Backdrop>().GetHighestLayerId() + 1; 
+                    OldBackdropSelect.SelectedBackdrop.GetComponent<Backdrop>().GetHighestLayerId() + 1; 
                 // set initial spacing 
                 newLayer.GetComponent<BackdropLayer>().LayerSpacing = 0.5f; 
-                BackdropSelect.SelectedBackdrop.GetComponent<Backdrop>().AddLayer(newLayer);
+                OldBackdropSelect.SelectedBackdrop.GetComponent<Backdrop>().AddLayer(newLayer);
             }
         }
     }

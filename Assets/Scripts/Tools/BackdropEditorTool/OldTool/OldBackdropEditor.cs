@@ -1,13 +1,13 @@
 using UnityEditor;
 using UnityEngine;
 
-public class BackdropEditor : EditorWindow
+public class OldBackdropEditor : EditorWindow
 {
     private bool showEditBackdropTransform = false;
 
     public void DrawEditTab()
     {
-        BackdropTool.DrawHorizontalLine();
+        OldBackdropTool.DrawHorizontalLine();
         EditMenu();
     }
     
@@ -15,7 +15,7 @@ public class BackdropEditor : EditorWindow
     {
         EditorGUILayout.LabelField("Edit backdrop", EditorStyles.boldLabel);
 
-        if (BackdropSelect.SelectedBackdrop == null)
+        if (OldBackdropSelect.SelectedBackdrop == null)
         {
             GUILayout.Label("Choose backdrop from list to edit.");
         }
@@ -27,7 +27,7 @@ public class BackdropEditor : EditorWindow
                 if (sceneView != null)
                 {
                     // Set the scene view pivot to the position of the selected object
-                    sceneView.LookAt(BackdropSelect.SelectedBackdrop.transform.position, sceneView.rotation);
+                    sceneView.LookAt(OldBackdropSelect.SelectedBackdrop.transform.position, sceneView.rotation);
                     
                     // repaint the scene view to reflect the changes 
                     sceneView.Repaint();
@@ -41,14 +41,14 @@ public class BackdropEditor : EditorWindow
     private void EditBackdrop()
     {
         EditorGUI.BeginDisabledGroup(true);
-        EditorGUILayout.ObjectField("Name: "+BackdropSelect.SelectedBackdrop.name, BackdropSelect.SelectedBackdrop, typeof(GameObject), true);
+        EditorGUILayout.ObjectField("Name: "+OldBackdropSelect.SelectedBackdrop.name, OldBackdropSelect.SelectedBackdrop, typeof(GameObject), true);
         EditorGUI.EndDisabledGroup();
         
-        BackdropTool.DrawHorizontalLine();
-        ChangeName(BackdropSelect.SelectedBackdrop);
-        BackdropTool.DrawHorizontalLine();
-        Transform(ref showEditBackdropTransform, BackdropSelect.SelectedBackdrop);
-        BackdropTool.DrawHorizontalLine();
+        OldBackdropTool.DrawHorizontalLine();
+        ChangeName(OldBackdropSelect.SelectedBackdrop);
+        OldBackdropTool.DrawHorizontalLine();
+        Transform(ref showEditBackdropTransform, OldBackdropSelect.SelectedBackdrop);
+        OldBackdropTool.DrawHorizontalLine();
     }
 
     private void ChangeName(GameObject gameObject)

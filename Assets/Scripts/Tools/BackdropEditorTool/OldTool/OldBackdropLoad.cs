@@ -2,7 +2,7 @@ using System.Linq;
 using UnityEditor;
 using UnityEngine;
 
-public class BackdropLoad : EditorWindow
+public class OldBackdropLoad : EditorWindow
 {
     private string backdropPrefabPath = "Assets/Prefabs/TheatreBackdrop/Backdrop.prefab";
     private string layerPrefabPath = "Assets/Prefabs/TheatreBackdrop/Layer.prefab";
@@ -23,7 +23,7 @@ public class BackdropLoad : EditorWindow
         BackdropHolderObject = GameObject.FindGameObjectWithTag("BackdropHolder");
         
         // load the backdrops 
-        BackdropSelect.Backdrops = GameObject.FindGameObjectsWithTag("Backdrop").ToList();
+        OldBackdropSelect.Backdrops = GameObject.FindGameObjectsWithTag("Backdrop").ToList();
     }
 
     private void LoadPrefabs()

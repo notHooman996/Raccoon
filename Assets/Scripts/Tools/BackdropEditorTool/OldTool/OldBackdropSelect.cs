@@ -4,7 +4,7 @@ using System.Linq;
 using UnityEditor;
 using UnityEngine;
 
-public class BackdropSelect : EditorWindow
+public class OldBackdropSelect : EditorWindow
 {
     public static List<GameObject> Backdrops { get; set; }
     private List<GameObject> layers = new List<GameObject>();
@@ -21,9 +21,9 @@ public class BackdropSelect : EditorWindow
 
     public void DrawSelectTab()
     {
-        BackdropTool.DrawHorizontalLine();
+        OldBackdropTool.DrawHorizontalLine();
         Deselect();
-        BackdropTool.DrawHorizontalLine();
+        OldBackdropTool.DrawHorizontalLine();
         
         DrawList(ref showBackdropList,
                 "Backdrop GameObject List",
@@ -32,7 +32,7 @@ public class BackdropSelect : EditorWindow
                 (x) => BackdropElement(x),
                 (x) => BackdropEditButton(x));
         
-        BackdropTool.DrawHorizontalLine();
+        OldBackdropTool.DrawHorizontalLine();
         
         DrawList(ref showLayerList,
                 "Layer GameObject List",
@@ -41,7 +41,7 @@ public class BackdropSelect : EditorWindow
                 (x) => LayerElement(x),
                 (x) => LayerEditButton(x)); 
         
-        BackdropTool.DrawHorizontalLine();
+        OldBackdropTool.DrawHorizontalLine();
     }
 
     private void Deselect()
@@ -108,7 +108,24 @@ public class BackdropSelect : EditorWindow
 
     private void LayerElement(int i)
     {
-        layers[i] = EditorGUILayout.ObjectField("Name: "+layers[i].name, layers[i], typeof(GameObject), true) as GameObject;
+        EditorGUILayout.BeginVertical("box");
+        EditorGUILayout.BeginHorizontal();
+        
+        EditorGUILayout.LabelField("Name: "+layers[i].name);
+        
+        EditorGUILayout.EndHorizontal();
+        EditorGUILayout.BeginHorizontal();
+        
+        BackdropLayer layerComponent = layers[i].GetComponent<BackdropLayer>();
+        
+        EditorGUILayout.LabelField("ID: ", GUILayout.Width(30));
+        EditorGUILayout.LabelField(layerComponent.LayerID.ToString(), GUILayout.Width(50));
+        
+        EditorGUILayout.LabelField("Spacing: ", GUILayout.Width(50));
+        layerComponent.LayerSpacing = EditorGUILayout.FloatField(layerComponent.LayerSpacing);
+        
+        EditorGUILayout.EndHorizontal();
+        EditorGUILayout.EndVertical();
     }
 
     private void BackdropEditButton(int i)

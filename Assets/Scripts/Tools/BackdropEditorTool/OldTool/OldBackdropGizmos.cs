@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class BackdropGizmos : MonoBehaviour
+public class OldBackdropGizmos : MonoBehaviour
 {
-    public static BackdropGizmos Instance; 
+    public static OldBackdropGizmos Instance; 
     
     private void Awake()
     {

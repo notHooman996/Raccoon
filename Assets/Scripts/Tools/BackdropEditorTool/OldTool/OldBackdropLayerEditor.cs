@@ -1,16 +1,16 @@
 using UnityEditor;
 using UnityEngine;
 
-public class BackdropLayerEditor : EditorWindow
+public class OldBackdropLayerEditor : EditorWindow
 {
     private int layerId;
     private float layerSpacing; 
     
     public void DrawLayerEditor()
     {
-        BackdropTool.DrawHorizontalLine();
+        OldBackdropTool.DrawHorizontalLine();
 
-        if (BackdropSelect.SelectedLayer == null)
+        if (OldBackdropSelect.SelectedLayer == null)
         {
             GUILayout.Label("Choose layer from list to edit.");
         }
@@ -19,11 +19,11 @@ public class BackdropLayerEditor : EditorWindow
             ShowInfo();
         }
         
-        BackdropTool.DrawHorizontalLine();
+        OldBackdropTool.DrawHorizontalLine();
 
         EditSpacing();
         
-        BackdropTool.DrawHorizontalLine();
+        OldBackdropTool.DrawHorizontalLine();
     }
 
     private void ShowInfo()
@@ -31,7 +31,7 @@ public class BackdropLayerEditor : EditorWindow
         EditorGUILayout.LabelField("Layer Info", EditorStyles.boldLabel);
 
         // load data from layer component 
-        BackdropLayer backdropLayer = BackdropSelect.SelectedLayer.GetComponent<BackdropLayer>();
+        BackdropLayer backdropLayer = OldBackdropSelect.SelectedLayer.GetComponent<BackdropLayer>();
         layerId = backdropLayer.LayerID;
         layerSpacing = backdropLayer.LayerSpacing; 
         
@@ -45,7 +45,7 @@ public class BackdropLayerEditor : EditorWindow
         EditorGUILayout.LabelField("Layer Info", EditorStyles.boldLabel);
 
         // load data from layer component 
-        BackdropLayer backdropLayer = BackdropSelect.SelectedLayer.GetComponent<BackdropLayer>();
+        BackdropLayer backdropLayer = OldBackdropSelect.SelectedLayer.GetComponent<BackdropLayer>();
 
         backdropLayer.LayerSpacing = EditorGUILayout.FloatField("Edit layer spacing: ", backdropLayer.LayerSpacing); 
     }

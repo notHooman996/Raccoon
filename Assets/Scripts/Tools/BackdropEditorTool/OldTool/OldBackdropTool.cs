@@ -2,14 +2,14 @@ using System;
 using UnityEditor;
 using UnityEngine;
 
-public class BackdropTool : EditorWindow
+public class OldBackdropTool : EditorWindow
 {
-    private BackdropLoad backdropLoad; 
-    private BackdropView backdropView;
-    private BackdropCreater backdropCreater;
-    private BackdropSelect backdropSelect; 
-    private BackdropEditor backdropEditor;
-    private BackdropLayerEditor backdropLayerEditor; 
+    private OldBackdropLoad oldBackdropLoad; 
+    private OldBackdropView oldBackdropView;
+    private OldBackdropCreater oldBackdropCreater;
+    private OldBackdropSelect oldBackdropSelect; 
+    private OldBackdropEditor oldBackdropEditor;
+    private OldBackdropLayerEditor oldBackdropLayerEditor; 
     
     private int selectedToolTab = 0;
     private string[] toolTabNames = {"View", "Create", "Select", "Edit"};
@@ -20,25 +20,25 @@ public class BackdropTool : EditorWindow
     private Color deselectedTabColor = Color.white;
     private Color unavailableTabColor = Color.gray;
 
-    [MenuItem("Tools/Backdrop Tool")]
+    [MenuItem("Tools/Old Backdrop Tool")]
     public static void ShowWindow()
     {
-        GetWindow<BackdropTool>("Backdrop Tool");
+        GetWindow<OldBackdropTool>("Old Backdrop Tool");
     }
 
     private void OnEnable()
     {
-        backdropLoad = ScriptableObject.CreateInstance<BackdropLoad>();
-        backdropView = ScriptableObject.CreateInstance<BackdropView>();
-        backdropCreater = ScriptableObject.CreateInstance<BackdropCreater>();
-        backdropSelect = ScriptableObject.CreateInstance<BackdropSelect>();
-        backdropEditor = ScriptableObject.CreateInstance<BackdropEditor>();
-        backdropLayerEditor = ScriptableObject.CreateInstance<BackdropLayerEditor>();
+        oldBackdropLoad = ScriptableObject.CreateInstance<OldBackdropLoad>();
+        oldBackdropView = ScriptableObject.CreateInstance<OldBackdropView>();
+        oldBackdropCreater = ScriptableObject.CreateInstance<OldBackdropCreater>();
+        oldBackdropSelect = ScriptableObject.CreateInstance<OldBackdropSelect>();
+        oldBackdropEditor = ScriptableObject.CreateInstance<OldBackdropEditor>();
+        oldBackdropLayerEditor = ScriptableObject.CreateInstance<OldBackdropLayerEditor>();
     }
 
     private void OnGUI()
     {
-        backdropLoad.Load();
+        oldBackdropLoad.Load();
 
         DrawUpdate();
         
@@ -50,7 +50,7 @@ public class BackdropTool : EditorWindow
     {
         if (GUILayout.Button("Update"))
         {
-            foreach (GameObject backdrop in BackdropSelect.Backdrops)
+            foreach (GameObject backdrop in OldBackdropSelect.Backdrops)
             {
                 backdrop.GetComponent<Backdrop>().DrawLayers();
             }
@@ -89,10 +89,10 @@ public class BackdropTool : EditorWindow
                 
                 break; 
             case 1: // create 
-                backdropCreater.DrawCreateTab();
+                oldBackdropCreater.DrawCreateTab();
                 break; 
             case 2: // select
-                backdropSelect.DrawSelectTab();
+                oldBackdropSelect.DrawSelectTab();
                 break; 
             case 3: // edit 
                 DrawTabs(ref selectedEditTab, editTabNames);
@@ -108,13 +108,13 @@ public class BackdropTool : EditorWindow
         switch (selectedEditTab)
         {
             case 0: // backdrop 
-                backdropEditor.DrawEditTab();
+                oldBackdropEditor.DrawEditTab();
                 break; 
             case 1: // floor
                 
                 break; 
             case 2: // layer
-                backdropLayerEditor.DrawLayerEditor();
+                oldBackdropLayerEditor.DrawLayerEditor();
                 break; 
         }
     }
