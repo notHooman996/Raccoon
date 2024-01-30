@@ -25,7 +25,14 @@ public class Backdrop : MonoBehaviour
     
     public void AddLayer(GameObject layer)
     {
+        // set layer rotation depending to backdrop rotation 
+        Quaternion initialLayerRotation = layer.transform.localRotation;
+        Quaternion newLayerRotation = transform.localRotation * initialLayerRotation; 
+        layer.transform.localRotation = newLayerRotation; 
+        
         Layers.Add(layer);
+
+        DrawLayers();
     }
     
     // create method that positions the layers correctly in relation to the backdrop 
@@ -33,14 +40,15 @@ public class Backdrop : MonoBehaviour
     {
         AdjustLayerIds();
         
-        // arrange the layers along the local z-axis with pacing 
-        float offsetZ = 0f; // initial offset 
+        // arrange the layers along the local z-axis with spacing 
+        float localOffsetZ = 0f; // initial offset 
         for (int i = 0; i < Layers.Count; i++)
         {
-            offsetZ += i > 0 ? Layers[i - 1].GetComponent<BackdropLayer>().LayerSpacing : 0f; // add the previous layers spacing 
-            offsetZ += Layers[i].GetComponent<BackdropLayer>().LayerSpacing; // add the current layer spacing 
-            Vector3 newPosition = new Vector3(0f, Layers[i].transform.position.y, offsetZ);
-            Layers[i].transform.localPosition = newPosition; 
+            // update layer position 
+            localOffsetZ += i > 0 ? Layers[i - 1].GetComponent<BackdropLayer>().LayerSpacing : 0f; // add the previous layers spacing 
+            localOffsetZ += Layers[i].GetComponent<BackdropLayer>().LayerSpacing; // add the current layer spacing 
+            Vector3 newPosition = new Vector3(0f, Layers[i].transform.localPosition.y, localOffsetZ);
+            Layers[i].transform.localPosition = newPosition;  
         }
     }
 

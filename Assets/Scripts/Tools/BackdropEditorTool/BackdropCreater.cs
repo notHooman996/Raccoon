@@ -34,8 +34,9 @@ public class BackdropCreater : EditorWindow
             }
             
             // new backdrop gameobject 
-            GameObject newBackdrop = PrefabUtility.InstantiatePrefab(BackdropLoad.BackdropPrefab) as GameObject;
-            newBackdrop.transform.parent = BackdropLoad.BackdropHolderObject.transform; 
+            GameObject newBackdrop = Instantiate(BackdropLoad.BackdropPrefab);
+            newBackdrop.transform.parent = BackdropLoad.BackdropHolderObject.transform;
+            newBackdrop.AddComponent<Backdrop>();
             BackdropSelect.Backdrops.Add(newBackdrop);
         }
     }
@@ -54,8 +55,10 @@ public class BackdropCreater : EditorWindow
             if (GUILayout.Button("Add Layer"))
             {
                 // new layer gameobject 
-                GameObject newLayer = PrefabUtility.InstantiatePrefab(BackdropLoad.LayerPrefab) as GameObject;
+                GameObject newLayer = Instantiate(BackdropLoad.LayerPrefab);
                 newLayer.transform.parent = BackdropSelect.SelectedBackdrop.transform; 
+                // add component 
+                newLayer.AddComponent<BackdropLayer>();
                 // figure out the id 
                 newLayer.GetComponent<BackdropLayer>().LayerID =
                     BackdropSelect.SelectedBackdrop.GetComponent<Backdrop>().GetHighestLayerId() + 1; 
