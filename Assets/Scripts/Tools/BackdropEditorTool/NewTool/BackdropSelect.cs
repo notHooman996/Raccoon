@@ -5,8 +5,11 @@ using UnityEngine;
 
 public class BackdropSelect : EditorWindow
 {
-    public GameObject SelectedBackdrop { get; private set; }
-    public GameObject SelectedLayer { get; private set; }
+    private int selectedBackdropIndex = -1; 
+    private int selectedLayerIndex = -1; 
+    
+    public static GameObject SelectedBackdrop { get; private set; }
+    public static GameObject SelectedLayer { get; private set; }
     
     public void DrawSelect()
     {
@@ -19,27 +22,52 @@ public class BackdropSelect : EditorWindow
 
     private void Deselect()
     {
+        bool isClickable = SelectedBackdrop != null;
+        
+        Color buttonColor = isClickable ? BackdropToolUtilities.DefaultColor : BackdropToolUtilities.UnavailableColor;
+        GUI.backgroundColor = buttonColor; 
+        
         if (GUILayout.Button("Deselect Backdrop"))
         {
-            // TODO 
-            // make sure the selected objects can be deselected 
+            SelectedBackdrop = null;
+            SelectedLayer = null;
+
+            selectedBackdropIndex = -1;
+            selectedLayerIndex = -1; 
         }
+        
+        // reset color to default 
+        GUI.backgroundColor = BackdropToolUtilities.DefaultColor; 
     }
 
     private void SelectBackdrop()
     {
-        // TODO 
-        // make an object field where the user can select a backdrop 
-        // make sure the only objects available to be selected are backdrop objects in the scene! 
-        SelectedBackdrop = EditorGUILayout.ObjectField("Select Backdrop: ", SelectedBackdrop, typeof(GameObject), true) as GameObject;
+        // display a dropdown with a list of backdrops  
+        string[] backdropNames = BackdropLoad.Backdrops.ConvertAll(b => b.name).ToArray();
+        selectedBackdropIndex = EditorGUILayout.Popup("Selected Backdrop: ", selectedBackdropIndex, backdropNames);
+
+        // set the backdrop gameobject when something is selected in the popup 
+        if (selectedBackdropIndex >= 0 && selectedBackdropIndex < BackdropLoad.Backdrops.Count)
+        {
+            SelectedBackdrop = BackdropLoad.Backdrops[selectedBackdropIndex];
+        }
     }
 
     private void SelectLayer()
     {
-        // TODO 
-        // make sure backdrop is selected first 
-        // make an object field where the user can select a layer 
-        // make sure the only objects available to be selected are layers on the selected backdrop! 
-        SelectedLayer = EditorGUILayout.ObjectField("Select Layer: ", SelectedLayer, typeof(GameObject), true) as GameObject;
+        bool isClickable = SelectedBackdrop != null;
+        
+        if (isClickable)
+        {
+            // display a dropdown with a list of backdrops  
+            string[] layerNames = BackdropLoad.Layers.ConvertAll(b => b.name).ToArray();
+            selectedLayerIndex = EditorGUILayout.Popup("Selected Layer: ", selectedLayerIndex, layerNames);
+
+            // set the backdrop gameobject when something is selected in the popup 
+            if (selectedLayerIndex >= 0 && selectedLayerIndex < BackdropLoad.Layers.Count)
+            {
+                SelectedLayer = BackdropLoad.Layers[selectedLayerIndex];
+            }
+        }
     }
 }

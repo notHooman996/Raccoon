@@ -15,15 +15,50 @@ public class BackdropCreater : EditorWindow
     {
         if (GUILayout.Button("Add Backdrop"))
         {
-            // TODO 
+            if (BackdropLoad.BackdropHolderObject == null)
+            {
+                // new backdrop holder object 
+                BackdropLoad.BackdropHolderObject = new GameObject();
+                BackdropLoad.BackdropHolderObject.name = "BackdropHolder";
+                BackdropLoad.BackdropHolderObject.tag = "BackdropHolder";
+            }
+            
+            // new backdrop gameobject 
+            GameObject newBackdrop = Instantiate(BackdropLoad.BackdropPrefab);
+            newBackdrop.name = "Backdrop"+BackdropLoad.Backdrops.Count; 
+            newBackdrop.transform.parent = BackdropLoad.BackdropHolderObject.transform;
+            newBackdrop.AddComponent<Backdrop>();
+            BackdropLoad.Backdrops.Add(newBackdrop);
         }
     }
 
     private void AddLayer()
     {
+        bool isClickable = BackdropSelect.SelectedBackdrop != null; 
+        
+        Color buttonColor = isClickable ? BackdropToolUtilities.DefaultColor : BackdropToolUtilities.UnavailableColor;
+        GUI.backgroundColor = buttonColor; 
+        
         if (GUILayout.Button("Add Layer"))
         {
-            // TODO 
+            if (isClickable)
+            {
+                // new layer gameobject 
+                GameObject newLayer = Instantiate(BackdropLoad.LayerPrefab);
+                newLayer.name = "Layer" + BackdropLoad.Layers.Count; 
+                newLayer.transform.parent = BackdropSelect.SelectedBackdrop.transform;
+                // add component 
+                newLayer.AddComponent<BackdropLayer>();
+                // figure out the id 
+                newLayer.GetComponent<BackdropLayer>().LayerID = BackdropSelect.SelectedBackdrop.GetComponent<Backdrop>().GetHighestLayerId() + 1;
+                // set initial spacing 
+                newLayer.GetComponent<BackdropLayer>().LayerSpacing = 0.5f;
+                // add new layer to backdrop list 
+                BackdropSelect.SelectedBackdrop.GetComponent<Backdrop>().AddLayer(newLayer);
+            }
         }
+
+        // reset color to default 
+        GUI.backgroundColor = BackdropToolUtilities.DefaultColor; 
     }
 }

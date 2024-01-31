@@ -3,9 +3,9 @@ using UnityEngine;
 
 public class BackdropToolUtilities : EditorWindow
 {
-    public static Color SelectedTabColor { get; private set; } = Color.green;
-    public static Color DeselectedTabColor { get; private set; } = Color.white;
-    public static Color UnavailableTabColor { get; private set; } = Color.gray;
+    public static Color SelectedColor { get; private set; } = Color.green;
+    public static Color DefaultColor { get; private set; } = Color.white;
+    public static Color UnavailableColor { get; private set; } = Color.gray;
     
     public static void DrawHorizontalLine()
     {

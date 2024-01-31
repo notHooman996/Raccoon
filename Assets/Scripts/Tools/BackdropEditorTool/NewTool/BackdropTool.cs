@@ -9,6 +9,7 @@ public class BackdropTool : EditorWindow
     private BackdropView backdropView;
     private BackdropEditor backdropEditor;
     private BackdropLayerEditor backdropLayerEditor; 
+    private BackdropLoad backdropLoad; 
     
     private int selectedEditTab = 0;
     private string[] editTabNames = { "Edit Backdrop", "Edit Layer" };
@@ -26,10 +27,13 @@ public class BackdropTool : EditorWindow
         backdropView = ScriptableObject.CreateInstance<BackdropView>();
         backdropEditor = ScriptableObject.CreateInstance<BackdropEditor>();
         backdropLayerEditor = ScriptableObject.CreateInstance<BackdropLayerEditor>();
+        backdropLoad = ScriptableObject.CreateInstance<BackdropLoad>();
     }
 
     private void OnGUI()
     {
+        backdropLoad.Load();
+        
         BackdropToolUtilities.DrawHorizontalLine();
         backdropView.DrawView();
         BackdropToolUtilities.DrawHorizontalLine();
@@ -48,7 +52,10 @@ public class BackdropTool : EditorWindow
     {
         if (GUILayout.Button("Update backdrops"))
         {
-            // TODO 
+            foreach (GameObject backdrop in BackdropLoad.Backdrops)
+            {
+                backdrop.GetComponent<Backdrop>().DrawLayers();
+            }
         }
     }
     
@@ -61,7 +68,7 @@ public class BackdropTool : EditorWindow
 
         for (int i = 0; i < tabNames.Length; i++)
         {
-            GUI.backgroundColor = i == selectedTab ? BackdropToolUtilities.SelectedTabColor : BackdropToolUtilities.DeselectedTabColor;
+            GUI.backgroundColor = i == selectedTab ? BackdropToolUtilities.SelectedColor : BackdropToolUtilities.DefaultColor;
 
             if (GUILayout.Button(tabNames[i], tabStyle))
             {
@@ -76,8 +83,6 @@ public class BackdropTool : EditorWindow
     
     private void DrawEditContent()
     {
-        GUILayout.Space(10);
-
         switch (selectedEditTab)
         {
             case 0: // backdrop 
