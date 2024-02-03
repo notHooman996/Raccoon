@@ -46,7 +46,6 @@ public class Backdrop : MonoBehaviour
         {
             // update layer position 
             localOffsetZ += i > 0 ? Layers[i - 1].GetComponent<BackdropLayer>().LayerSpacing : 0f; // add the previous layers spacing 
-            localOffsetZ += Layers[i].GetComponent<BackdropLayer>().LayerSpacing; // add the current layer spacing 
             Vector3 newPosition = new Vector3(0f, Layers[i].transform.localPosition.y, localOffsetZ);
             Layers[i].transform.localPosition = newPosition;  
         }
