@@ -37,8 +37,6 @@ public class BackdropTool : EditorWindow
         BackdropToolUtilities.DrawHorizontalLine();
         backdropView.DrawView();
         BackdropToolUtilities.DrawHorizontalLine();
-        UpdateScene();
-        BackdropToolUtilities.DrawHorizontalLine();
         backdropCreater.DrawCreater();
         BackdropToolUtilities.DrawHorizontalLine();
         backdropSelect.DrawSelect();
@@ -46,17 +44,6 @@ public class BackdropTool : EditorWindow
         DrawTabs(ref selectedEditTab, editTabNames);
         DrawEditContent();
         BackdropToolUtilities.DrawHorizontalLine();
-    }
-
-    private void UpdateScene()
-    {
-        if (GUILayout.Button("Update backdrops"))
-        {
-            foreach (GameObject backdrop in BackdropLoad.Backdrops)
-            {
-                backdrop.GetComponent<Backdrop>().DrawLayers();
-            }
-        }
     }
     
     private void DrawTabs(ref int selectedTab, string[] tabNames)
