@@ -13,7 +13,7 @@ public class BackdropLoad : EditorWindow
     public static GameObject LayerPrefab { get; private set; }
     
     public static List<GameObject> Backdrops { get; private set; }
-    public static List<GameObject> Layers { get; private set; }
+    public static List<GameObject> Layers { get; set; }
     
     public void Load()
     {
