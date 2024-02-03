@@ -42,14 +42,25 @@ public class BackdropSelect : EditorWindow
 
     private void SelectBackdrop()
     {
-        // display a dropdown with a list of backdrops  
-        string[] backdropNames = BackdropLoad.Backdrops.ConvertAll(b => b.name).ToArray();
-        selectedBackdropIndex = EditorGUILayout.Popup("Selected Backdrop: ", selectedBackdropIndex, backdropNames);
-
-        // set the backdrop gameobject when something is selected in the popup 
-        if (selectedBackdropIndex >= 0 && selectedBackdropIndex < BackdropLoad.Backdrops.Count)
+        if (BackdropLoad.Backdrops.Count > 0)
         {
-            SelectedBackdrop = BackdropLoad.Backdrops[selectedBackdropIndex];
+            // display a dropdown with a list of backdrops  
+            string[] backdropNames = BackdropLoad.Backdrops.ConvertAll(b => b.name).ToArray();
+            selectedBackdropIndex = EditorGUILayout.Popup("Selected Backdrop: ", selectedBackdropIndex, backdropNames);
+
+            // set the backdrop gameobject when something is selected in the popup 
+            if (selectedBackdropIndex >= 0 && selectedBackdropIndex < BackdropLoad.Backdrops.Count)
+            {
+                SelectedBackdrop = BackdropLoad.Backdrops[selectedBackdropIndex];
+            }
+        }
+        else
+        {
+            SelectedBackdrop = null;
+            SelectedLayer = null;
+
+            selectedBackdropIndex = -1;
+            selectedLayerIndex = -1; 
         }
     }
 
@@ -59,14 +70,22 @@ public class BackdropSelect : EditorWindow
         
         if (isClickable)
         {
-            // display a dropdown with a list of backdrops  
-            string[] layerNames = BackdropLoad.Layers.ConvertAll(b => b.name).ToArray();
-            selectedLayerIndex = EditorGUILayout.Popup("Selected Layer: ", selectedLayerIndex, layerNames);
-
-            // set the backdrop gameobject when something is selected in the popup 
-            if (selectedLayerIndex >= 0 && selectedLayerIndex < BackdropLoad.Layers.Count)
+            if (BackdropLoad.Layers.Count > 0)
             {
-                SelectedLayer = BackdropLoad.Layers[selectedLayerIndex];
+                // display a dropdown with a list of backdrops  
+                string[] layerNames = BackdropLoad.Layers.ConvertAll(b => b.name).ToArray();
+                selectedLayerIndex = EditorGUILayout.Popup("Selected Layer: ", selectedLayerIndex, layerNames);
+
+                // set the backdrop gameobject when something is selected in the popup 
+                if (selectedLayerIndex >= 0 && selectedLayerIndex < BackdropLoad.Layers.Count)
+                {
+                    SelectedLayer = BackdropLoad.Layers[selectedLayerIndex];
+                }
+            }
+            else
+            {
+                SelectedLayer = null;
+                selectedLayerIndex = -1; 
             }
         }
     }
