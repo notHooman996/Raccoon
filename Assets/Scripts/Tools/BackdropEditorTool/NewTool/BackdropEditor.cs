@@ -56,11 +56,42 @@ public class BackdropEditor : EditorWindow
         
         BackdropLayer layerComponent = BackdropLoad.Layers[i].GetComponent<BackdropLayer>();
         
-        EditorGUILayout.LabelField("ID: ", GUILayout.Width(30));
+        EditorGUILayout.LabelField("ID: ", GUILayout.Width(50));
         EditorGUILayout.LabelField(layerComponent.LayerID.ToString(), GUILayout.Width(50));
         
         EditorGUILayout.LabelField("Spacing: ", GUILayout.Width(50));
-        layerComponent.LayerSpacing = EditorGUILayout.FloatField(layerComponent.LayerSpacing);
+        float currentLayerSpacing = layerComponent.LayerSpacing; 
+        layerComponent.LayerSpacing = EditorGUILayout.FloatField(layerComponent.LayerSpacing, GUILayout.Width(100));
+        // check if change has occured 
+        if (currentLayerSpacing != layerComponent.LayerSpacing)
+        {
+            // update the layers 
+            BackdropSelect.SelectedBackdrop.GetComponent<Backdrop>().DrawLayers();
+        }
+        
+        EditorGUILayout.EndHorizontal();
+        EditorGUILayout.BeginHorizontal();
+        
+        EditorGUILayout.BeginVertical("box");
+        EditorGUILayout.LabelField("Tilt: ", GUILayout.Width(50));
+        Vector3 layerRotation = BackdropLoad.Layers[i].transform.localRotation.eulerAngles; 
+        EditorGUILayout.BeginHorizontal();
+        layerRotation.x = EditorGUILayout.FloatField("\tX: ", layerRotation.x);
+        if (GUILayout.Button("Reset X tilt"))
+        {
+            layerRotation.x = 270;
+        }
+        EditorGUILayout.EndHorizontal();
+        EditorGUILayout.BeginHorizontal();
+        layerRotation.y = EditorGUILayout.FloatField("\tY: ", layerRotation.y);
+        if (GUILayout.Button("Reset Y tilt"))
+        {
+            layerRotation.y = 0;
+        }
+        EditorGUILayout.EndHorizontal();
+        layerRotation.z = BackdropLoad.Layers[i].transform.localRotation.eulerAngles.z; 
+        BackdropLoad.Layers[i].transform.localRotation = Quaternion.Euler(layerRotation);
+        EditorGUILayout.EndVertical();
         
         EditorGUILayout.EndHorizontal();
         EditorGUILayout.EndVertical();
