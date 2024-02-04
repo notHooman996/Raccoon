@@ -8,6 +8,7 @@ public class BackdropCreater : EditorWindow
         GUILayout.BeginHorizontal();
         AddBackdrop();
         AddLayer();
+        AddSprite();
         GUILayout.EndHorizontal();
     }
 
@@ -58,6 +59,37 @@ public class BackdropCreater : EditorWindow
             }
         }
 
+        // reset color to default 
+        GUI.backgroundColor = BackdropToolUtilities.DefaultColor; 
+    }
+
+    private void AddSprite()
+    {
+        bool isClickable = BackdropSelect.SelectedLayer != null; 
+        
+        Color buttonColor = isClickable ? BackdropToolUtilities.DefaultColor : BackdropToolUtilities.UnavailableColor;
+        GUI.backgroundColor = buttonColor;
+
+        if (GUILayout.Button("Add Sprite"))
+        {
+            if (isClickable)
+            {
+                // new sprite gameobject 
+                // create new empty gameobject 
+                GameObject newGameObject = new GameObject("Sprite" + BackdropLoad.Sprites.Count);
+                // set parent 
+                newGameObject.transform.parent = BackdropSelect.SelectedLayer.transform;
+                // set tag 
+                newGameObject.tag = "Sprite";
+                // add a spriterenderer component to the new gameobject 
+                newGameObject.AddComponent<SpriteRenderer>();
+                // add script component 
+                newGameObject.AddComponent<BackdropSprite>(); 
+                // add new sprite object to the list 
+                BackdropSelect.SelectedLayer.GetComponent<BackdropLayer>().AddSprite(newGameObject);
+            }
+        }
+        
         // reset color to default 
         GUI.backgroundColor = BackdropToolUtilities.DefaultColor; 
     }
