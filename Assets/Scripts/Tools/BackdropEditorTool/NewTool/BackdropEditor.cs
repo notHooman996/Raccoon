@@ -101,7 +101,7 @@ public class BackdropEditor : EditorWindow
         layerRotation.x = EditorGUILayout.FloatField("\tX: ", layerRotation.x);
         if (GUILayout.Button("Reset X tilt"))
         {
-            layerRotation.x = 270;
+            layerRotation.x = 90;
         }
         EditorGUILayout.EndHorizontal();
         EditorGUILayout.BeginHorizontal();

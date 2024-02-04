@@ -12,6 +12,7 @@ TagManager:
   - BackdropLayer
   - BackdropHolder
   - Obstacle
+  - Sprite
   layers:
   - Default
   - TransparentFX

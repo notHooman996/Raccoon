@@ -35,7 +35,6 @@ public class Backdrop : MonoBehaviour
         DrawLayers();
     }
     
-    // create method that positions the layers correctly in relation to the backdrop 
     public void DrawLayers()
     {
         AdjustLayerIds();

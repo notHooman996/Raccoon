@@ -134,7 +134,7 @@ GameObject:
   - component: {fileID: 425534994}
   m_Layer: 0
   m_Name: Test
-  m_TagString: Untagged
+  m_TagString: Sprite
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
