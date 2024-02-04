@@ -11,7 +11,7 @@ public class BackdropEditor : EditorWindow
     {
         scrollPosition = EditorGUILayout.BeginScrollView(scrollPosition);
 
-        if (BackdropSelect.SelectedBackdrop != null)
+        if (BackdropSelect.SelectedBackdrop != null && BackdropLoad.Layers != null)
         {
             DrawList();
         }
@@ -40,7 +40,7 @@ public class BackdropEditor : EditorWindow
         }
         else
         {
-            EditorGUILayout.LabelField("Select a layer to edit.");
+            EditorGUILayout.LabelField("Add layers to the backdrop to edit.");
         }
     }
     
@@ -53,8 +53,24 @@ public class BackdropEditor : EditorWindow
         
         EditorGUILayout.EndHorizontal();
         EditorGUILayout.BeginHorizontal();
+
+        LayerSpacing(i);
         
+        EditorGUILayout.EndHorizontal();
+        EditorGUILayout.BeginHorizontal();
+
+        LayerTilt(i);
+        
+        EditorGUILayout.EndHorizontal();
+        EditorGUILayout.EndVertical();
+    }
+
+    private void LayerSpacing(int i)
+    {
         BackdropLayer layerComponent = BackdropLoad.Layers[i].GetComponent<BackdropLayer>();
+        
+        EditorGUILayout.BeginVertical("box");
+        EditorGUILayout.BeginHorizontal();
         
         EditorGUILayout.LabelField("ID: ", GUILayout.Width(50));
         EditorGUILayout.LabelField(layerComponent.LayerID.ToString(), GUILayout.Width(50));
@@ -70,12 +86,18 @@ public class BackdropEditor : EditorWindow
         }
         
         EditorGUILayout.EndHorizontal();
-        EditorGUILayout.BeginHorizontal();
-        
+        EditorGUILayout.EndVertical();
+    }
+
+    private void LayerTilt(int i)
+    {
         EditorGUILayout.BeginVertical("box");
+        
         EditorGUILayout.LabelField("Tilt: ", GUILayout.Width(50));
         Vector3 layerRotation = BackdropLoad.Layers[i].transform.localRotation.eulerAngles; 
+        
         EditorGUILayout.BeginHorizontal();
+        
         layerRotation.x = EditorGUILayout.FloatField("\tX: ", layerRotation.x);
         if (GUILayout.Button("Reset X tilt"))
         {
@@ -83,17 +105,18 @@ public class BackdropEditor : EditorWindow
         }
         EditorGUILayout.EndHorizontal();
         EditorGUILayout.BeginHorizontal();
+        
         layerRotation.y = EditorGUILayout.FloatField("\tY: ", layerRotation.y);
         if (GUILayout.Button("Reset Y tilt"))
         {
             layerRotation.y = 0;
         }
-        EditorGUILayout.EndHorizontal();
-        layerRotation.z = BackdropLoad.Layers[i].transform.localRotation.eulerAngles.z; 
-        BackdropLoad.Layers[i].transform.localRotation = Quaternion.Euler(layerRotation);
-        EditorGUILayout.EndVertical();
         
         EditorGUILayout.EndHorizontal();
+        
+        layerRotation.z = BackdropLoad.Layers[i].transform.localRotation.eulerAngles.z; 
+        BackdropLoad.Layers[i].transform.localRotation = Quaternion.Euler(layerRotation);
+        
         EditorGUILayout.EndVertical();
     }
 }

@@ -13,7 +13,7 @@ public class BackdropLoad : EditorWindow
     public static GameObject LayerPrefab { get; private set; }
     
     public static List<GameObject> Backdrops { get; private set; }
-    public static List<GameObject> Layers { get; set; }
+    public static List<GameObject> Layers { get; private set; }
     
     public void Load()
     {
@@ -32,7 +32,10 @@ public class BackdropLoad : EditorWindow
         // load the layers of the backdrop 
         if (BackdropSelect.SelectedBackdrop != null)
         {
-            Layers = BackdropSelect.SelectedBackdrop.GetComponent<Backdrop>().Layers; 
+            if (BackdropSelect.SelectedBackdrop.GetComponent<Backdrop>() != null)
+            {
+                Layers = BackdropSelect.SelectedBackdrop.GetComponent<Backdrop>().Layers; 
+            }
         }
     }
 

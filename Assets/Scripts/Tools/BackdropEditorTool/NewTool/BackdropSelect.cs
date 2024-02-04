@@ -66,9 +66,7 @@ public class BackdropSelect : EditorWindow
 
     private void SelectLayer()
     {
-        bool isClickable = SelectedBackdrop != null;
-        
-        if (isClickable)
+        if (SelectedBackdrop != null && BackdropLoad.Layers != null)
         {
             if (BackdropLoad.Layers.Count > 0)
             {
