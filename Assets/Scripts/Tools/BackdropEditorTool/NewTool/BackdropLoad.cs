@@ -14,6 +14,7 @@ public class BackdropLoad : EditorWindow
     
     public static List<GameObject> Backdrops { get; private set; }
     public static List<GameObject> Layers { get; private set; }
+    public static List<GameObject> Sprites { get; private set; }
     
     public void Load()
     {
@@ -35,6 +36,15 @@ public class BackdropLoad : EditorWindow
             if (BackdropSelect.SelectedBackdrop.GetComponent<Backdrop>() != null)
             {
                 Layers = BackdropSelect.SelectedBackdrop.GetComponent<Backdrop>().Layers; 
+            }
+        }
+        
+        // load the sprites of the layer 
+        if (BackdropSelect.SelectedLayer != null)
+        {
+            if (BackdropSelect.SelectedLayer.GetComponent<BackdropLayer>() != null)
+            {
+                Sprites = BackdropSelect.SelectedLayer.GetComponent<BackdropLayer>().Sprites; 
             }
         }
     }
