@@ -39,22 +39,17 @@ public class BackdropLayer : MonoBehaviour
 
     public void AddSprite(GameObject spriteObject)
     {
-        // set sprite objects position relative to layer 
-        spriteObject.transform.localPosition = new Vector3(spriteObject.transform.localPosition.x, spriteObject.transform.localPosition.y, 0f);
-        // set sprite objects rotation to match the layers rotation 
-        spriteObject.transform.localRotation = transform.localRotation; 
+        // set the local position and rotation of the new sprite object in relation to the layer 
+        spriteObject.transform.localPosition = new Vector3(0f, 0f, 0f);
+        spriteObject.transform.localRotation = Quaternion.Euler(-90f, 0f, 0f); 
         
         Sprites.Add(spriteObject);
+
+        DrawSprites();
     }
 
     public void DrawSprites()
     {
-        for (int i = 0; i < Sprites.Count; i++)
-        {
-            // set sprite objects position relative to layer 
-            Sprites[i].transform.localPosition = new Vector3(Sprites[i].transform.localPosition.x, Sprites[i].transform.localPosition.y, 0f);
-            // set sprite objects rotation to match the layers rotation 
-            Sprites[i].transform.localRotation = transform.localRotation; 
-        }
+        
     }
 }

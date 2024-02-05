@@ -54,8 +54,6 @@ public class BackdropLayerEditor : EditorWindow
 
         EditorGUILayout.LabelField("Name: " + BackdropLoad.Sprites[i].name);
         
-        EditorGUILayout.LabelField("rotation: " + BackdropLoad.Sprites[i].transform.localRotation.eulerAngles);
-        
         EditorGUILayout.EndHorizontal();
         EditorGUILayout.BeginHorizontal();
 
@@ -109,12 +107,16 @@ public class BackdropLayerEditor : EditorWindow
 
     private string[] GetSpriteNames()
     {
-        string[] spritePaths = AssetDatabase.FindAssets("t:sprite", new[] { "Assets/Resources/Sprites" }); 
+        string folderPath = EditorPrefs.GetString("SpriteSelectorFolder", "Assets/Resources/Sprites");
+        string[] spritePaths = AssetDatabase.FindAssets("t:sprite", new[] { folderPath }); 
+        
         string[] spriteNames = new string[spritePaths.Length];
 
         for (int i = 0; i < spritePaths.Length; i++)
         {
-            spriteNames[i] = AssetDatabase.GUIDToAssetPath(spritePaths[i]);
+            string path = spritePaths[i];
+            string spriteName = System.IO.Path.GetFileNameWithoutExtension(AssetDatabase.GUIDToAssetPath(path));
+            spriteNames[i] = spriteName;
         }
 
         return spriteNames; 
@@ -124,7 +126,11 @@ public class BackdropLayerEditor : EditorWindow
     {
         EditorGUILayout.BeginVertical("box");
 
-        BackdropLoad.Sprites[i].transform.localPosition = EditorGUILayout.Vector2Field("Sprite Local Position: ", BackdropLoad.Sprites[i].transform.localPosition);
+        // Note - to set the position, do it relative to the layers axis 
+        Vector3 currentLocalPosition = BackdropLoad.Sprites[i].transform.localPosition; 
+        Vector2 newLocalPosition = EditorGUILayout.Vector2Field("Sprite Local Position: ", new Vector2(currentLocalPosition.x, currentLocalPosition.z));
+        Vector3 updatedLocalPosition = new Vector3(newLocalPosition.x, 0f, -newLocalPosition.y);
+        BackdropLoad.Sprites[i].transform.localPosition = updatedLocalPosition; 
         
         EditorGUILayout.EndVertical();
     }

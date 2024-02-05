@@ -81,10 +81,13 @@ public class BackdropCreater : EditorWindow
                 newGameObject.transform.parent = BackdropSelect.SelectedLayer.transform;
                 // set tag 
                 newGameObject.tag = "Sprite";
-                // add a spriterenderer component to the new gameobject 
-                newGameObject.AddComponent<SpriteRenderer>();
                 // add script component 
                 newGameObject.AddComponent<BackdropSprite>(); 
+                // add a spriterenderer component to the new gameobject 
+                newGameObject.AddComponent<SpriteRenderer>();
+                // apply a default sprite 
+                newGameObject.GetComponent<BackdropSprite>().SelectedSprite = AssetDatabase.LoadAssetAtPath<Sprite>("Assets/Resources/Sprites/TestSprite.png"); // TODO - make a default 
+                newGameObject.GetComponent<BackdropSprite>().ApplySprite();
                 // add new sprite object to the list 
                 BackdropSelect.SelectedLayer.GetComponent<BackdropLayer>().AddSprite(newGameObject);
             }
