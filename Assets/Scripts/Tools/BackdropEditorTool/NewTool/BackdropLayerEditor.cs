@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
@@ -5,12 +7,11 @@ public class BackdropLayerEditor : EditorWindow
 {
     private Vector2 scrollPosition;
 
-    private string[] spriteOptions; 
-    
+    private string[] spritePaths;
+
     public void DrawEditor()
     {
-        // load the sprite options 
-        spriteOptions = GetSpriteNames();
+        RefreshSpriteList();
         
         scrollPosition = EditorGUILayout.BeginScrollView(scrollPosition);
         
@@ -75,18 +76,23 @@ public class BackdropLayerEditor : EditorWindow
         if (BackdropLoad.Sprites[i].GetComponent<BackdropSprite>() != null)
         {
             // get selected sprite 
-            Sprite selectedSprite = BackdropLoad.Sprites[i].GetComponent<BackdropSprite>().SelectedSprite; 
+            Sprite currentSelectedSprite = BackdropLoad.Sprites[i].GetComponent<BackdropSprite>().SelectedSprite; 
             
             // display dropdown menu for selecting a sprite 
-            int selectedIndex = EditorGUILayout.Popup("Select Sprite: ", GetSelectedIndex(selectedSprite), spriteOptions);
+            int selectedIndex = EditorGUILayout.Popup("Select Sprite: ", GetSelectedIndex(currentSelectedSprite), GetSpriteNames());
             
             // set selected sprite 
-            selectedSprite = AssetDatabase.LoadAssetAtPath<Sprite>(spriteOptions[selectedIndex]); 
-            
-            // apply selected sprite to the sprite object 
-            BackdropLoad.Sprites[i].GetComponent<BackdropSprite>().SelectedSprite = selectedSprite; 
-            BackdropLoad.Sprites[i].GetComponent<BackdropSprite>().ApplySprite();
-            BackdropSelect.SelectedLayer.GetComponent<BackdropLayer>().DrawSprites();
+            Sprite selectedSprite = AssetDatabase.LoadAssetAtPath<Sprite>(AssetDatabase.GUIDToAssetPath(spritePaths[selectedIndex]));
+            if (selectedSprite != null)
+            {
+                if (currentSelectedSprite != selectedSprite)
+                {
+                    // apply selected sprite to the sprite object 
+                    BackdropLoad.Sprites[i].GetComponent<BackdropSprite>().SelectedSprite = selectedSprite; 
+                    BackdropLoad.Sprites[i].GetComponent<BackdropSprite>().ApplySprite();
+                    BackdropSelect.SelectedLayer.GetComponent<BackdropLayer>().DrawSprites();
+                }
+            }
         }
         
         EditorGUILayout.EndVertical();
@@ -94,9 +100,9 @@ public class BackdropLayerEditor : EditorWindow
 
     private int GetSelectedIndex(Sprite sprite)
     {
-        for (int i = 0; i < spriteOptions.Length; i++)
+        for (int i = 0; i < spritePaths.Length; i++)
         {
-            if (sprite == AssetDatabase.LoadAssetAtPath<Sprite>(spriteOptions[i]))
+            if (sprite == AssetDatabase.LoadAssetAtPath<Sprite>(AssetDatabase.GUIDToAssetPath(spritePaths[i])))
             {
                 return i; 
             }
@@ -105,11 +111,13 @@ public class BackdropLayerEditor : EditorWindow
         return 0; 
     }
 
+    private void RefreshSpriteList()
+    {
+        spritePaths = AssetDatabase.FindAssets("t:sprite", new[] { "Assets/Resources/Sprites" });
+    }
+
     private string[] GetSpriteNames()
     {
-        string folderPath = EditorPrefs.GetString("SpriteSelectorFolder", "Assets/Resources/Sprites");
-        string[] spritePaths = AssetDatabase.FindAssets("t:sprite", new[] { folderPath }); 
-        
         string[] spriteNames = new string[spritePaths.Length];
 
         for (int i = 0; i < spritePaths.Length; i++)
@@ -118,7 +126,7 @@ public class BackdropLayerEditor : EditorWindow
             string spriteName = System.IO.Path.GetFileNameWithoutExtension(AssetDatabase.GUIDToAssetPath(path));
             spriteNames[i] = spriteName;
         }
-
+        
         return spriteNames; 
     }
 
