@@ -58,6 +58,11 @@ public class BackdropLayerEditor : EditorWindow
         EditorGUILayout.EndHorizontal();
         EditorGUILayout.BeginHorizontal();
 
+        DoBillboarding(i);
+        
+        EditorGUILayout.EndHorizontal();
+        EditorGUILayout.BeginHorizontal();
+
         SpriteSelect(i);
         
         EditorGUILayout.EndHorizontal();
@@ -67,6 +72,13 @@ public class BackdropLayerEditor : EditorWindow
         
         EditorGUILayout.EndHorizontal();
         EditorGUILayout.EndVertical();
+    }
+
+    private void DoBillboarding(int i)
+    {
+        Billboarding billboardingComponent = BackdropLoad.Sprites[i].GetComponent<Billboarding>();
+
+        billboardingComponent.DoSpriteBillboarding = EditorGUILayout.Toggle("Do billboarding: ", billboardingComponent.DoSpriteBillboarding);
     }
 
     private void SpriteSelect(int i)
