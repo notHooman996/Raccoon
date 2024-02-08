@@ -4,9 +4,15 @@ using UnityEngine;
 public class Billboarding : MonoBehaviour
 {
     private Vector3 cameraDirection;
+    [SerializeField] private bool doSpriteBillboarding; 
 
     public bool DoStageBillboarding { get; set; } = true; // TODO - change later 
-    public bool DoSpriteBillboarding { get; set; } // TODO - set with BackdropTool 
+
+    public bool DoSpriteBillboarding
+    {
+        get { return doSpriteBillboarding; }
+        set { doSpriteBillboarding = value; }
+    }
     
     private void Update()
     {
