@@ -6,7 +6,7 @@ public class Billboarding : MonoBehaviour
     private Vector3 cameraDirection;
     [SerializeField] private bool doSpriteBillboarding; 
 
-    public bool DoStageBillboarding { get; set; } = true; // TODO - change later 
+    public bool DoStageBillboarding { get; set; } // TODO - change later 
 
     public bool DoSpriteBillboarding
     {
@@ -16,6 +16,7 @@ public class Billboarding : MonoBehaviour
     
     private void Update()
     {
+        // only do billboarding in the current stage 
         if (DoStageBillboarding)
         {
             if (DoSpriteBillboarding)
