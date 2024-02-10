@@ -21,11 +21,16 @@ public class Billboarding : MonoBehaviour
         {
             if (DoSpriteBillboarding)
             {
-                cameraDirection = Camera.main.transform.forward;
-                cameraDirection.y = 0;
-
-                transform.rotation = Quaternion.LookRotation(cameraDirection);
+                Billboard();
             }
         }
+    }
+
+    private void Billboard()
+    {
+        cameraDirection = CameraHandler.Instance.GetCurrentCamera.transform.forward;
+        cameraDirection.y = 0;
+
+        transform.rotation = Quaternion.LookRotation(cameraDirection);
     }
 }
