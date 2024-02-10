@@ -27,12 +27,12 @@ public class StageBillboarding : MonoBehaviour
         }
     }
 
-    private void FindChildObjectsWithTag(Transform parent, string tag)
+    private void FindChildObjectsWithTag(Transform parent, string tagName)
     {
         foreach (Transform child in parent)
         {
             // if the child has a specified tag, add it to the list 
-            if (child.CompareTag(tag))
+            if (child.CompareTag(tagName))
             {
                 sprites.Add(child.gameObject);
             }
@@ -40,7 +40,7 @@ public class StageBillboarding : MonoBehaviour
             // recursively search through children 
             if (child.childCount > 0)
             {
-                FindChildObjectsWithTag(child, tag);
+                FindChildObjectsWithTag(child, tagName);
             }
         }
     }
