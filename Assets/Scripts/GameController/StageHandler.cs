@@ -22,23 +22,19 @@ public class StageHandler : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
+    [SerializeField] private GameObject startStage; 
     
     private List<GameObject> stages = new List<GameObject>();
-
     public GameObject CurrentStage { get; private set; }
     
     private void Start()
     {
         stages = GameObject.FindGameObjectsWithTag("Stage").ToList();
-        SetCurrentStage(stages[0]); // TODO - temp set it here 
+        SetCurrentStage(startStage); // set currentstage to startstage // TODO - set somewhere else 
     }
 
-    private void Update()
-    {
-        
-    }
-
-    private void SetCurrentStage(GameObject nextStage)
+    public void SetCurrentStage(GameObject nextStage)
     {
         // set the stage 
         if (nextStage.CompareTag("Stage"))
