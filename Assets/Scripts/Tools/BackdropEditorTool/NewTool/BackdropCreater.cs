@@ -21,6 +21,7 @@ public class BackdropCreater : EditorWindow
                 // new backdrop holder object 
                 BackdropLoad.BackdropHolderObject = new GameObject();
                 BackdropLoad.BackdropHolderObject.transform.parent = GameObject.FindGameObjectWithTag("Stage").transform;
+                BackdropLoad.BackdropHolderObject.transform.position = GameObject.FindGameObjectWithTag("Stage").transform.position; 
                 BackdropLoad.BackdropHolderObject.name = "BackdropHolder";
                 BackdropLoad.BackdropHolderObject.tag = "BackdropHolder";
             }
@@ -29,6 +30,7 @@ public class BackdropCreater : EditorWindow
             GameObject newBackdrop = Instantiate(BackdropLoad.BackdropPrefab);
             newBackdrop.name = "Backdrop"+BackdropLoad.Backdrops.Count; 
             newBackdrop.transform.parent = BackdropLoad.BackdropHolderObject.transform;
+            newBackdrop.transform.position = BackdropLoad.BackdropHolderObject.transform.position;
             newBackdrop.AddComponent<Backdrop>();
             BackdropLoad.Backdrops.Add(newBackdrop);
         }
