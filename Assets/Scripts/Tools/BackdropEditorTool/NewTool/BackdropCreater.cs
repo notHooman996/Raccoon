@@ -20,6 +20,7 @@ public class BackdropCreater : EditorWindow
             {
                 // new backdrop holder object 
                 BackdropLoad.BackdropHolderObject = new GameObject();
+                BackdropLoad.BackdropHolderObject.transform.parent = GameObject.FindGameObjectWithTag("Stage").transform;
                 BackdropLoad.BackdropHolderObject.name = "BackdropHolder";
                 BackdropLoad.BackdropHolderObject.tag = "BackdropHolder";
             }
