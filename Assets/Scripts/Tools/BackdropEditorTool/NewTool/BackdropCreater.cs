@@ -20,6 +20,7 @@ public class BackdropCreater : EditorWindow
             {
                 // new backdrop holder object 
                 BackdropLoad.BackdropHolderObject = new GameObject();
+                BackdropLoad.BackdropHolderObject.transform.parent = GameObject.FindGameObjectWithTag("Stage").transform;
                 BackdropLoad.BackdropHolderObject.name = "BackdropHolder";
                 BackdropLoad.BackdropHolderObject.tag = "BackdropHolder";
             }
@@ -75,21 +76,13 @@ public class BackdropCreater : EditorWindow
             if (isClickable)
             {
                 // new sprite gameobject 
-                // create new empty gameobject 
-                GameObject newGameObject = new GameObject("Sprite" + BackdropLoad.Sprites.Count);
-                // set parent 
-                newGameObject.transform.parent = BackdropSelect.SelectedLayer.transform;
-                // set tag 
-                newGameObject.tag = "Sprite";
-                // add script component 
-                newGameObject.AddComponent<BackdropSprite>(); 
-                // add a spriterenderer component to the new gameobject 
-                newGameObject.AddComponent<SpriteRenderer>();
-                // apply a default sprite 
-                newGameObject.GetComponent<BackdropSprite>().SelectedSprite = AssetDatabase.LoadAssetAtPath<Sprite>("Assets/Resources/Sprites/TestSprite.png"); // TODO - make a default 
-                newGameObject.GetComponent<BackdropSprite>().ApplySprite();
+                GameObject newSpriteObject = Instantiate(BackdropLoad.SpriteObjectPrefab);
+                newSpriteObject.name = "SpriteObject" + BackdropLoad.Sprites.Count;
+                newSpriteObject.transform.parent = BackdropSelect.SelectedLayer.transform; 
+                // set billboarding on automaticly 
+                newSpriteObject.GetComponent<Billboarding>().DoSpriteBillboarding = true; 
                 // add new sprite object to the list 
-                BackdropSelect.SelectedLayer.GetComponent<BackdropLayer>().AddSprite(newGameObject);
+                BackdropSelect.SelectedLayer.GetComponent<BackdropLayer>().AddSprite(newSpriteObject);
             }
         }
         

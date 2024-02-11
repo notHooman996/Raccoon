@@ -7,10 +7,12 @@ public class BackdropLoad : EditorWindow
 {
     private string backdropPrefabPath = "Assets/Prefabs/TheatreBackdrop/Backdrop.prefab";
     private string layerPrefabPath = "Assets/Prefabs/TheatreBackdrop/Layer.prefab";
+    private string spriteObjectPrefabPath = "Assets/Prefabs/TheatreBackdrop/SpriteObject.prefab";
     
     public static GameObject BackdropHolderObject { get; set; }
     public static GameObject BackdropPrefab { get; private set; }
     public static GameObject LayerPrefab { get; private set; }
+    public static GameObject SpriteObjectPrefab { get; private set; }
     
     public static List<GameObject> Backdrops { get; private set; }
     public static List<GameObject> Layers { get; private set; }
@@ -53,5 +55,6 @@ public class BackdropLoad : EditorWindow
     {
         BackdropPrefab = AssetDatabase.LoadAssetAtPath(backdropPrefabPath, typeof(GameObject)) as GameObject;
         LayerPrefab = AssetDatabase.LoadAssetAtPath(layerPrefabPath, typeof(GameObject)) as GameObject;
+        SpriteObjectPrefab = AssetDatabase.LoadAssetAtPath(spriteObjectPrefabPath, typeof(GameObject)) as GameObject;
     }
 }
