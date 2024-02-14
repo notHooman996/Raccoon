@@ -6,34 +6,50 @@ public class BackdropCreater : EditorWindow
     public void DrawCreater()
     {
         GUILayout.BeginHorizontal();
+        AddBackdropHolder();
         AddBackdrop();
         AddLayer();
         AddSprite();
         GUILayout.EndHorizontal();
     }
 
+    private void AddBackdropHolder()
+    {
+        if (GUILayout.Button("Add BackdropHolder"))
+        {
+            // new backdrop holder object 
+            GameObject newBackdropHolder = new GameObject();
+            newBackdropHolder.transform.parent = GameObject.FindGameObjectWithTag("Stage").transform;
+            newBackdropHolder.transform.position = GameObject.FindGameObjectWithTag("Stage").transform.position; 
+            newBackdropHolder.name = "BackdropHolder";
+            newBackdropHolder.tag = "BackdropHolder";
+            BackdropLoad.BackdropHolders.Add(newBackdropHolder);
+        }
+    }
+
     private void AddBackdrop()
     {
+        bool isClickable = BackdropSelect.SelectedBackdropHolder != null; 
+        
+        Color buttonColor = isClickable ? BackdropToolUtilities.DefaultColor : BackdropToolUtilities.UnavailableColor;
+        GUI.backgroundColor = buttonColor; 
+        
         if (GUILayout.Button("Add Backdrop"))
         {
-            if (BackdropLoad.BackdropHolderObject == null)
+            if (isClickable)
             {
-                // new backdrop holder object 
-                BackdropLoad.BackdropHolderObject = new GameObject();
-                BackdropLoad.BackdropHolderObject.transform.parent = GameObject.FindGameObjectWithTag("Stage").transform;
-                BackdropLoad.BackdropHolderObject.transform.position = GameObject.FindGameObjectWithTag("Stage").transform.position; 
-                BackdropLoad.BackdropHolderObject.name = "BackdropHolder";
-                BackdropLoad.BackdropHolderObject.tag = "BackdropHolder";
+                // new backdrop gameobject 
+                GameObject newBackdrop = Instantiate(BackdropLoad.BackdropPrefab);
+                newBackdrop.name = "Backdrop" + BackdropLoad.Backdrops.Count;
+                newBackdrop.transform.parent = BackdropSelect.SelectedBackdropHolder.transform;
+                newBackdrop.transform.position = BackdropSelect.SelectedBackdropHolder.transform.position;
+                newBackdrop.AddComponent<Backdrop>();
+                BackdropLoad.Backdrops.Add(newBackdrop);
             }
-            
-            // new backdrop gameobject 
-            GameObject newBackdrop = Instantiate(BackdropLoad.BackdropPrefab);
-            newBackdrop.name = "Backdrop"+BackdropLoad.Backdrops.Count; 
-            newBackdrop.transform.parent = BackdropLoad.BackdropHolderObject.transform;
-            newBackdrop.transform.position = BackdropLoad.BackdropHolderObject.transform.position;
-            newBackdrop.AddComponent<Backdrop>();
-            BackdropLoad.Backdrops.Add(newBackdrop);
         }
+        
+        // reset color to default 
+        GUI.backgroundColor = BackdropToolUtilities.DefaultColor; 
     }
 
     private void AddLayer()
