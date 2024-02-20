@@ -1,11 +1,12 @@
 using UnityEngine;
 using System.Collections;
+using UnityEditor;
 
 public class TestPauseMenu : MonoBehaviour
 {
     public static TestPauseMenu Instance; 
     
-    public GameObject pausemenuPrefab; // reference to the canvas ui prefab 
+    private GameObject pausemenuPrefab; // reference to the canvas ui prefab 
     private CanvasGroup canvasGroup;
     private GameObject canvasInstance; // reference to the instantiated prefab 
     private bool isPaused = false; 
@@ -28,6 +29,9 @@ public class TestPauseMenu : MonoBehaviour
     
     private void Start()
     {
+        // load the prefab 
+        pausemenuPrefab = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/Menus/PauseMenu.prefab");
+        
         pausemenuPrefab.SetActive(true);
     }
 
