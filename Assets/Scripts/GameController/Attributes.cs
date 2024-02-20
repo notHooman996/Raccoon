@@ -1,11 +1,28 @@
+using System.Collections.Generic;
 using Cinemachine;
 using UnityEngine;
 using Unity.Collections;
+using UnityEngine.SceneManagement;
 
 public class Attributes : MonoBehaviour
 {
     // singleton 
     public static Attributes Instance;
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this; 
+            
+            // make sure object is not destroyed across scenes 
+            DontDestroyOnLoad(gameObject);
+        }
+        else if (Instance != this)
+        {
+            // enforce singleton, there can only be one instance 
+            Destroy(gameObject);
+        }
+    }
     
     [Header("ActiveVirtualCamera")] 
     [SerializeField, ReadOnly] private CinemachineVirtualCameraBase activeVirtualCamera;
@@ -14,23 +31,12 @@ public class Attributes : MonoBehaviour
     [SerializeField, ReadOnly] private bool canPlayerMove;
     
     [Header("CanPlayerInteract")]
-    [SerializeField, ReadOnly] private bool canPlayerInteract = false;
+    [SerializeField, ReadOnly] private bool canPlayerInteract = false; // TODO - move somewhere else 
     
-    private void Awake()
-    {
-        if (Instance == null)
-        {
-            Instance = this; 
-            
-            // make sure object is not destroyed across scenes 
-            //DontDestroyOnLoad(gameObject);
-        }
-        else if (Instance != this)
-        {
-            // enforce singleton, there can only be one instance 
-            Destroy(gameObject);
-        }
-    }
+    [Header("List of Scenes")]
+    [SerializeField, ReadOnly] private List<Scene> scenes = new List<Scene>();
+
+    private int currentSceneIndex = 0; 
     
     private void Start()
     {
@@ -58,5 +64,10 @@ public class Attributes : MonoBehaviour
     {
         get { return canPlayerInteract; }
         set { canPlayerInteract = value; }
+    }
+
+    public Scene CurrentScene
+    {
+        get { return scenes[currentSceneIndex]; }
     }
 }
