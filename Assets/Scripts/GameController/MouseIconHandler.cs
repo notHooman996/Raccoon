@@ -30,17 +30,26 @@ public class MouseIconHandler : MonoBehaviour
 
     private void Update()
     {
-        if (isPreviousPause != InputHandler.Instance.GetPauseInput() ||
-            previousMouseHoverType != AttributesPointAndClick.Instance.MouseHover ||
-            previousInteractableType != AttributesPointAndClick.Instance.MouseInteractableHover)
+        if (InputHandler.Instance.IsMouseInput())
         {
-            // only update cursor icon when it needs to change 
-            UpdateCursorIcon();
+            Cursor.visible = true; 
             
-            // update previous variables 
-            isPreviousPause = InputHandler.Instance.GetPauseInput();
-            previousMouseHoverType = AttributesPointAndClick.Instance.MouseHover;
-            previousInteractableType = AttributesPointAndClick.Instance.MouseInteractableHover;
+            if (isPreviousPause != InputHandler.Instance.GetPauseInput() ||
+                previousMouseHoverType != AttributesPointAndClick.Instance.MouseHover ||
+                previousInteractableType != AttributesPointAndClick.Instance.MouseInteractableHover)
+            {
+                // only update cursor icon when it needs to change 
+                UpdateCursorIcon();
+
+                // update previous variables 
+                isPreviousPause = InputHandler.Instance.GetPauseInput();
+                previousMouseHoverType = AttributesPointAndClick.Instance.MouseHover;
+                previousInteractableType = AttributesPointAndClick.Instance.MouseInteractableHover;
+            }
+        }
+        else
+        {
+            Cursor.visible = false; 
         }
     }
 
