@@ -1,12 +1,13 @@
 using Cinemachine;
 using UnityEngine;
 using System.Collections;
+using UnityEditor;
 
 public class TestMainMenu : MonoBehaviour
 {
     public static TestMainMenu Instance; 
     
-    public GameObject mainmenuPrefab; // reference to the canvas ui prefab 
+    private GameObject mainmenuPrefab; // reference to the canvas ui prefab 
     private CanvasGroup canvasGroup;
     private GameObject canvasInstance; // reference to the instantiated prefab 
     //private bool isMenu = false;
@@ -31,6 +32,9 @@ public class TestMainMenu : MonoBehaviour
     
     private void Start()
     {
+        // load the prefab 
+        mainmenuPrefab = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/Menus/MainMenu.prefab");
+        
         mainmenuPrefab.SetActive(true);
     }
 
