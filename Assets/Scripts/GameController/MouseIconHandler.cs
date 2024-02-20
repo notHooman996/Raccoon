@@ -1,26 +1,31 @@
+using System;
+using System.Collections.Generic;
 using UnityEngine;
 using Unity.Collections;
+using UnityEditor;
 
 public class MouseIconHandler : MonoBehaviour
 {
-    [Header("CursorTextures")] 
-    [SerializeField, ReadOnly] private Texture2D cursorTestTexture; 
-    [SerializeField, ReadOnly] private Texture2D leafTexture; 
-    [SerializeField, ReadOnly] private Texture2D walkTexture; 
-    [SerializeField, ReadOnly] private Texture2D hideTexture;
-
+    private Dictionary<string, Texture2D> icons = new Dictionary<string, Texture2D>();
+    
     private bool isPreviousPause;
     private MouseHoverType previousMouseHoverType;
-    private InteractableType previousInteractableType; 
-    
+    private InteractableType previousInteractableType;
+
     private void Start()
     {
+        // load textures // TODO - change to correct textures later 
+        icons.Add("cursorTestTexture", AssetDatabase.LoadAssetAtPath<Texture2D>("Assets/MouseIcons/TestIcon.png"));
+        icons.Add("leafTexture", AssetDatabase.LoadAssetAtPath<Texture2D>("Assets/MouseIcons/TestIcon.png"));
+        icons.Add("walkTexture", AssetDatabase.LoadAssetAtPath<Texture2D>("Assets/MouseIcons/TestIcon.png"));
+        icons.Add("hideTexture", AssetDatabase.LoadAssetAtPath<Texture2D>("Assets/MouseIcons/TestIcon.png"));
+        
         isPreviousPause = InputHandler.Instance.GetPauseInput();
         previousMouseHoverType = AttributesPointAndClick.Instance.MouseHover;
         previousInteractableType = AttributesPointAndClick.Instance.MouseInteractableHover;
 
         // set default cursor icon 
-        SetCursorIcon(leafTexture);
+        SetCursorIcon(icons["leafTexture"]);
     }
 
     private void Update()
@@ -44,7 +49,7 @@ public class MouseIconHandler : MonoBehaviour
         // check if game is paused, hence in menu state 
         if (InputHandler.Instance.GetPauseInput())
         {
-            SetCursorIcon(leafTexture);
+            SetCursorIcon(icons["leafTexture"]);
         }
         else if(AttributesPointAndClick.Instance.MouseHover == MouseHoverType.Interactable)
         {
@@ -54,12 +59,12 @@ public class MouseIconHandler : MonoBehaviour
         else if(AttributesPointAndClick.Instance.MouseHover == MouseHoverType.Ground)
         {
             // set depending on ground 
-            SetCursorIcon(walkTexture);
+            SetCursorIcon(icons["walkTexture"]);
         }
         else
         {
             // set cursor to normal 
-            SetCursorIcon(leafTexture);
+            SetCursorIcon(icons["leafTexture"]);
         }
     }
 
@@ -68,10 +73,10 @@ public class MouseIconHandler : MonoBehaviour
         switch (AttributesPointAndClick.Instance.MouseInteractableHover)
         {
             case InteractableType.Test:
-                SetCursorIcon(cursorTestTexture);
+                SetCursorIcon(icons["cursorTestTexture"]);
                 break; 
             case InteractableType.Hide:
-                SetCursorIcon(hideTexture);
+                SetCursorIcon(icons["hideTexture"]);
                 break; 
         }
     }
