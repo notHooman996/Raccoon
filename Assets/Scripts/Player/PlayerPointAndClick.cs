@@ -99,7 +99,7 @@ public class PlayerPointAndClick : MonoBehaviour
                 AttributesPointAndClick.Instance.InteractableObject = hit.collider.GameObject();
                 
                 // check if player can interact 
-                if (Attributes.Instance.CanPlayerInteract)
+                if (AttributesPlayer.Instance.CanPlayerInteract)
                 {
                     // if player is colliding with an interactable object, it can interact 
                     Debug.Log("click interact, interact");
