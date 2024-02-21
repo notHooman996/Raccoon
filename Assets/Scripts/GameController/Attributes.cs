@@ -24,15 +24,6 @@ public class Attributes : MonoBehaviour
         }
     }
     
-    [Header("ActiveVirtualCamera")] 
-    [SerializeField, ReadOnly] private CinemachineVirtualCameraBase activeVirtualCamera;
-
-    [Header("CanPlayerMove")] 
-    [SerializeField, ReadOnly] private bool canPlayerMove;
-    
-    [Header("CanPlayerInteract")]
-    [SerializeField, ReadOnly] private bool canPlayerInteract = false; // TODO - move somewhere else 
-    
     [Header("List of Scenes")]
     [SerializeField, ReadOnly] private List<Scene> scenes = new List<Scene>();
 
@@ -40,30 +31,12 @@ public class Attributes : MonoBehaviour
     
     private void Start()
     {
-        canPlayerMove = true; // TODO - set to false when game starts 
+        // canPlayerMove = true; // TODO - set to false when game starts 
     }
 
     private void Update()
     {
         
-    }
-
-    public CinemachineVirtualCameraBase ActiveVirtualCamera
-    {
-        get { return activeVirtualCamera; }
-        set { activeVirtualCamera = value; }
-    }
-
-    public bool CanPlayerMove
-    {
-        get { return canPlayerMove; }
-        set { canPlayerMove = value; }
-    }
-
-    public bool CanPlayerInteract
-    {
-        get { return canPlayerInteract; }
-        set { canPlayerInteract = value; }
     }
 
     public Scene CurrentScene
