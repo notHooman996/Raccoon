@@ -1,3 +1,4 @@
+using GameController;
 using UnityEngine;
 
 public class PlayerInteraction : MonoBehaviour
@@ -15,7 +16,7 @@ public class PlayerInteraction : MonoBehaviour
 
     private void KeyboardControllerInteraction()
     {
-        if (Attributes.Instance.CanPlayerInteract)
+        if (AttributesPlayer.Instance.CanPlayerInteract)
         {
             if (InputHandler.Instance.GetInteractInput())
             {
