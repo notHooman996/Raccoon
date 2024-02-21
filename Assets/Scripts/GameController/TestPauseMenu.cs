@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using GameController;
 using UnityEditor;
 
 public class TestPauseMenu : MonoBehaviour
@@ -57,7 +58,7 @@ public class TestPauseMenu : MonoBehaviour
     /// </summary>
     public void OpenPauseMenu()
     {
-        Attributes.Instance.CanPlayerMove = false; 
+        AttributesPlayer.Instance.CanPlayerMove = false; // TODO - change
         AddPrefabToScene();
         canvasGroup = canvasInstance.GetComponent<CanvasGroup>();
         StartCoroutine(FadeCanvasGroup(0f, 1f, 2f));
@@ -76,7 +77,7 @@ public class TestPauseMenu : MonoBehaviour
             StartCoroutine(FadingOver());
         }
 
-        Attributes.Instance.CanPlayerMove = true; 
+        AttributesPlayer.Instance.CanPlayerMove = true; // TODO - change 
     }
     
     /// <summary>
