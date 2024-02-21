@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using Cinemachine;
+using GameController;
 
 public class PlayerCollision : MonoBehaviour
 {
@@ -10,11 +11,11 @@ public class PlayerCollision : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Interactable"))
         {
-            Attributes.Instance.CanPlayerInteract = true;
-            Debug.Log("can interact: "+Attributes.Instance.CanPlayerInteract);
+            AttributesPlayer.Instance.CanPlayerInteract = true;
+            Debug.Log("can interact: "+AttributesPlayer.Instance.CanPlayerInteract);
         }
         
-        if (other.gameObject.CompareTag("SceneChanger"))
+        if (other.gameObject.CompareTag("SceneChanger")) // TODO - camera - handle on object, not player 
         {
             isFirstCamera = !isFirstCamera;
 
@@ -33,8 +34,8 @@ public class PlayerCollision : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Interactable"))
         {
-            Attributes.Instance.CanPlayerInteract = false;
-            Debug.Log("can interact: "+Attributes.Instance.CanPlayerInteract);
+            AttributesPlayer.Instance.CanPlayerInteract = false;
+            Debug.Log("can interact: "+AttributesPlayer.Instance.CanPlayerInteract);
         }
     }
 }
