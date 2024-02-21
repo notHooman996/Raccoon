@@ -1,6 +1,7 @@
 using Cinemachine;
 using UnityEngine;
 using System.Collections;
+using GameController;
 using UnityEditor;
 
 public class TestMainMenu : MonoBehaviour
@@ -60,7 +61,7 @@ public class TestMainMenu : MonoBehaviour
     /// </summary>
     public void OpenMainMenu()
     {
-        Attributes.Instance.CanPlayerMove = false;
+        AttributesPlayer.Instance.CanPlayerMove = false; // TODO - change 
         
         // move camera to sky - change camera with the CameraController 
         CameraHandler.Instance.SwitchCamera(CameraHandler.Instance.GetCameraByName("SkyCamera"));
@@ -88,7 +89,7 @@ public class TestMainMenu : MonoBehaviour
             StartCoroutine(FadingOver());
         }
 
-        Attributes.Instance.CanPlayerMove = true; 
+        AttributesPlayer.Instance.CanPlayerMove = true; // TODO - change 
     }
 
     /// <summary>
