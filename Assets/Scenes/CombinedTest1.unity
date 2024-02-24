@@ -329,6 +329,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1139080475}
+  - component: {fileID: 1139080486}
   - component: {fileID: 1139080485}
   - component: {fileID: 1139080484}
   - component: {fileID: 1139080483}
@@ -372,7 +373,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1eb25e0885c49fb4bb19062e9b1d205a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pausemenuPrefab: {fileID: 158479739407139580, guid: b92f26620c6a2d142904a6e8a3ce84ae, type: 3}
 --- !u!114 &1139080477
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -385,7 +385,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1392078467d3d8b45b5adde07b72f29f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mainmenuPrefab: {fileID: 5109410412213691079, guid: 7db7354b67beeab4ea02b6578c5ff5bf, type: 3}
 --- !u!114 &1139080478
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -411,10 +410,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 169b6a6e3e27a5242bece080b4a38c4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cursorTestTexture: {fileID: 0}
-  leafTexture: {fileID: 0}
-  walkTexture: {fileID: 0}
-  hideTexture: {fileID: 0}
 --- !u!114 &1139080480
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -433,6 +428,7 @@ MonoBehaviour:
   pause: 0
   mouseLeftClick: 0
   mousePosition: {x: 0, y: 0, z: 0}
+  isMouseInput: 0
 --- !u!114 &1139080481
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -480,7 +476,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerSpeed: 5
+  canPlayerMove: 0
+  canPlayerInteract: 0
 --- !u!114 &1139080485
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1139080474}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a181b14ccb9c35b4bbfc8603d1436587, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scenes: []
+--- !u!114 &1139080486
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -489,13 +500,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1139080474}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a181b14ccb9c35b4bbfc8603d1436587, type: 3}
+  m_Script: {fileID: 11500000, guid: 460ad5f36aa828c44b40dbe868366f29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  activeVirtualCamera: {fileID: 0}
-  canPlayerMove: 0
-  canPlayerInteract: 0
-  scenes: []
 --- !u!1 &1265280160
 GameObject:
   m_ObjectHideFlags: 0
