@@ -14,7 +14,7 @@ public class SceneHandler : MonoBehaviour
             Instance = this; 
             
             // make sure object is not destroyed across scenes 
-            DontDestroyOnLoad(gameObject);
+            //DontDestroyOnLoad(gameObject);
         }
         else if (Instance != this)
         {
