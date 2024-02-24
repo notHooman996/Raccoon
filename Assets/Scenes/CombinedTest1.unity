@@ -329,14 +329,14 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1139080475}
+  - component: {fileID: 1139080487}
   - component: {fileID: 1139080486}
-  - component: {fileID: 1139080485}
-  - component: {fileID: 1139080484}
-  - component: {fileID: 1139080483}
+  - component: {fileID: 1139080478}
   - component: {fileID: 1139080481}
   - component: {fileID: 1139080480}
   - component: {fileID: 1139080479}
-  - component: {fileID: 1139080478}
+  - component: {fileID: 1139080484}
+  - component: {fileID: 1139080483}
   - component: {fileID: 1139080477}
   - component: {fileID: 1139080476}
   m_Layer: 0
@@ -478,19 +478,6 @@ MonoBehaviour:
   playerSpeed: 5
   canPlayerMove: 0
   canPlayerInteract: 0
---- !u!114 &1139080485
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1139080474}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a181b14ccb9c35b4bbfc8603d1436587, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  scenes: []
 --- !u!114 &1139080486
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -501,6 +488,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 460ad5f36aa828c44b40dbe868366f29, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scenes: []
+--- !u!114 &1139080487
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1139080474}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f226e81618d4f659892f25e5852154a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1265280160
