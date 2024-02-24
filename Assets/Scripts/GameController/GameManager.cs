@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        Debug.Log("Hello");
         int sceneIndex = gameData.sceneIndex; 
     }
 }
