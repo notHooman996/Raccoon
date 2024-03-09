@@ -54,11 +54,11 @@ public class InputHandler : MonoBehaviour
 
     private void CheckInputDevice()
     {
-        if (Input.anyKey || Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0)
+        if (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0)
         {
             isMouseInput = false; 
         }
-        else if (Input.GetAxisRaw("Mouse X") != 0 || Input.GetAxisRaw("Mouse Y") != 0)
+        else if (Input.GetMouseButtonDown(0) || Input.GetAxisRaw("Mouse X") != 0 || Input.GetAxisRaw("Mouse Y") != 0)
         {
             isMouseInput = true; 
         }
