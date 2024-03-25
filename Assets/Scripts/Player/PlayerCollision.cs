@@ -1,7 +1,6 @@
 using System;
 using UnityEngine;
 using Cinemachine;
-using GameController;
 
 public class PlayerCollision : MonoBehaviour
 {

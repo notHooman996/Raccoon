@@ -1,7 +1,6 @@
 using Cinemachine;
 using UnityEngine;
 using System.Collections;
-using GameController;
 using UnityEditor;
 
 public class TestMainMenu : MonoBehaviour

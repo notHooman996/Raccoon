@@ -1,6 +1,5 @@
 using UnityEngine;
 using System.Collections;
-using GameController;
 using UnityEditor;
 
 public class TestPauseMenu : MonoBehaviour

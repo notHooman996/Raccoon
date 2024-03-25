@@ -1,4 +1,3 @@
-using GameController;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
