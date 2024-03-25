@@ -1,4 +1,3 @@
-using GameController;
 using UnityEngine;
 
 public class PlayerInteraction : MonoBehaviour
@@ -31,7 +30,7 @@ public class PlayerInteraction : MonoBehaviour
         {
             // check if player is close enough to the chosen interactable object 
             float distance = Vector3.Distance(GameObject.FindWithTag("Player").transform.position, AttributesPointAndClick.Instance.InteractableObject.transform.position);
-            if (distance <= AttributesPointAndClick.Instance.InteractDistance)
+            if (distance <= AttributesPlayer.Instance.InteractDistance)
             {
                 Debug.Log("interact - point and click");
             }
