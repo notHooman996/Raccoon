@@ -29,7 +29,6 @@ public class AttributesPointAndClick : MonoBehaviour
     [SerializeField, ReadOnly] private CurrentObjective currentObjective;
     [SerializeField, ReadOnly] private Vector3 goalPosition;
     [SerializeField, ReadOnly] private GameObject interactableObject;
-    [SerializeField, ReadOnly] private float interactDistance = 3; // TODO - move to player attributes 
     
     private void Awake()
     {
@@ -85,10 +84,5 @@ public class AttributesPointAndClick : MonoBehaviour
     {
         get { return interactableObject; }
         set { interactableObject = value; }
-    }
-
-    public float InteractDistance
-    {
-        get { return interactDistance; }
     }
 }
