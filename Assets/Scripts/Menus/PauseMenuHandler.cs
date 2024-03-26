@@ -7,7 +7,7 @@ public class PauseMenuHandler : MonoBehaviour
         Debug.Log("resume");
         
         // close the pause menu prefab 
-        TestPauseMenu.Instance.ClosePauseMenu();
+        PauseMenuController.Instance.ClosePauseMenu();
     }
     
     public void ClickSettingsButton()
@@ -22,9 +22,9 @@ public class PauseMenuHandler : MonoBehaviour
         Debug.Log("main menu");
         
         // close the pause menu prefab 
-        TestPauseMenu.Instance.ClosePauseMenu();
+        PauseMenuController.Instance.ClosePauseMenu();
         
         // open the main menu prefab 
-        TestMainMenu.Instance.OpenMainMenu();
+        MainMenuController.Instance.OpenMainMenu();
     }
 }

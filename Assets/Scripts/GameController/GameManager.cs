@@ -1,5 +1,10 @@
 using UnityEngine;
 
+/// <summary>
+/// The Game Manager
+/// Loads from save data, GameData, a scriptable object.
+/// Also saves to GameData.
+/// </summary>
 public class GameManager : MonoBehaviour
 {
     // singleton 

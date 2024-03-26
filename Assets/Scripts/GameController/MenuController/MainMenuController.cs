@@ -3,9 +3,9 @@ using UnityEngine;
 using System.Collections;
 using UnityEditor;
 
-public class TestMainMenu : MonoBehaviour
+public class MainMenuController : MonoBehaviour
 {
-    public static TestMainMenu Instance; 
+    public static MainMenuController Instance; 
     
     private GameObject mainmenuPrefab; // reference to the canvas ui prefab 
     private CanvasGroup canvasGroup;

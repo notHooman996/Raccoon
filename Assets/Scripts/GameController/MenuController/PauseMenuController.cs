@@ -2,9 +2,9 @@ using UnityEngine;
 using System.Collections;
 using UnityEditor;
 
-public class TestPauseMenu : MonoBehaviour
+public class PauseMenuController : MonoBehaviour
 {
-    public static TestPauseMenu Instance; 
+    public static PauseMenuController Instance; 
     
     private GameObject pausemenuPrefab; // reference to the canvas ui prefab 
     private CanvasGroup canvasGroup;

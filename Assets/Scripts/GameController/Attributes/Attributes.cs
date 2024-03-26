@@ -4,6 +4,9 @@ using UnityEngine;
 using Unity.Collections;
 using UnityEngine.SceneManagement;
 
+/// <summary>
+/// TODO - figure out if this is needed - keep for now 
+/// </summary>
 public class Attributes : MonoBehaviour
 {
     // singleton 

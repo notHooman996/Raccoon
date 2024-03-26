@@ -26,7 +26,7 @@ public class SceneHandler : MonoBehaviour
     [Header("List of Scenes")]
     [SerializeField, ReadOnly] private List<Scene> scenes = new List<Scene>();
     
-    private int currentSceneIndex = 0; 
+    private int currentSceneIndex = 0; // TODO - get the index from GameManager 
     
     public Scene CurrentScene
     {

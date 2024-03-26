@@ -9,7 +9,7 @@ public class MainMenuHandler : MonoBehaviour
         Debug.Log("play");
         
         // go back to game - close main menu 
-        TestMainMenu.Instance.CloseMainMenu();
+        MainMenuController.Instance.CloseMainMenu();
     }
     
     public void ClickNewGameButton()
