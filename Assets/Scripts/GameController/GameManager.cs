@@ -31,7 +31,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        sceneIndex = gameData.sceneIndex; 
+        sceneIndex = gameData.sceneIndex; // TODO - remember to set the index 
     }
 
     public int GetCurrentSceneIndex()
