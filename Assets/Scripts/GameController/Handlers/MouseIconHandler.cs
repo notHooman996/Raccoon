@@ -30,7 +30,7 @@ public class MouseIconHandler : MonoBehaviour
 
     private void Update()
     {
-        if (InputHandler.Instance.IsMouseInput())
+        if (InputHandler.Instance.GetIsMouseInput())
         {
             Cursor.visible = true; 
             
