@@ -66,7 +66,7 @@ public class InputHandler : MonoBehaviour
 
     private void SetMovementInput()
     {
-        (horizontal, vertical) = (Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+        (horizontal, vertical) = (Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
     }
 
     private void SetInteractInput()
@@ -114,7 +114,7 @@ public class InputHandler : MonoBehaviour
         return mousePosition; 
     }
 
-    public bool IsMouseInput()
+    public bool GetIsMouseInput()
     {
         return isMouseInput; 
     }
