@@ -5,9 +5,11 @@ using UnityEngine;
 
 public class BackdropSelect : EditorWindow
 {
+    private int selectedBackdropHolderIndex = -1; 
     private int selectedBackdropIndex = -1; 
     private int selectedLayerIndex = -1; 
     
+    public static GameObject SelectedBackdropHolder { get; private set; }
     public static GameObject SelectedBackdrop { get; private set; }
     public static GameObject SelectedLayer { get; private set; }
     
@@ -15,6 +17,7 @@ public class BackdropSelect : EditorWindow
     {
         GUILayout.BeginVertical("box");
         Deselect();
+        SelectBackdropHolder();
         SelectBackdrop();
         SelectLayer();
         GUILayout.EndVertical();
@@ -29,9 +32,11 @@ public class BackdropSelect : EditorWindow
         
         if (GUILayout.Button("Deselect Backdrop"))
         {
+            SelectedBackdropHolder = null; 
             SelectedBackdrop = null;
             SelectedLayer = null;
 
+            selectedBackdropHolderIndex = -1; 
             selectedBackdropIndex = -1;
             selectedLayerIndex = -1; 
         }
@@ -40,27 +45,56 @@ public class BackdropSelect : EditorWindow
         GUI.backgroundColor = BackdropToolUtilities.DefaultColor; 
     }
 
-    private void SelectBackdrop()
+    private void SelectBackdropHolder()
     {
-        if (BackdropLoad.Backdrops.Count > 0)
+        if (BackdropLoad.BackdropHolders.Count > 0)
         {
-            // display a dropdown with a list of backdrops  
-            string[] backdropNames = BackdropLoad.Backdrops.ConvertAll(b => b.name).ToArray();
-            selectedBackdropIndex = EditorGUILayout.Popup("Selected Backdrop: ", selectedBackdropIndex, backdropNames);
-
-            // set the backdrop gameobject when something is selected in the popup 
-            if (selectedBackdropIndex >= 0 && selectedBackdropIndex < BackdropLoad.Backdrops.Count)
+            // display a dropdown with a list of holders 
+            string[] holderNames = BackdropLoad.BackdropHolders.ConvertAll(h => h.name).ToArray();
+            selectedBackdropHolderIndex = EditorGUILayout.Popup("Selected BackdropHolder: ", selectedBackdropHolderIndex, holderNames);
+            
+            // set the holder object when something is selected in the popup 
+            if (selectedBackdropHolderIndex >= 0 && selectedBackdropHolderIndex < BackdropLoad.BackdropHolders.Count)
             {
-                SelectedBackdrop = BackdropLoad.Backdrops[selectedBackdropIndex];
+                SelectedBackdropHolder = BackdropLoad.BackdropHolders[selectedBackdropHolderIndex];
             }
         }
         else
         {
+            SelectedBackdropHolder = null; 
             SelectedBackdrop = null;
             SelectedLayer = null;
 
+            selectedBackdropHolderIndex = -1; 
             selectedBackdropIndex = -1;
             selectedLayerIndex = -1; 
+        }
+    }
+
+    private void SelectBackdrop()
+    {
+        if (SelectedBackdropHolder != null && BackdropLoad.Backdrops != null)
+        {
+            if (BackdropLoad.Backdrops.Count > 0)
+            {
+                // display a dropdown with a list of backdrops  
+                string[] backdropNames = BackdropLoad.Backdrops.ConvertAll(b => b.name).ToArray();
+                selectedBackdropIndex = EditorGUILayout.Popup("Selected Backdrop: ", selectedBackdropIndex, backdropNames);
+
+                // set the backdrop gameobject when something is selected in the popup 
+                if (selectedBackdropIndex >= 0 && selectedBackdropIndex < BackdropLoad.Backdrops.Count)
+                {
+                    SelectedBackdrop = BackdropLoad.Backdrops[selectedBackdropIndex];
+                }
+            }
+            else
+            {
+                SelectedBackdrop = null;
+                SelectedLayer = null;
+
+                selectedBackdropIndex = -1;
+                selectedLayerIndex = -1;
+            }
         }
     }
 

@@ -9,11 +9,11 @@ public class BackdropLoad : EditorWindow
     private string layerPrefabPath = "Assets/Prefabs/TheatreBackdrop/Layer.prefab";
     private string spriteObjectPrefabPath = "Assets/Prefabs/TheatreBackdrop/SpriteObject.prefab";
     
-    public static GameObject BackdropHolderObject { get; set; }
     public static GameObject BackdropPrefab { get; private set; }
     public static GameObject LayerPrefab { get; private set; }
     public static GameObject SpriteObjectPrefab { get; private set; }
     
+    public static List<GameObject> BackdropHolders { get; private set; }
     public static List<GameObject> Backdrops { get; private set; }
     public static List<GameObject> Layers { get; private set; }
     public static List<GameObject> Sprites { get; private set; }
@@ -26,12 +26,17 @@ public class BackdropLoad : EditorWindow
     
     private void LoadStage()
     {
-        // load backdrop holder 
-        BackdropHolderObject = GameObject.FindGameObjectWithTag("BackdropHolder");
+        // load backdrop holders 
+        BackdropHolders = GameObject.FindGameObjectsWithTag("BackdropHolder").ToList();
         
         // load the backdrops 
-        Backdrops = GameObject.FindGameObjectsWithTag("Backdrop").ToList();
-        
+        if (BackdropSelect.SelectedBackdropHolder != null)
+        {
+            Backdrops = GameObject.FindGameObjectsWithTag("Backdrop")
+                        .Where(child => child.transform.IsChildOf(BackdropSelect.SelectedBackdropHolder.transform))
+                        .ToList();
+        }
+
         // load the layers of the backdrop 
         if (BackdropSelect.SelectedBackdrop != null)
         {

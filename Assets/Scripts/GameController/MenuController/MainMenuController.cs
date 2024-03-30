@@ -1,12 +1,13 @@
 using Cinemachine;
 using UnityEngine;
 using System.Collections;
+using UnityEditor;
 
-public class TestMainMenu : MonoBehaviour
+public class MainMenuController : MonoBehaviour
 {
-    public static TestMainMenu Instance; 
+    public static MainMenuController Instance; 
     
-    public GameObject mainmenuPrefab; // reference to the canvas ui prefab 
+    private GameObject mainmenuPrefab; // reference to the canvas ui prefab 
     private CanvasGroup canvasGroup;
     private GameObject canvasInstance; // reference to the instantiated prefab 
     //private bool isMenu = false;
@@ -31,6 +32,9 @@ public class TestMainMenu : MonoBehaviour
     
     private void Start()
     {
+        // load the prefab 
+        mainmenuPrefab = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/Menus/MainMenu.prefab");
+        
         mainmenuPrefab.SetActive(true);
     }
 
@@ -56,7 +60,7 @@ public class TestMainMenu : MonoBehaviour
     /// </summary>
     public void OpenMainMenu()
     {
-        Attributes.Instance.CanPlayerMove = false;
+        AttributesPlayer.Instance.CanPlayerMove = false; // TODO - change 
         
         // move camera to sky - change camera with the CameraController 
         CameraHandler.Instance.SwitchCamera(CameraHandler.Instance.GetCameraByName("SkyCamera"));
@@ -84,7 +88,7 @@ public class TestMainMenu : MonoBehaviour
             StartCoroutine(FadingOver());
         }
 
-        Attributes.Instance.CanPlayerMove = true; 
+        AttributesPlayer.Instance.CanPlayerMove = true; // TODO - change 
     }
 
     /// <summary>

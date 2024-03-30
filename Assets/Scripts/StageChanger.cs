@@ -21,6 +21,10 @@ public class StageChanger : MonoBehaviour
                 Debug.Log("stage 1");
                 StageHandler.Instance.SetCurrentStage(stage1);
             }
+            else
+            {
+                Debug.Log("Error: startStage, currentStage, stage1 or stage2 is not set.");
+            }
         }
     }
 }

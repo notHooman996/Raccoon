@@ -1,11 +1,12 @@
 using UnityEngine;
 using System.Collections;
+using UnityEditor;
 
-public class TestPauseMenu : MonoBehaviour
+public class PauseMenuController : MonoBehaviour
 {
-    public static TestPauseMenu Instance; 
+    public static PauseMenuController Instance; 
     
-    public GameObject pausemenuPrefab; // reference to the canvas ui prefab 
+    private GameObject pausemenuPrefab; // reference to the canvas ui prefab 
     private CanvasGroup canvasGroup;
     private GameObject canvasInstance; // reference to the instantiated prefab 
     private bool isPaused = false; 
@@ -28,6 +29,9 @@ public class TestPauseMenu : MonoBehaviour
     
     private void Start()
     {
+        // load the prefab 
+        pausemenuPrefab = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/Menus/PauseMenu.prefab");
+        
         pausemenuPrefab.SetActive(true);
     }
 
@@ -53,7 +57,7 @@ public class TestPauseMenu : MonoBehaviour
     /// </summary>
     public void OpenPauseMenu()
     {
-        Attributes.Instance.CanPlayerMove = false; 
+        AttributesPlayer.Instance.CanPlayerMove = false; // TODO - change
         AddPrefabToScene();
         canvasGroup = canvasInstance.GetComponent<CanvasGroup>();
         StartCoroutine(FadeCanvasGroup(0f, 1f, 2f));
@@ -72,7 +76,7 @@ public class TestPauseMenu : MonoBehaviour
             StartCoroutine(FadingOver());
         }
 
-        Attributes.Instance.CanPlayerMove = true; 
+        AttributesPlayer.Instance.CanPlayerMove = true; // TODO - change 
     }
     
     /// <summary>

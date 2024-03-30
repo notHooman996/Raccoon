@@ -23,7 +23,7 @@ public class StageHandler : MonoBehaviour
         }
     }
 
-    [SerializeField] private GameObject startStage; 
+    [SerializeField] private GameObject startStage; // TODO - should be set via GameData, when loading a scene, determine the starting stage from there via the GameManager. 
     
     private List<GameObject> stages = new List<GameObject>();
     public GameObject CurrentStage { get; private set; }
@@ -42,6 +42,7 @@ public class StageHandler : MonoBehaviour
             CurrentStage = nextStage; 
         }
 
+        // control which stages uses the billboarding effect 
         foreach (GameObject stage in stages)
         {
             StageBillboarding component = stage.GetComponent<StageBillboarding>();

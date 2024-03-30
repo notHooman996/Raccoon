@@ -1,27 +1,17 @@
-using Cinemachine;
-using UnityEngine;
+using System;
 using Unity.Collections;
+using UnityEngine;
 
-public class Attributes : MonoBehaviour
+public class AttributesPlayer : MonoBehaviour
 {
     // singleton 
-    public static Attributes Instance;
-    
-    [Header("ActiveVirtualCamera")] 
-    [SerializeField, ReadOnly] private CinemachineVirtualCameraBase activeVirtualCamera;
-
-    [Header("CanPlayerMove")] 
-    [SerializeField, ReadOnly] private bool canPlayerMove;
-    
-    [Header("CanPlayerInteract")]
-    [SerializeField, ReadOnly] private bool canPlayerInteract = false;
-    
+    public static AttributesPlayer Instance;
     private void Awake()
     {
         if (Instance == null)
         {
             Instance = this; 
-            
+        
             // make sure object is not destroyed across scenes 
             //DontDestroyOnLoad(gameObject);
         }
@@ -31,23 +21,29 @@ public class Attributes : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
+    [Header("ActiveVirtualCamera")] 
+    [SerializeField, ReadOnly] private float playerSpeed = 5f;
     
+    [Header("CanPlayerMove")] 
+    [SerializeField, ReadOnly] private bool canPlayerMove;
+
+    [Header("CanPlayerInteract")]
+    [SerializeField, ReadOnly] private bool canPlayerInteract = false; 
+    
+    [Header("PlayerInteractDistance")]
+    [SerializeField, ReadOnly] private float interactDistance = 3; 
+
     private void Start()
     {
         canPlayerMove = true; // TODO - set to false when game starts 
     }
 
-    private void Update()
+    public float GetPlayerSpeed()
     {
-        
+        return playerSpeed; 
     }
-
-    public CinemachineVirtualCameraBase ActiveVirtualCamera
-    {
-        get { return activeVirtualCamera; }
-        set { activeVirtualCamera = value; }
-    }
-
+    
     public bool CanPlayerMove
     {
         get { return canPlayerMove; }
@@ -58,5 +54,10 @@ public class Attributes : MonoBehaviour
     {
         get { return canPlayerInteract; }
         set { canPlayerInteract = value; }
+    }
+    
+    public float InteractDistance
+    {
+        get { return interactDistance; }
     }
 }
