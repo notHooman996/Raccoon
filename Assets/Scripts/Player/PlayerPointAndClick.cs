@@ -97,6 +97,11 @@ public class PlayerPointAndClick : MonoBehaviour
                 // set the chosen interactable object 
                 AttributesPointAndClick.Instance.InteractableObject = hit.collider.GameObject();
                 
+                // testing 
+                GameObject testingObject = hit.collider.GameObject();
+                InteractableObject testingInteractable = testingObject.GetComponent("InteractableObject") as InteractableObject;
+                Debug.Log("Interactible type: " + testingInteractable.GetInteractableType());
+                
                 // check if player can interact 
                 if (AttributesPlayer.Instance.CanPlayerInteract)
                 {
@@ -114,6 +119,15 @@ public class PlayerPointAndClick : MonoBehaviour
                     Debug.Log("entrypoint: "+entryPoint);
                     AttributesPointAndClick.Instance.GoalPosition = hit.point;
                 }
+            }
+            // check if the object is of type "StageChanger"
+            if (hit.collider.CompareTag("StageChanger"))
+            {
+                // set the current objective to change stage 
+                AttributesPointAndClick.Instance.CurrentObjective = CurrentObjective.ChangeStage;
+                
+                // set the chosen object 
+                AttributesPointAndClick.Instance.InteractableObject = hit.collider.GameObject();
             }
             // check if the object is of type "Ground" 
             else if (hit.collider.CompareTag("Ground"))
