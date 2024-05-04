@@ -131,6 +131,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 580825501674204737, guid: fd377d493f7f7c0439566e88fc728bfb, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 1272990766}
     - target: {fileID: 1025176358068491822, guid: fd377d493f7f7c0439566e88fc728bfb, type: 3}
       propertyPath: startStage
       value: 
@@ -183,18 +187,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameController
       objectReference: {fileID: 0}
-    - target: {fileID: 8292328366474778186, guid: fd377d493f7f7c0439566e88fc728bfb, type: 3}
-      propertyPath: m_TagString
-      value: Untagged
-      objectReference: {fileID: 0}
     - target: {fileID: 9014049519631088868, guid: fd377d493f7f7c0439566e88fc728bfb, type: 3}
       propertyPath: startCamera
       value: 
       objectReference: {fileID: 962725830}
-    - target: {fileID: 9014049519631088868, guid: fd377d493f7f7c0439566e88fc728bfb, type: 3}
-      propertyPath: cameras.Array.size
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 9014049519631088868, guid: fd377d493f7f7c0439566e88fc728bfb, type: 3}
       propertyPath: cameras.Array.data[0]
       value: 
@@ -202,10 +198,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 8292328366474778186, guid: fd377d493f7f7c0439566e88fc728bfb, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1294380878}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fd377d493f7f7c0439566e88fc728bfb, type: 3}
 --- !u!1 &290888714
 GameObject:
@@ -557,26 +550,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 3539858880305012879, guid: 3e7f2614a7efb3d43a8ba082fde4c53d, type: 3}
   m_PrefabInstance: {fileID: 1113437184}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1294380875 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8292328366474778186, guid: fd377d493f7f7c0439566e88fc728bfb, type: 3}
-  m_PrefabInstance: {fileID: 81133812}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1294380878
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1294380875}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f3edfd5a237ef614a958da9dbe813272, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: {fileID: 1272990766}
-  target: {fileID: 0}
-  path: []
 --- !u!1001 &1557184391
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -588,22 +561,6 @@ PrefabInstance:
     - target: {fileID: 4582380653091453839, guid: 39e0e17c75e60a74e9e6639e3da719a9, type: 3}
       propertyPath: m_Name
       value: RaccoonHome
-      objectReference: {fileID: 0}
-    - target: {fileID: 6183063776390242705, guid: 39e0e17c75e60a74e9e6639e3da719a9, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0.81
-      objectReference: {fileID: 0}
-    - target: {fileID: 6894430335669983976, guid: 39e0e17c75e60a74e9e6639e3da719a9, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7006240341780268013, guid: 39e0e17c75e60a74e9e6639e3da719a9, type: 3}
-      propertyPath: type
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7308158874013063725, guid: 39e0e17c75e60a74e9e6639e3da719a9, type: 3}
-      propertyPath: m_TagString
-      value: Interactable
       objectReference: {fileID: 0}
     - target: {fileID: 8229220185619535199, guid: 39e0e17c75e60a74e9e6639e3da719a9, type: 3}
       propertyPath: m_RootOrder
