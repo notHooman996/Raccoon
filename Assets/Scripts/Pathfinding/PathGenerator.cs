@@ -77,8 +77,8 @@ public class PathGenerator : MonoBehaviour
                     // Cast a ray between points.
                     bool isHit = Physics.Linecast(position1, position2, out RaycastHit hit);
 
-                    // If it hits something and the collider is tagged as "Obstacle"...
-                    if (!isHit || !hit.collider.CompareTag("Obstacle"))
+                    // If it does not hit something and the collider is tagged as "Obstacle" or "Interactable", then add edge 
+                    if (!isHit || (!hit.collider.CompareTag("Obstacle") && !hit.collider.CompareTag("Interactable")))
                     {
                         Edge edge = new Edge(vertex1, vertex2);
                         vertex1.edges.Add(edge);
