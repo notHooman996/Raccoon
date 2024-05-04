@@ -1,6 +1,7 @@
 using System;
 using Unity.Collections;
-using UnityEngine; 
+using UnityEngine;
+using UnityEngine.Serialization;
 
 public class InputHandler : MonoBehaviour
 {
@@ -23,6 +24,10 @@ public class InputHandler : MonoBehaviour
     
     [Header("MouseInput")]
     [SerializeField, ReadOnly] private bool isMouseInput;
+    
+    [FormerlySerializedAs("isHintActive")]
+    [Header("HintInput")]
+    [SerializeField, ReadOnly] private bool isHintInput;
 
     private void Awake()
     {
@@ -50,6 +55,7 @@ public class InputHandler : MonoBehaviour
         SetPauseInput();
         SetMouseLeftClick();
         SetMousePosition();
+        SetIsHintInput();
     }
 
     private void CheckInputDevice()
@@ -89,6 +95,11 @@ public class InputHandler : MonoBehaviour
         mousePosition = Input.mousePosition;
     }
 
+    private void SetIsHintInput()
+    {
+        isHintInput = Input.GetButtonDown("Hint") || Input.GetMouseButtonDown(1);
+    }
+
     public (float x, float y) GetMovementInput()
     {
         return (horizontal, vertical);
@@ -117,5 +128,10 @@ public class InputHandler : MonoBehaviour
     public bool GetIsMouseInput()
     {
         return isMouseInput; 
+    }
+
+    public bool GetIsHintInput()
+    {
+        return isHintInput; 
     }
 }
