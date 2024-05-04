@@ -9,12 +9,12 @@ public enum MouseHoverType {Ground, Interactable, None}
 /// <summary>
 /// Type of the interactable object, used for setting the cursor icon 
 /// </summary>
-public enum InteractableType {Test, Hide}
+public enum InteractableType {Test, Hide, StageChange}
 
 /// <summary>
 /// Type of point and click objective, used to determine the current point and click objective 
 /// </summary>
-public enum CurrentObjective {Move, Interact}
+public enum CurrentObjective {Move, Interact, ChangeStage}
 
 public class AttributesPointAndClick : MonoBehaviour
 {
