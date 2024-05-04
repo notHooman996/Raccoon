@@ -15,6 +15,7 @@ TagManager:
   - Sprite
   - Stage
   - StageChanger
+  - Hint
   layers:
   - Default
   - TransparentFX
