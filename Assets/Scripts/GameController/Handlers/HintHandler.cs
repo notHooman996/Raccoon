@@ -1,10 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 
 public class HintHandler : MonoBehaviour
 {
+    private Camera mainCamera; 
+    
     private bool isHintActive = false; 
     private float despawnTime = 3; 
     
@@ -17,8 +20,7 @@ public class HintHandler : MonoBehaviour
     
     private void Start()
     {
-        hintPrefab = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/UI_Assets/Hint.prefab");
-        hintCanvas = GameObject.Find("HintCanvas");
+        hintPrefab = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/Hint/Hint.prefab");
     }
 
     private void Update()
@@ -65,9 +67,12 @@ public class HintHandler : MonoBehaviour
 
     private void SpawnHints()
     {
+        Debug.Log("Spawn");
         foreach (GameObject interactable in interactables)
         {
             GameObject hintGameObject = Instantiate(hintPrefab, interactable.transform.position, Quaternion.identity);
+
+            //GameObject hintGameObject = Instantiate(hintPrefab, interactable.transform.position, Quaternion.identity);
             // GameObject hintGameObject = Instantiate(hintPrefab, hintCanvas.transform);
             // hintGameObject.transform.localPosition = interactable.transform.position;
             // hintGameObject.transform.localRotation = Quaternion.identity; 
