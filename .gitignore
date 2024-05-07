@@ -11,6 +11,5 @@ UserSettings
 
 # Visual Studio 
 .vsconfig
-*.csproj
 .vscode
 .vs
