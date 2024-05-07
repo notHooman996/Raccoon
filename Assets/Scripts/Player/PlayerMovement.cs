@@ -61,7 +61,7 @@ public class PlayerMovement : MonoBehaviour
     private Vector3 DirectionVector()
     {
         // calculate the direction vector between the two points 
-        Vector3 directionVector = transform.position - CameraHandler.Instance.GetCurrentCamera.transform.position;
+        Vector3 directionVector = transform.position - CameraHandler.Instance.GetCurrentCamera().transform.position;
 
         // normalize the vector to get its unit vector 
         Vector3 normalizedVector = Vector3.Normalize(directionVector);

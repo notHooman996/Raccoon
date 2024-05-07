@@ -12,9 +12,9 @@ public class CameraHandler : MonoBehaviour
     private CinemachineVirtualCamera currentCamera; 
     private CinemachineVirtualCamera prevCamera;
 
-    public CinemachineVirtualCamera GetCurrentCamera
+    public CinemachineVirtualCamera GetCurrentCamera()
     {
-        get { return currentCamera; }
+        return currentCamera; 
     }
     
     private void Awake()
