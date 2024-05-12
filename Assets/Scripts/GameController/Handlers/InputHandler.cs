@@ -62,6 +62,7 @@ public class InputHandler : MonoBehaviour
     {
         if (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0)
         {
+            AttributesPointAndClick.Instance.IsPathFindingEnabled = false; 
             isMouseInput = false; 
         }
         else if (Input.GetMouseButtonDown(0) || Input.GetAxisRaw("Mouse X") != 0 || Input.GetAxisRaw("Mouse Y") != 0)
