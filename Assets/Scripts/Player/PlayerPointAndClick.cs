@@ -39,7 +39,10 @@ public class PlayerPointAndClick : MonoBehaviour
             MouseClick();
         }
 
-        FollowPath(PathGenerator.Instance.path);
+        if (AttributesPointAndClick.Instance.IsPathFindingEnabled)
+        {
+            FollowPath(PathGenerator.Instance.path);
+        }
     }
     
     private void MouseHover()
@@ -88,6 +91,8 @@ public class PlayerPointAndClick : MonoBehaviour
         // check if the ray hits an object 
         if (Physics.Raycast(ray, out hit))
         {
+            AttributesPointAndClick.Instance.IsPathFindingEnabled = true; 
+            
             // check if the object is of type "Interactable"
             if (hit.collider.CompareTag("Interactable"))
             {
@@ -121,7 +126,7 @@ public class PlayerPointAndClick : MonoBehaviour
                 }
             }
             // check if the object is of type "StageChanger"
-            if (hit.collider.CompareTag("StageChanger"))
+            else if (hit.collider.CompareTag("StageChanger"))
             {
                 // set the current objective to change stage 
                 AttributesPointAndClick.Instance.CurrentObjective = CurrentObjective.ChangeStage;
@@ -139,7 +144,7 @@ public class PlayerPointAndClick : MonoBehaviour
 
                 entryPoint = hit.point; 
                 Debug.Log("entrypoint: "+entryPoint);
-                AttributesPointAndClick.Instance.GoalPosition = hit.point;
+                AttributesPointAndClick.Instance.GoalPosition = entryPoint;
             }
         }
     }
@@ -150,9 +155,9 @@ public class PlayerPointAndClick : MonoBehaviour
         
         Gizmos.color = Color.red; 
         
-        Gizmos.DrawSphere(entryPoint, 0.5f);
+        Gizmos.DrawSphere(AttributesPointAndClick.Instance.GoalPosition, 0.5f);
         
-        Gizmos.DrawRay(entryPoint, Vector3.up * 10);
+        Gizmos.DrawRay(AttributesPointAndClick.Instance.GoalPosition, Vector3.up * 10);
     }
 
     public void FollowPath(List<Vertex> vertices)
@@ -170,7 +175,7 @@ public class PlayerPointAndClick : MonoBehaviour
 
             if (vertices[1].name == "End" && Vector3.Distance(transform.position, vertices[1].position) <= stoppingDistance)
             {
-                
+                AttributesPointAndClick.Instance.IsPathFindingEnabled = false; 
             }
             else
             {
