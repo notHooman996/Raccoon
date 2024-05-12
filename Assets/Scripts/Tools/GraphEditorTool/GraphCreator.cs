@@ -219,7 +219,7 @@ public class GraphCreator : EditorWindow
             {
                 canAddVertex = false; 
                 // disable adding vertices 
-                SceneView.duringSceneGui -= (sceneView) => graphGenerator.CreateVertex(sceneView, vertices);
+                SceneView.duringSceneGui -= AddingVertexCall;
             }
         }
         else
@@ -229,7 +229,7 @@ public class GraphCreator : EditorWindow
             {
                 canAddVertex = true; 
                 // enable adding vertices 
-                SceneView.duringSceneGui += (sceneView) => graphGenerator.CreateVertex(sceneView, vertices);
+                SceneView.duringSceneGui += AddingVertexCall;
             }
         }
 
@@ -275,6 +275,11 @@ public class GraphCreator : EditorWindow
             Debug.Log("Generate edges");
             edges = graphGenerator.GenerateEdges();
         }
+    }
+
+    private void AddingVertexCall(SceneView sceneView)
+    {
+        graphGenerator.CreateVertex(sceneView, vertices); 
     }
 
     private void VisualVertexList(int i)

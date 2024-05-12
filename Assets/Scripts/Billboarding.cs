@@ -28,7 +28,7 @@ public class Billboarding : MonoBehaviour
 
     private void Billboard()
     {
-        cameraDirection = CameraHandler.Instance.GetCurrentCamera.transform.forward;
+        cameraDirection = CameraHandler.Instance.GetCurrentCamera().transform.forward;
         cameraDirection.y = 0;
 
         transform.rotation = Quaternion.LookRotation(cameraDirection);

@@ -24,7 +24,7 @@ public class PathGenerator : MonoBehaviour
     }
     
     private string folderPath = "Assets/DataFiles/";
-    private string selectedJSONFile = "hej.json";
+    private string selectedJSONFile = "Graph_RaccoonHome.json"; // TODO - load from somewhere 
 
     public GameObject player;
     public GameObject target;
@@ -45,6 +45,14 @@ public class PathGenerator : MonoBehaviour
 
     private void Update()
     {
+        if (InputHandler.Instance.GetIsMouseInput())
+        {
+            CreateGraph();
+        }
+    }
+
+    public void CreateGraph()
+    {
         start = new Vertex("Start", player.transform.position);
         end = new Vertex("End", AttributesPointAndClick.Instance.GoalPosition);
         graph.vertices.Add(start);
@@ -58,13 +66,6 @@ public class PathGenerator : MonoBehaviour
 
         graph.vertices.Remove(start);
         graph.vertices.Remove(end);
-
-        // foreach (var path in aStar.pathResult)
-        // {
-        //     Debug.Log(path.name+": "+path.position);
-        //     Debug.Log("->");
-        // }
-
     }
 
     private Graph CalculateGraphConnections(Graph graph)
@@ -80,13 +81,12 @@ public class PathGenerator : MonoBehaviour
                 {
                     Vector3 position1 = new Vector3(vertex1.position.x, 0, vertex1.position.z);
                     Vector3 position2 = new Vector3(vertex2.position.x, 0, vertex2.position.z);
-                    Vector3 direction = position2 - position1;
 
-                    // Cast a ray straight down.
+                    // Cast a ray between points.
                     bool isHit = Physics.Linecast(position1, position2, out RaycastHit hit);
 
-                    // If it hits something and the collider is tagged as "Obstacle"...
-                    if (!isHit || !hit.collider.CompareTag("Obstacle"))
+                    // If it does not hit something and the collider is tagged as "Obstacle" or "Interactable", then add edge 
+                    if (!isHit || (!hit.collider.CompareTag("Obstacle") && !hit.collider.CompareTag("Interactable")))
                     {
                         Edge edge = new Edge(vertex1, vertex2);
                         vertex1.edges.Add(edge);
@@ -100,7 +100,6 @@ public class PathGenerator : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-
         for (int i=0; i<aStar?.pathResult?.Count; i++)
         {
             Gizmos.color = Color.cyan;
