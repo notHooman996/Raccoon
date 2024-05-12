@@ -47,20 +47,25 @@ public class PathGenerator : MonoBehaviour
     {
         if (InputHandler.Instance.GetIsMouseInput())
         {
-            start = new Vertex("Start", player.transform.position);
-            end = new Vertex("End", AttributesPointAndClick.Instance.GoalPosition);
-            graph.vertices.Add(start);
-            graph.vertices.Add(end);
-            graph = CalculateGraphConnections(graph);
-
-            aStar = new AStar(graph);
-            aStar.Run(start, end);
-
-            path = aStar.pathResult; 
-
-            graph.vertices.Remove(start);
-            graph.vertices.Remove(end);
+            CreateGraph();
         }
+    }
+
+    public void CreateGraph()
+    {
+        start = new Vertex("Start", player.transform.position);
+        end = new Vertex("End", AttributesPointAndClick.Instance.GoalPosition);
+        graph.vertices.Add(start);
+        graph.vertices.Add(end);
+        graph = CalculateGraphConnections(graph);
+
+        aStar = new AStar(graph);
+        aStar.Run(start, end);
+
+        path = aStar.pathResult; 
+
+        graph.vertices.Remove(start);
+        graph.vertices.Remove(end);
     }
 
     private Graph CalculateGraphConnections(Graph graph)
