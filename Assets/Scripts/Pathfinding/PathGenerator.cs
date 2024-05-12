@@ -45,19 +45,22 @@ public class PathGenerator : MonoBehaviour
 
     private void Update()
     {
-        start = new Vertex("Start", player.transform.position);
-        end = new Vertex("End", AttributesPointAndClick.Instance.GoalPosition);
-        graph.vertices.Add(start);
-        graph.vertices.Add(end);
-        graph = CalculateGraphConnections(graph);
+        if (InputHandler.Instance.GetIsMouseInput())
+        {
+            start = new Vertex("Start", player.transform.position);
+            end = new Vertex("End", AttributesPointAndClick.Instance.GoalPosition);
+            graph.vertices.Add(start);
+            graph.vertices.Add(end);
+            graph = CalculateGraphConnections(graph);
 
-        aStar = new AStar(graph);
-        aStar.Run(start, end);
+            aStar = new AStar(graph);
+            aStar.Run(start, end);
 
-        path = aStar.pathResult; 
+            path = aStar.pathResult; 
 
-        graph.vertices.Remove(start);
-        graph.vertices.Remove(end);
+            graph.vertices.Remove(start);
+            graph.vertices.Remove(end);
+        }
     }
 
     private Graph CalculateGraphConnections(Graph graph)
@@ -92,7 +95,6 @@ public class PathGenerator : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-
         for (int i=0; i<aStar?.pathResult?.Count; i++)
         {
             Gizmos.color = Color.cyan;
