@@ -21,12 +21,16 @@ public class PlayerMovement : MonoBehaviour
         
         // calculate the movement direction 
         Vector3 direction = new Vector3(horizontalInput, 0, verticalInput).normalized;
-
-        Vector3 movement = CameraRelativeMovement(direction) * AttributesPlayer.Instance.GetPlayerSpeed() * Time.deltaTime;
-        movement.y = 0; // make sure it does not fly or fall 
+        Vector3 cameraRelativeDirection = CameraRelativeMovement(direction); 
+        
+        // create new look at vector 
+        Vector3 lookAtPosition = new Vector3(transform.position.x + cameraRelativeDirection.x, transform.position.y, transform.position.z + cameraRelativeDirection.z);
+        
+        // player look in the direction 
+        transform.LookAt(lookAtPosition);
         
         // move the player 
-        transform.Translate(movement);
+        transform.Translate(Vector3.forward * AttributesPlayer.Instance.GetPlayerSpeed() * Time.deltaTime);
     }
 
     private Vector3 CameraRelativeMovement(Vector3 inputDirection)
