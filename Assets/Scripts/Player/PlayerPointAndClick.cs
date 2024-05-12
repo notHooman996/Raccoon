@@ -145,6 +145,7 @@ public class PlayerPointAndClick : MonoBehaviour
                 entryPoint = hit.point; 
                 Debug.Log("entrypoint: "+entryPoint);
                 AttributesPointAndClick.Instance.GoalPosition = entryPoint;
+                PathGenerator.Instance.CreateGraph();
             }
         }
     }
@@ -160,7 +161,7 @@ public class PlayerPointAndClick : MonoBehaviour
         Gizmos.DrawRay(AttributesPointAndClick.Instance.GoalPosition, Vector3.up * 10);
     }
 
-    public void FollowPath(List<Vertex> vertices)
+    private void FollowPath(List<Vertex> vertices)
     {
         if (vertices?.Count >= 2)
         {
@@ -171,11 +172,13 @@ public class PlayerPointAndClick : MonoBehaviour
             
             // what we no now 
             
-            // when player is x from end, then stop (decelerate) 
-
+            
+            
             if (vertices[1].name == "End" && Vector3.Distance(transform.position, vertices[1].position) <= stoppingDistance)
             {
+                // when player is x from end, then stop (decelerate) 
                 AttributesPointAndClick.Instance.IsPathFindingEnabled = false; 
+                Debug.Log("Test");
             }
             else
             {
