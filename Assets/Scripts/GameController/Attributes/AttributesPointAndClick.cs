@@ -30,6 +30,9 @@ public class AttributesPointAndClick : MonoBehaviour
     [SerializeField, ReadOnly] private Vector3 goalPosition;
     [SerializeField, ReadOnly] private GameObject interactableObject;
     
+    [Header("PathFinding")]
+    [SerializeField, ReadOnly] private bool isPathFindingEnabled = false; 
+    
     private void Awake()
     {
         if (Instance == null)
@@ -84,5 +87,11 @@ public class AttributesPointAndClick : MonoBehaviour
     {
         get { return interactableObject; }
         set { interactableObject = value; }
+    }
+
+    public bool IsPathFindingEnabled
+    {
+        get { return isPathFindingEnabled; }
+        set { isPathFindingEnabled = value; }
     }
 }
