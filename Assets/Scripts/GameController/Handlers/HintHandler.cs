@@ -30,6 +30,7 @@ public class HintHandler : MonoBehaviour
             isHintActive = true; 
             
             ObtainReferenceToInteractables();
+            ObtainReferenceToStageChangers();
 
             SpawnHints();
 
@@ -61,8 +62,18 @@ public class HintHandler : MonoBehaviour
 
     private void ObtainReferenceToStageChangers()
     {
-        // TODO 
-        // get those that have to do with current stage 
+        GameObject currentStage = GameObject.Find("RaccoonHome"); // TODO - change to current stage 
+        
+        GameObject[] stageChangers = GameObject.FindGameObjectsWithTag("StageChanger");
+        foreach (GameObject stageChanger in stageChangers)
+        {
+            StageChanger stageChangerComponent = stageChanger.GetComponent<StageChanger>();
+            if (stageChangerComponent.GetStage1() == currentStage || stageChangerComponent.GetStage2() == currentStage)
+            {
+                // add to list 
+                interactables.Add(stageChanger);
+            }
+        }
     }
 
     private void SpawnHints()
