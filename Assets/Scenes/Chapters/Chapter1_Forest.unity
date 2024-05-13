@@ -212,7 +212,7 @@ GameObject:
   - component: {fileID: 290888718}
   - component: {fileID: 290888717}
   - component: {fileID: 290888716}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Ground
   m_TagString: Ground
   m_Icon: {fileID: 0}
@@ -331,12 +331,16 @@ PrefabInstance:
       value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 8970056833068697184, guid: fc6fc7f39f4949b498f797e094220622, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 9.314699
+      objectReference: {fileID: 0}
+    - target: {fileID: 8970056833068697184, guid: fc6fc7f39f4949b498f797e094220622, type: 3}
       propertyPath: m_LocalPosition.x
       value: 15.181805
       objectReference: {fileID: 0}
     - target: {fileID: 8970056833068697184, guid: fc6fc7f39f4949b498f797e094220622, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.5
+      value: 5.95
       objectReference: {fileID: 0}
     - target: {fileID: 8970056833068697184, guid: fc6fc7f39f4949b498f797e094220622, type: 3}
       propertyPath: m_LocalPosition.z
@@ -580,9 +584,25 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 202928510937340089, guid: 39e0e17c75e60a74e9e6639e3da719a9, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 3.159
+      objectReference: {fileID: 0}
+    - target: {fileID: 202928510937340089, guid: 39e0e17c75e60a74e9e6639e3da719a9, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.053
+      objectReference: {fileID: 0}
+    - target: {fileID: 202928510937340089, guid: 39e0e17c75e60a74e9e6639e3da719a9, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.053
+      objectReference: {fileID: 0}
     - target: {fileID: 4582380653091453839, guid: 39e0e17c75e60a74e9e6639e3da719a9, type: 3}
       propertyPath: m_Name
       value: RaccoonHome
+      objectReference: {fileID: 0}
+    - target: {fileID: 7583441548749586393, guid: 39e0e17c75e60a74e9e6639e3da719a9, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8229220185619535199, guid: 39e0e17c75e60a74e9e6639e3da719a9, type: 3}
       propertyPath: m_RootOrder
