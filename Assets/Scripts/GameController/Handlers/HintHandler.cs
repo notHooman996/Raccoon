@@ -6,17 +6,15 @@ using UnityEngine;
 
 public class HintHandler : MonoBehaviour
 {
-    private Camera mainCamera; 
-    
     private bool isHintActive = false; 
     private float despawnTime = 3; 
     
     // reference to the prefab 
     private GameObject hintPrefab;
-
-    private GameObject hintCanvas; 
     
     public List<GameObject> interactables = new List<GameObject>();
+    
+    private float maxDistance = 2f;
     
     private void Start()
     {
@@ -78,15 +76,24 @@ public class HintHandler : MonoBehaviour
 
     private void SpawnHints()
     {
-        Debug.Log("Spawn");
         foreach (GameObject interactable in interactables)
         {
-            GameObject hintGameObject = Instantiate(hintPrefab, interactable.transform.position, Quaternion.identity);
-
-            //GameObject hintGameObject = Instantiate(hintPrefab, interactable.transform.position, Quaternion.identity);
-            // GameObject hintGameObject = Instantiate(hintPrefab, hintCanvas.transform);
-            // hintGameObject.transform.localPosition = interactable.transform.position;
-            // hintGameObject.transform.localRotation = Quaternion.identity; 
+            Vector3 hintPosition;
+            
+            RaycastHit hit;
+            // do raycast to determine the height of a hint 
+            if (Physics.Raycast(interactable.transform.position, -Vector3.up, out hit, maxDistance, LayerMask.GetMask("Ground")))
+            {
+                // if point is not too high 
+                hintPosition = interactable.transform.position; 
+            }
+            else
+            {
+                // if the point is too high up, set at max height 
+                hintPosition = new Vector3(interactable.transform.position.x, maxDistance, interactable.transform.position.z);
+            }
+            
+            GameObject hintGameObject = Instantiate(hintPrefab, hintPosition, Quaternion.identity);
         }
     }
 
