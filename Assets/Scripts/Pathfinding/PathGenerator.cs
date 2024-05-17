@@ -36,6 +36,14 @@ public class PathGenerator : MonoBehaviour
 
     public List<Vertex> path = new List<Vertex>();
 
+    private GameObject clickedObject = null;
+
+    public GameObject ClickedObject
+    {
+        get { return clickedObject; }
+        set { clickedObject = value; }
+    }
+
     private void Start()
     {
         // TODO - make sure to load new file whenever changing stage 
@@ -86,7 +94,7 @@ public class PathGenerator : MonoBehaviour
                     bool isHit = Physics.Linecast(position1, position2, out RaycastHit hit);
 
                     // If it does not hit something and the collider is tagged as "Obstacle" or "Interactable", then add edge 
-                    if (!isHit || (!hit.collider.CompareTag("Obstacle") && !hit.collider.CompareTag("Interactable")))
+                    if (!isHit || hit.transform.gameObject == clickedObject || (!hit.collider.CompareTag("Obstacle") && !hit.collider.CompareTag("Interactable")))
                     {
                         Edge edge = new Edge(vertex1, vertex2);
                         vertex1.edges.Add(edge);
