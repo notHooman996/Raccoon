@@ -108,6 +108,7 @@ public class PlayerPointAndClick : MonoBehaviour
                 Debug.Log("Interactible type: " + testingInteractable.GetInteractableType());
                 
                 // check if player can interact 
+                Debug.Log("Can interact: " + AttributesPlayer.Instance.CanPlayerInteract);
                 if (AttributesPlayer.Instance.CanPlayerInteract)
                 {
                     // if player is colliding with an interactable object, it can interact 
@@ -122,7 +123,9 @@ public class PlayerPointAndClick : MonoBehaviour
                     
                     entryPoint = hit.point; 
                     Debug.Log("entrypoint: "+entryPoint);
-                    AttributesPointAndClick.Instance.GoalPosition = hit.point;
+                    AttributesPointAndClick.Instance.GoalPosition = hit.transform.position;
+                    PathGenerator.Instance.ClickedObject = hit.collider.GameObject(); 
+                    PathGenerator.Instance.CreateGraph();
                 }
             }
             // check if the object is of type "StageChanger"
@@ -145,6 +148,7 @@ public class PlayerPointAndClick : MonoBehaviour
                 entryPoint = hit.point; 
                 Debug.Log("entrypoint: "+entryPoint);
                 AttributesPointAndClick.Instance.GoalPosition = entryPoint;
+                PathGenerator.Instance.ClickedObject = null; 
                 PathGenerator.Instance.CreateGraph();
             }
         }
