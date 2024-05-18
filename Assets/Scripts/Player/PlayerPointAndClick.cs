@@ -121,9 +121,8 @@ public class PlayerPointAndClick : MonoBehaviour
                     // move to interactable object position 
                     Debug.Log("click interact, move"); // TODO - move to position 
                     
-                    entryPoint = hit.point; 
-                    Debug.Log("entrypoint: "+entryPoint);
-                    AttributesPointAndClick.Instance.GoalPosition = hit.transform.position;
+                    Vector3 hitPosition = hit.transform.position;
+                    AttributesPointAndClick.Instance.GoalPosition = new Vector3(hitPosition.x, 0, hitPosition.z);
                     PathGenerator.Instance.ClickedObject = hit.collider.GameObject(); 
                     PathGenerator.Instance.CreateGraph();
                 }
@@ -134,8 +133,13 @@ public class PlayerPointAndClick : MonoBehaviour
                 // set the current objective to change stage 
                 AttributesPointAndClick.Instance.CurrentObjective = CurrentObjective.ChangeStage;
                 
+                Debug.Log("click stagechanger");
+                
                 // set the chosen object 
-                AttributesPointAndClick.Instance.InteractableObject = hit.collider.GameObject();
+                Vector3 hitPosition = hit.transform.position;
+                AttributesPointAndClick.Instance.GoalPosition = new Vector3(hitPosition.x, 0, hitPosition.z);
+                PathGenerator.Instance.ClickedObject = hit.collider.GameObject(); 
+                PathGenerator.Instance.CreateGraph();
             }
             // check if the object is of type "Ground" 
             else if (hit.collider.CompareTag("Ground"))
@@ -146,7 +150,7 @@ public class PlayerPointAndClick : MonoBehaviour
                 Debug.Log("click move"); // TODO - move to position 
 
                 entryPoint = hit.point; 
-                Debug.Log("entrypoint: "+entryPoint);
+                //Debug.Log("entrypoint: "+entryPoint);
                 AttributesPointAndClick.Instance.GoalPosition = entryPoint;
                 PathGenerator.Instance.ClickedObject = null; 
                 PathGenerator.Instance.CreateGraph();
@@ -182,7 +186,6 @@ public class PlayerPointAndClick : MonoBehaviour
             {
                 // when player is x from end, then stop (decelerate) 
                 AttributesPointAndClick.Instance.IsPathFindingEnabled = false; 
-                Debug.Log("Test");
             }
             else
             {
