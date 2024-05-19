@@ -31,7 +31,7 @@ public class StageHandler : MonoBehaviour
     private void Start()
     {
         stages = GameObject.FindGameObjectsWithTag("Stage").ToList();
-        //SetCurrentStage(startStage); // set currentstage to startstage // TODO - set somewhere else 
+        SetCurrentStage(startStage); // set currentstage to startstage // TODO - set somewhere else 
     }
 
     public void SetCurrentStage(GameObject nextStage)
