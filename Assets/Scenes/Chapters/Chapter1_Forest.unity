@@ -188,9 +188,17 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 962725830}
     - target: {fileID: 9014049519631088868, guid: fd377d493f7f7c0439566e88fc728bfb, type: 3}
+      propertyPath: cameras.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 9014049519631088868, guid: fd377d493f7f7c0439566e88fc728bfb, type: 3}
       propertyPath: cameras.Array.data[0]
       value: 
       objectReference: {fileID: 962725830}
+    - target: {fileID: 9014049519631088868, guid: fd377d493f7f7c0439566e88fc728bfb, type: 3}
+      propertyPath: cameras.Array.data[1]
+      value: 
+      objectReference: {fileID: 2001504684}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -212,6 +220,14 @@ PrefabInstance:
       propertyPath: stage2
       value: 
       objectReference: {fileID: 1207915308}
+    - target: {fileID: 3171066496135166666, guid: fc6fc7f39f4949b498f797e094220622, type: 3}
+      propertyPath: camera1
+      value: 
+      objectReference: {fileID: 962725830}
+    - target: {fileID: 3171066496135166666, guid: fc6fc7f39f4949b498f797e094220622, type: 3}
+      propertyPath: camera2
+      value: 
+      objectReference: {fileID: 2001504684}
     - target: {fileID: 5711256759996713457, guid: fc6fc7f39f4949b498f797e094220622, type: 3}
       propertyPath: m_Name
       value: StageChangeWall
@@ -524,6 +540,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6617d2e1fae76944080261104d7bab55, type: 3}
+--- !u!114 &2001504684 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6133234947854423635, guid: fcd232b06e65e8243b9e5b51fd197414, type: 3}
+  m_PrefabInstance: {fileID: 5212171071595036576}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45e653bab7fb20e499bda25e1b646fea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1513221217223982432
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -629,6 +656,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6133234947854423635, guid: fcd232b06e65e8243b9e5b51fd197414, type: 3}
+      propertyPath: m_LookAt
+      value: 
+      objectReference: {fileID: 1272990775}
     - target: {fileID: 6955823376542922371, guid: fcd232b06e65e8243b9e5b51fd197414, type: 3}
       propertyPath: m_Name
       value: Forrest1
