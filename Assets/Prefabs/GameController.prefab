@@ -108,6 +108,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cameras:
   - {fileID: 0}
+  - {fileID: 0}
   startCamera: {fileID: 0}
 --- !u!114 &1674203072460063912
 MonoBehaviour:
