@@ -157,18 +157,17 @@ public class PlayerPointAndClick : MonoBehaviour
             }
         }
     }
-
+    
     private void OnDrawGizmos()
     {
-        //Debug.Log("test gizmos");
-        
-        Gizmos.color = Color.red; 
-        
-        Gizmos.DrawSphere(AttributesPointAndClick.Instance.GoalPosition, 0.5f);
-        
-        Gizmos.DrawRay(AttributesPointAndClick.Instance.GoalPosition, Vector3.up * 10);
+        if (Application.isPlaying)
+        {
+            Gizmos.color = Color.red;
+            Gizmos.DrawSphere(AttributesPointAndClick.Instance.GoalPosition, 0.5f);
+            Gizmos.DrawRay(AttributesPointAndClick.Instance.GoalPosition, Vector3.up * 10);
+        }
     }
-
+    
     private void FollowPath(List<Vertex> vertices)
     {
         if (vertices?.Count >= 2)
