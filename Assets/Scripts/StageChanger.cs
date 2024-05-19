@@ -10,6 +10,9 @@ public class StageChanger : MonoBehaviour
     [SerializeField] private CinemachineVirtualCamera camera1;
     [SerializeField] private CinemachineVirtualCamera camera2;
 
+    [SerializeField] private Vector3 position1; 
+    [SerializeField] private Vector3 position2; 
+
     public GameObject GetStage1()
     {
         return stage1;
@@ -28,10 +31,14 @@ public class StageChanger : MonoBehaviour
             if (StageHandler.Instance.CurrentStage == stage1)
             {
                 StageHandler.Instance.SetCurrentStage(stage2);
+                PlayerForcedMovement.ForcedPosition = position2;
+                PlayerForcedMovement.ShouldMoveForced = true; 
             }
             else if (StageHandler.Instance.CurrentStage == stage2)
             {
                 StageHandler.Instance.SetCurrentStage(stage1);
+                PlayerForcedMovement.ForcedPosition = position1;
+                PlayerForcedMovement.ShouldMoveForced = true; 
             }
             else
             {
@@ -59,5 +66,12 @@ public class StageChanger : MonoBehaviour
                 Debug.Log("Error: camera1 or camera2 is not set.");
             }
         }
+    }
+    
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.magenta;
+        Gizmos.DrawSphere(position1, 0.3f);
+        Gizmos.DrawSphere(position2, 0.3f);
     }
 }
