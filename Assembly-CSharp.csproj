@@ -52,6 +52,7 @@
      <Compile Include="Assets\Scripts\GameController\MenuController\MainMenuController.cs" />
      <Compile Include="Assets\Scripts\GameController\Attributes\AttributesPlayer.cs" />
      <Compile Include="Assets\Scripts\Backdrop\BackdropSprite.cs" />
+     <Compile Include="Assets\Scripts\Backdrop\Billboarding\Billboarding.cs" />
      <Compile Include="Assets\Scripts\Pathfinding\Graph.cs" />
      <Compile Include="Assets\Scripts\Tools\TerrainEditorTool\TerrainCreater.cs" />
      <Compile Include="Assets\Scripts\Tools\BackdropEditorTool\NewTool\BackdropCreater.cs" />
@@ -63,7 +64,6 @@
      <Compile Include="Assets\Scripts\Tools\BackdropEditorTool\OldTool\OldBackdropSelect.cs" />
      <Compile Include="Assets\Scripts\Pathfinding\PathGenerator.cs" />
      <Compile Include="Assets\Scripts\Player\PlayerInteraction.cs" />
-     <Compile Include="Assets\Scripts\StageBillboarding.cs" />
      <Compile Include="Assets\Scripts\Tools\BackdropEditorTool\NewTool\BackdropLayerEditor.cs" />
      <Compile Include="Assets\Scripts\Pathfinding\Path.cs" />
      <Compile Include="Assets\Scripts\Tools\BackdropEditorTool\OldTool\OldBackdropTool.cs" />
@@ -85,13 +85,13 @@
      <Compile Include="Assets\Scripts\Backdrop\BackdropFloor.cs" />
      <Compile Include="Assets\Scripts\Tools\BackdropEditorTool\OldTool\OldBackdropLayerEditor.cs" />
      <Compile Include="Assets\Scripts\Tools\BackdropEditorTool\OldTool\OldBackdropView.cs" />
-     <Compile Include="Assets\Scripts\Billboarding.cs" />
      <Compile Include="Assets\Scripts\Pathfinding\AStar.cs" />
      <Compile Include="Assets\Scripts\Player\PlayerPointAndClick.cs" />
      <Compile Include="Assets\Scripts\GameController\Handlers\SceneHandler.cs" />
      <Compile Include="Assets\Scripts\StageChanger.cs" />
      <Compile Include="Assets\Scripts\Menus\PauseMenuHandler.cs" />
      <Compile Include="Assets\Scripts\Tools\BackdropEditorTool\OldTool\OldBackdropLoad.cs" />
+     <Compile Include="Assets\Scripts\Backdrop\Billboarding\StageBillboarding.cs" />
      <Compile Include="Assets\Scripts\Player\PlayerMovement.cs" />
      <Compile Include="Assets\Scripts\Tools\BackdropEditorTool\NewTool\BackdropEditor.cs" />
      <Compile Include="Assets\Scripts\Backdrop\BackdropLayer.cs" />
@@ -133,6 +133,7 @@
      <Folder Include="Assets\Prefabs\CombinedTest1\Stages" />
      <Folder Include="Assets\Scenes\TestScenes\Test1" />
      <Folder Include="Assets\Prefabs\Hint" />
+     <Folder Include="Assets\Scripts\Backdrop\Billboarding" />
      <Folder Include="Assets\Scripts\GameData" />
      <Folder Include="Assets\Scenes" />
      <Folder Include="Assets\Prefabs\OldPrefabs" />
