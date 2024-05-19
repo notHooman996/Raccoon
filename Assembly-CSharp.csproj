@@ -71,6 +71,7 @@
      <Compile Include="Assets\Scripts\Tools\BackdropEditorTool\NewTool\BackdropView.cs" />
      <Compile Include="Assets\Scripts\Tools\BackdropEditorTool\OldTool\OldBackdropEditor.cs" />
      <Compile Include="Assets\Scripts\GameController\Handlers\InputHandler.cs" />
+     <Compile Include="Assets\Scripts\Player\PlayerForcedMovement.cs" />
      <Compile Include="Assets\Scripts\GameData\GameData.cs" />
      <Compile Include="Assets\Scripts\TempCameraMovement.cs" />
      <Compile Include="Assets\Scripts\Tools\BackdropEditorTool\NewTool\BackdropSelect.cs" />

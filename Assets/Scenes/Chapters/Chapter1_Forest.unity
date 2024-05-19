@@ -188,10 +188,6 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 962725830}
     - target: {fileID: 9014049519631088868, guid: fd377d493f7f7c0439566e88fc728bfb, type: 3}
-      propertyPath: cameras.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 9014049519631088868, guid: fd377d493f7f7c0439566e88fc728bfb, type: 3}
       propertyPath: cameras.Array.data[0]
       value: 
       objectReference: {fileID: 962725830}
