@@ -83,6 +83,7 @@
      <Compile Include="Assets\Scripts\Tools\GraphEditorTool\FileHandler.cs" />
      <Compile Include="Assets\Scripts\Pathfinding\FCompare.cs" />
      <Compile Include="Assets\Scripts\Tools\BackdropEditorTool\NewTool\BackdropLoad.cs" />
+     <Compile Include="Assets\Scripts\Player\PlayerSprites.cs" />
      <Compile Include="Assets\Scripts\Backdrop\BackdropFloor.cs" />
      <Compile Include="Assets\Scripts\Tools\BackdropEditorTool\OldTool\OldBackdropLayerEditor.cs" />
      <Compile Include="Assets\Scripts\Tools\BackdropEditorTool\OldTool\OldBackdropView.cs" />

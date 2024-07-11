@@ -110,8 +110,8 @@ public class PathGenerator : MonoBehaviour
     {
         for (int i=0; i<aStar?.pathResult?.Count; i++)
         {
-            Gizmos.color = Color.cyan;
-            Gizmos.DrawSphere(aStar.pathResult[i].position, 0.5f);
+            // Gizmos.color = Color.cyan;
+            // Gizmos.DrawSphere(aStar.pathResult[i].position, 0.5f);
             if (i!=aStar.pathResult.Count-1)
             {
                 Gizmos.color = Color.green;
