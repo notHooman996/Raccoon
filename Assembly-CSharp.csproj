@@ -147,6 +147,7 @@
      <Folder Include="Assets\Scripts\Pathfinding" />
      <Folder Include="Assets\Scripts\Menus" />
      <Folder Include="Assets\Scenes\TestScenes\Test0" />
+     <Folder Include="Assets\PlayerSprites" />
      <Folder Include="Assets\Scripts\GameController" />
      <Reference Include="UnityEngine">
      <HintPath>C:\Program Files\Unity\Hub\Editor\2022.3.13f1\Editor\Data\Managed\UnityEngine\UnityEngine.dll</HintPath>
