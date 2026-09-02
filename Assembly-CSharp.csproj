@@ -54,6 +54,7 @@
      <Compile Include="Assets\Scripts\Backdrop\BackdropSprite.cs" />
      <Compile Include="Assets\Scripts\Backdrop\Billboarding\Billboarding.cs" />
      <Compile Include="Assets\Scripts\Pathfinding\Graph.cs" />
+     <Compile Include="Assets\Scripts\Tools\DevSettings\DevSettingsTool.cs" />
      <Compile Include="Assets\Scripts\Tools\TerrainEditorTool\TerrainCreater.cs" />
      <Compile Include="Assets\Scripts\Tools\BackdropEditorTool\NewTool\BackdropCreater.cs" />
      <Compile Include="Assets\Scripts\GameController\Handlers\HintHandler.cs" />
@@ -109,7 +110,6 @@
      <Folder Include="Assets\Prefabs\TheatreBackdrop" />
      <Folder Include="Assets\Scripts\Tools\TerrainEditorTool" />
      <None Include="Assets\DataFiles\testing.json" />
-     <Folder Include="Assets\Scripts\Tools" />
      <Folder Include="Assets\Scripts\Player" />
      <None Include="Assets\DataFiles\lars2.json" />
      <Folder Include="Assets\Scenes\Chapters" />
