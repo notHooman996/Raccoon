@@ -52,7 +52,9 @@
      <Compile Include="Assets\Scripts\GameController\MenuController\MainMenuController.cs" />
      <Compile Include="Assets\Scripts\GameController\Attributes\AttributesPlayer.cs" />
      <Compile Include="Assets\Scripts\Backdrop\BackdropSprite.cs" />
+     <Compile Include="Assets\Scripts\Backdrop\Billboarding\Billboarding.cs" />
      <Compile Include="Assets\Scripts\Pathfinding\Graph.cs" />
+     <Compile Include="Assets\Scripts\Tools\DevSettings\DevSettingsTool.cs" />
      <Compile Include="Assets\Scripts\Tools\TerrainEditorTool\TerrainCreater.cs" />
      <Compile Include="Assets\Scripts\Tools\BackdropEditorTool\NewTool\BackdropCreater.cs" />
      <Compile Include="Assets\Scripts\GameController\Handlers\HintHandler.cs" />
@@ -63,7 +65,6 @@
      <Compile Include="Assets\Scripts\Tools\BackdropEditorTool\OldTool\OldBackdropSelect.cs" />
      <Compile Include="Assets\Scripts\Pathfinding\PathGenerator.cs" />
      <Compile Include="Assets\Scripts\Player\PlayerInteraction.cs" />
-     <Compile Include="Assets\Scripts\StageBillboarding.cs" />
      <Compile Include="Assets\Scripts\Tools\BackdropEditorTool\NewTool\BackdropLayerEditor.cs" />
      <Compile Include="Assets\Scripts\Pathfinding\Path.cs" />
      <Compile Include="Assets\Scripts\Tools\BackdropEditorTool\OldTool\OldBackdropTool.cs" />
@@ -71,6 +72,7 @@
      <Compile Include="Assets\Scripts\Tools\BackdropEditorTool\NewTool\BackdropView.cs" />
      <Compile Include="Assets\Scripts\Tools\BackdropEditorTool\OldTool\OldBackdropEditor.cs" />
      <Compile Include="Assets\Scripts\GameController\Handlers\InputHandler.cs" />
+     <Compile Include="Assets\Scripts\Player\PlayerForcedMovement.cs" />
      <Compile Include="Assets\Scripts\GameData\GameData.cs" />
      <Compile Include="Assets\Scripts\TempCameraMovement.cs" />
      <Compile Include="Assets\Scripts\Tools\BackdropEditorTool\NewTool\BackdropSelect.cs" />
@@ -82,16 +84,17 @@
      <Compile Include="Assets\Scripts\Tools\GraphEditorTool\FileHandler.cs" />
      <Compile Include="Assets\Scripts\Pathfinding\FCompare.cs" />
      <Compile Include="Assets\Scripts\Tools\BackdropEditorTool\NewTool\BackdropLoad.cs" />
+     <Compile Include="Assets\Scripts\Player\PlayerSprites.cs" />
      <Compile Include="Assets\Scripts\Backdrop\BackdropFloor.cs" />
      <Compile Include="Assets\Scripts\Tools\BackdropEditorTool\OldTool\OldBackdropLayerEditor.cs" />
      <Compile Include="Assets\Scripts\Tools\BackdropEditorTool\OldTool\OldBackdropView.cs" />
-     <Compile Include="Assets\Scripts\Billboarding.cs" />
      <Compile Include="Assets\Scripts\Pathfinding\AStar.cs" />
      <Compile Include="Assets\Scripts\Player\PlayerPointAndClick.cs" />
      <Compile Include="Assets\Scripts\GameController\Handlers\SceneHandler.cs" />
      <Compile Include="Assets\Scripts\StageChanger.cs" />
      <Compile Include="Assets\Scripts\Menus\PauseMenuHandler.cs" />
      <Compile Include="Assets\Scripts\Tools\BackdropEditorTool\OldTool\OldBackdropLoad.cs" />
+     <Compile Include="Assets\Scripts\Backdrop\Billboarding\StageBillboarding.cs" />
      <Compile Include="Assets\Scripts\Player\PlayerMovement.cs" />
      <Compile Include="Assets\Scripts\Tools\BackdropEditorTool\NewTool\BackdropEditor.cs" />
      <Compile Include="Assets\Scripts\Backdrop\BackdropLayer.cs" />
@@ -107,7 +110,6 @@
      <Folder Include="Assets\Prefabs\TheatreBackdrop" />
      <Folder Include="Assets\Scripts\Tools\TerrainEditorTool" />
      <None Include="Assets\DataFiles\testing.json" />
-     <Folder Include="Assets\Scripts\Tools" />
      <Folder Include="Assets\Scripts\Player" />
      <None Include="Assets\DataFiles\lars2.json" />
      <Folder Include="Assets\Scenes\Chapters" />
@@ -133,6 +135,7 @@
      <Folder Include="Assets\Prefabs\CombinedTest1\Stages" />
      <Folder Include="Assets\Scenes\TestScenes\Test1" />
      <Folder Include="Assets\Prefabs\Hint" />
+     <Folder Include="Assets\Scripts\Backdrop\Billboarding" />
      <Folder Include="Assets\Scripts\GameData" />
      <Folder Include="Assets\Scenes" />
      <Folder Include="Assets\Prefabs\OldPrefabs" />
@@ -144,6 +147,7 @@
      <Folder Include="Assets\Scripts\Pathfinding" />
      <Folder Include="Assets\Scripts\Menus" />
      <Folder Include="Assets\Scenes\TestScenes\Test0" />
+     <Folder Include="Assets\PlayerSprites" />
      <Folder Include="Assets\Scripts\GameController" />
      <Reference Include="UnityEngine">
      <HintPath>C:\Program Files\Unity\Hub\Editor\2022.3.13f1\Editor\Data\Managed\UnityEngine\UnityEngine.dll</HintPath>

@@ -108,6 +108,7 @@ public class PlayerPointAndClick : MonoBehaviour
                 Debug.Log("Interactible type: " + testingInteractable.GetInteractableType());
                 
                 // check if player can interact 
+                Debug.Log("Can interact: " + AttributesPlayer.Instance.CanPlayerInteract);
                 if (AttributesPlayer.Instance.CanPlayerInteract)
                 {
                     // if player is colliding with an interactable object, it can interact 
@@ -120,9 +121,10 @@ public class PlayerPointAndClick : MonoBehaviour
                     // move to interactable object position 
                     Debug.Log("click interact, move"); // TODO - move to position 
                     
-                    entryPoint = hit.point; 
-                    Debug.Log("entrypoint: "+entryPoint);
-                    AttributesPointAndClick.Instance.GoalPosition = hit.point;
+                    Vector3 hitPosition = hit.transform.position;
+                    AttributesPointAndClick.Instance.GoalPosition = new Vector3(hitPosition.x, 0, hitPosition.z);
+                    PathGenerator.Instance.ClickedObject = hit.collider.GameObject(); 
+                    PathGenerator.Instance.CreateGraph();
                 }
             }
             // check if the object is of type "StageChanger"
@@ -131,8 +133,13 @@ public class PlayerPointAndClick : MonoBehaviour
                 // set the current objective to change stage 
                 AttributesPointAndClick.Instance.CurrentObjective = CurrentObjective.ChangeStage;
                 
+                Debug.Log("click stagechanger");
+                
                 // set the chosen object 
-                AttributesPointAndClick.Instance.InteractableObject = hit.collider.GameObject();
+                Vector3 hitPosition = hit.transform.position;
+                AttributesPointAndClick.Instance.GoalPosition = new Vector3(hitPosition.x, 0, hitPosition.z);
+                PathGenerator.Instance.ClickedObject = hit.collider.GameObject(); 
+                PathGenerator.Instance.CreateGraph();
             }
             // check if the object is of type "Ground" 
             else if (hit.collider.CompareTag("Ground"))
@@ -143,24 +150,24 @@ public class PlayerPointAndClick : MonoBehaviour
                 Debug.Log("click move"); // TODO - move to position 
 
                 entryPoint = hit.point; 
-                Debug.Log("entrypoint: "+entryPoint);
+                //Debug.Log("entrypoint: "+entryPoint);
                 AttributesPointAndClick.Instance.GoalPosition = entryPoint;
+                PathGenerator.Instance.ClickedObject = null; 
                 PathGenerator.Instance.CreateGraph();
             }
         }
     }
-
+    
     private void OnDrawGizmos()
     {
-        //Debug.Log("test gizmos");
-        
-        Gizmos.color = Color.red; 
-        
-        Gizmos.DrawSphere(AttributesPointAndClick.Instance.GoalPosition, 0.5f);
-        
-        Gizmos.DrawRay(AttributesPointAndClick.Instance.GoalPosition, Vector3.up * 10);
+        if (Application.isPlaying)
+        {
+            Gizmos.color = Color.red;
+            Gizmos.DrawSphere(AttributesPointAndClick.Instance.GoalPosition, 0.5f);
+            Gizmos.DrawRay(AttributesPointAndClick.Instance.GoalPosition, Vector3.up * 10);
+        }
     }
-
+    
     private void FollowPath(List<Vertex> vertices)
     {
         if (vertices?.Count >= 2)
@@ -178,7 +185,6 @@ public class PlayerPointAndClick : MonoBehaviour
             {
                 // when player is x from end, then stop (decelerate) 
                 AttributesPointAndClick.Instance.IsPathFindingEnabled = false; 
-                Debug.Log("Test");
             }
             else
             {

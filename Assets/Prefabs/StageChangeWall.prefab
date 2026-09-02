@@ -12,7 +12,8 @@ GameObject:
   - component: {fileID: 6277300564018385416}
   - component: {fileID: 2046373910673059248}
   - component: {fileID: 3583232141994736415}
-  m_Layer: 2
+  - component: {fileID: 3171066496135166666}
+  m_Layer: 0
   m_Name: StageChangeWall
   m_TagString: StageChanger
   m_Icon: {fileID: 0}
@@ -26,13 +27,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5711256759996713457}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 25.4, y: 0, z: -0.17}
-  m_LocalScale: {x: 1, y: 3, z: 12}
+  m_LocalScale: {x: 2, y: 10, z: 12}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &6277300564018385416
 MeshFilter:
@@ -105,3 +106,21 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &3171066496135166666
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5711256759996713457}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9be3138a0bd63994891718740a3ef0d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stage1: {fileID: 0}
+  stage2: {fileID: 0}
+  camera1: {fileID: 0}
+  camera2: {fileID: 0}
+  position1: {x: 12, y: 0, z: 0}
+  position2: {x: 18, y: 0, z: 0}
